@@ -1,11 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    //编译版本
     compileSdkVersion 24
+    //编译工具版本
     buildToolsVersion "25.0.2"
     defaultConfig {
+        //主程序包，相当于eclipse的manifast下面的package
         applicationId "joyfu.ayd.edt.joyfukitchen"
+        //最小支持版本  这里是4.4
         minSdkVersion 19
+        //目标版本
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
