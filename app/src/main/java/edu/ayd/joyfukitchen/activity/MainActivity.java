@@ -3,7 +3,7 @@ package edu.ayd.joyfukitchen.activity;
 import android.app.Activity;
 import android.os.Bundle;
 
-import joyfu.ayd.edt.joyfukitchen.R;
+
 
 public class MainActivity extends Activity {
 
