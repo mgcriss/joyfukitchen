@@ -7,7 +7,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         //主程序包，相当于eclipse的manifast下面的package
-        applicationId "joyfu.ayd.edt.joyfukitchen"
+        applicationId "edu.ayd.joyfukitchen"
         //最小支持版本  这里是4.4
         minSdkVersion 19
         //目标版本
