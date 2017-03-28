@@ -7,5 +7,5 @@ package edu.ayd.joyfukitchen.service;
 
 public class WeightService {
 
-    /**查询*/
+    /**查询，*/
 }
