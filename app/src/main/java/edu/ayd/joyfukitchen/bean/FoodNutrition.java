@@ -1,134 +1,139 @@
 package edu.ayd.joyfukitchen.bean;
 
+import java.util.Date;
+
 /**
  * Created by 萝莉 on 2017/3/28.
  */
 public class FoodNutrition {
-    private String id;
-    private String food_id;
-    private String name;
-    private String water;
+    private Integer id;   //编号
+    private Integer food_id;  //类型（外键Food_id）
+    private String name;    //名称
+    private Float water;
     private String water_unit;
-    private String energy;
+    private Float energy;
     private String energy_unit;
-    private String protein;
+    private Float protein;
     private String protein_unit;
-    private String fat;
+    private Float fat;
     private String fat_unit;
-    private String carbohydrate;
+    private Float carbohydrate;
     private String carbohydrate_unit;
-    private String df;
+    private Float df;
     private String df_unit;
-    private String cholesterol;
+    private Float cholesterol;
     private String cholesterol_unit;
-    private String vitamina;
+    private Float vitamina;
     private String vitamina_unit;
-    private String carotene;
+    private Float carotene;
     private String carotene_unit;
-    private String retinol;
+    private Float retinol;
     private String retinol_unit;
-    private String vitaminb1;
+    private Float vitaminb1;
     private String vitaminb1_unit;
-    private String vitaminb2;
+    private Float vitaminb2;
     private String vitaminb2_unit;
-    private String niacin;
+    private Float niacin;
     private String niacin_unit;
-    private String vitaminc;
+    private Float vitaminc;
     private String vitaminc_unit;
-    private String vitamine;
+    private Float vitamine;
     private String vitamine_unit;
-    private String ca;
+    private Float ca;
     private String ca_unit;
-    private String p;
+    private Float p;
     private String p_unit;
-    private String k;
+    private Float k;
     private String k_unit;
-    private String na;
+    private Float na;
     private String na_unit;
-    private String mg;
+    private Float mg;
     private String mg_unit;
-    private String fe;
+    private Float fe;
     private String fe_unit;
-    private String zn;
+    private Float zn;
     private String zn_unit;
-    private String cu;
+    private Float cu;
     private String cu_unit;
-    private String mn;
+    private Float mn;
     private String mn_unit;
-    private String se;
+    private Float se;
     private String se_unit;
-    private String createtime;
+    private Date createtime;
 
-    public FoodNutrition(String id, String food_id, String name, String water, String water_unit, String energy, String energy_unit, String protein, String protein_unit, String fat, String fat_unit, String carbohydrate, String carbohydrate_unit, String df, String df_unit, String cholesterol, String cholesterol_unit, String vitamina, String vitamina_unit, String carotene, String carotene_unit, String retinol, String retinol_unit, String vitaminb1, String vitaminb1_unit, String vitaminb2, String vitaminb2_unit, String niacin, String niacin_unit, String vitaminc, String vitaminc_unit, String vitamine, String vitamine_unit, String ca, String ca_unit, String p, String p_unit, String k, String k_unit, String na, String na_unit, String mg, String mg_unit, String fe, String fe_unit, String zn, String zn_unit, String cu, String cu_unit, String mn, String mn_unit, String se, String se_unit, String createtime) {
-        this.id = id;
-        this.food_id = food_id;
-        this.name = name;
-        this.water = water;
-        this.water_unit = water_unit;
-        this.energy = energy;
-        this.energy_unit = energy_unit;
-        this.protein = protein;
-        this.protein_unit = protein_unit;
-        this.fat = fat;
-        this.fat_unit = fat_unit;
-        this.carbohydrate = carbohydrate;
-        this.carbohydrate_unit = carbohydrate_unit;
-        this.df = df;
-        this.df_unit = df_unit;
-        this.cholesterol = cholesterol;
-        this.cholesterol_unit = cholesterol_unit;
-        this.vitamina = vitamina;
-        this.vitamina_unit = vitamina_unit;
-        this.carotene = carotene;
-        this.carotene_unit = carotene_unit;
-        this.retinol = retinol;
-        this.retinol_unit = retinol_unit;
-        this.vitaminb1 = vitaminb1;
-        this.vitaminb1_unit = vitaminb1_unit;
-        this.vitaminb2 = vitaminb2;
-        this.vitaminb2_unit = vitaminb2_unit;
-        this.niacin = niacin;
-        this.niacin_unit = niacin_unit;
-        this.vitaminc = vitaminc;
-        this.vitaminc_unit = vitaminc_unit;
-        this.vitamine = vitamine;
-        this.vitamine_unit = vitamine_unit;
-        this.ca = ca;
-        this.ca_unit = ca_unit;
-        this.p = p;
-        this.p_unit = p_unit;
-        this.k = k;
-        this.k_unit = k_unit;
-        this.na = na;
-        this.na_unit = na_unit;
-        this.mg = mg;
-        this.mg_unit = mg_unit;
-        this.fe = fe;
-        this.fe_unit = fe_unit;
-        this.zn = zn;
-        this.zn_unit = zn_unit;
-        this.cu = cu;
-        this.cu_unit = cu_unit;
-        this.mn = mn;
-        this.mn_unit = mn_unit;
-        this.se = se;
-        this.se_unit = se_unit;
-        this.createtime = createtime;
+    @Override
+    public String toString() {
+        return "FoodNutrition{" +
+                "id=" + id +
+                ", food_id=" + food_id +
+                ", name='" + name + '\'' +
+                ", water=" + water +
+                ", water_unit='" + water_unit + '\'' +
+                ", energy=" + energy +
+                ", energy_unit='" + energy_unit + '\'' +
+                ", protein=" + protein +
+                ", protein_unit='" + protein_unit + '\'' +
+                ", fat=" + fat +
+                ", fat_unit='" + fat_unit + '\'' +
+                ", carbohydrate=" + carbohydrate +
+                ", carbohydrate_unit='" + carbohydrate_unit + '\'' +
+                ", df=" + df +
+                ", df_unit='" + df_unit + '\'' +
+                ", cholesterol=" + cholesterol +
+                ", cholesterol_unit='" + cholesterol_unit + '\'' +
+                ", vitamina=" + vitamina +
+                ", vitamina_unit='" + vitamina_unit + '\'' +
+                ", carotene=" + carotene +
+                ", carotene_unit='" + carotene_unit + '\'' +
+                ", retinol=" + retinol +
+                ", retinol_unit='" + retinol_unit + '\'' +
+                ", vitaminb1=" + vitaminb1 +
+                ", vitaminb1_unit='" + vitaminb1_unit + '\'' +
+                ", vitaminb2=" + vitaminb2 +
+                ", vitaminb2_unit='" + vitaminb2_unit + '\'' +
+                ", niacin=" + niacin +
+                ", niacin_unit='" + niacin_unit + '\'' +
+                ", vitaminc=" + vitaminc +
+                ", vitaminc_unit='" + vitaminc_unit + '\'' +
+                ", vitamine=" + vitamine +
+                ", vitamine_unit='" + vitamine_unit + '\'' +
+                ", ca=" + ca +
+                ", ca_unit='" + ca_unit + '\'' +
+                ", p=" + p +
+                ", p_unit='" + p_unit + '\'' +
+                ", k=" + k +
+                ", k_unit='" + k_unit + '\'' +
+                ", na=" + na +
+                ", na_unit='" + na_unit + '\'' +
+                ", mg=" + mg +
+                ", mg_unit='" + mg_unit + '\'' +
+                ", fe=" + fe +
+                ", fe_unit='" + fe_unit + '\'' +
+                ", zn=" + zn +
+                ", zn_unit='" + zn_unit + '\'' +
+                ", cu=" + cu +
+                ", cu_unit='" + cu_unit + '\'' +
+                ", mn=" + mn +
+                ", mn_unit='" + mn_unit + '\'' +
+                ", se=" + se +
+                ", se_unit='" + se_unit + '\'' +
+                ", createtime=" + createtime +
+                '}';
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getFood_id() {
+    public Integer getFood_id() {
         return food_id;
     }
 
-    public void setFood_id(String food_id) {
+    public void setFood_id(Integer food_id) {
         this.food_id = food_id;
     }
 
@@ -140,11 +145,11 @@ public class FoodNutrition {
         this.name = name;
     }
 
-    public String getWater() {
+    public Float getWater() {
         return water;
     }
 
-    public void setWater(String water) {
+    public void setWater(Float water) {
         this.water = water;
     }
 
@@ -156,11 +161,11 @@ public class FoodNutrition {
         this.water_unit = water_unit;
     }
 
-    public String getEnergy() {
+    public Float getEnergy() {
         return energy;
     }
 
-    public void setEnergy(String energy) {
+    public void setEnergy(Float energy) {
         this.energy = energy;
     }
 
@@ -172,11 +177,11 @@ public class FoodNutrition {
         this.energy_unit = energy_unit;
     }
 
-    public String getProtein() {
+    public Float getProtein() {
         return protein;
     }
 
-    public void setProtein(String protein) {
+    public void setProtein(Float protein) {
         this.protein = protein;
     }
 
@@ -188,11 +193,11 @@ public class FoodNutrition {
         this.protein_unit = protein_unit;
     }
 
-    public String getFat() {
+    public Float getFat() {
         return fat;
     }
 
-    public void setFat(String fat) {
+    public void setFat(Float fat) {
         this.fat = fat;
     }
 
@@ -204,11 +209,11 @@ public class FoodNutrition {
         this.fat_unit = fat_unit;
     }
 
-    public String getCarbohydrate() {
+    public Float getCarbohydrate() {
         return carbohydrate;
     }
 
-    public void setCarbohydrate(String carbohydrate) {
+    public void setCarbohydrate(Float carbohydrate) {
         this.carbohydrate = carbohydrate;
     }
 
@@ -220,11 +225,11 @@ public class FoodNutrition {
         this.carbohydrate_unit = carbohydrate_unit;
     }
 
-    public String getDf() {
+    public Float getDf() {
         return df;
     }
 
-    public void setDf(String df) {
+    public void setDf(Float df) {
         this.df = df;
     }
 
@@ -236,11 +241,11 @@ public class FoodNutrition {
         this.df_unit = df_unit;
     }
 
-    public String getCholesterol() {
+    public Float getCholesterol() {
         return cholesterol;
     }
 
-    public void setCholesterol(String cholesterol) {
+    public void setCholesterol(Float cholesterol) {
         this.cholesterol = cholesterol;
     }
 
@@ -252,11 +257,11 @@ public class FoodNutrition {
         this.cholesterol_unit = cholesterol_unit;
     }
 
-    public String getVitamina() {
+    public Float getVitamina() {
         return vitamina;
     }
 
-    public void setVitamina(String vitamina) {
+    public void setVitamina(Float vitamina) {
         this.vitamina = vitamina;
     }
 
@@ -268,11 +273,11 @@ public class FoodNutrition {
         this.vitamina_unit = vitamina_unit;
     }
 
-    public String getCarotene() {
+    public Float getCarotene() {
         return carotene;
     }
 
-    public void setCarotene(String carotene) {
+    public void setCarotene(Float carotene) {
         this.carotene = carotene;
     }
 
@@ -284,11 +289,11 @@ public class FoodNutrition {
         this.carotene_unit = carotene_unit;
     }
 
-    public String getRetinol() {
+    public Float getRetinol() {
         return retinol;
     }
 
-    public void setRetinol(String retinol) {
+    public void setRetinol(Float retinol) {
         this.retinol = retinol;
     }
 
@@ -300,11 +305,11 @@ public class FoodNutrition {
         this.retinol_unit = retinol_unit;
     }
 
-    public String getVitaminb1() {
+    public Float getVitaminb1() {
         return vitaminb1;
     }
 
-    public void setVitaminb1(String vitaminb1) {
+    public void setVitaminb1(Float vitaminb1) {
         this.vitaminb1 = vitaminb1;
     }
 
@@ -316,11 +321,11 @@ public class FoodNutrition {
         this.vitaminb1_unit = vitaminb1_unit;
     }
 
-    public String getVitaminb2() {
+    public Float getVitaminb2() {
         return vitaminb2;
     }
 
-    public void setVitaminb2(String vitaminb2) {
+    public void setVitaminb2(Float vitaminb2) {
         this.vitaminb2 = vitaminb2;
     }
 
@@ -332,11 +337,11 @@ public class FoodNutrition {
         this.vitaminb2_unit = vitaminb2_unit;
     }
 
-    public String getNiacin() {
+    public Float getNiacin() {
         return niacin;
     }
 
-    public void setNiacin(String niacin) {
+    public void setNiacin(Float niacin) {
         this.niacin = niacin;
     }
 
@@ -348,11 +353,11 @@ public class FoodNutrition {
         this.niacin_unit = niacin_unit;
     }
 
-    public String getVitaminc() {
+    public Float getVitaminc() {
         return vitaminc;
     }
 
-    public void setVitaminc(String vitaminc) {
+    public void setVitaminc(Float vitaminc) {
         this.vitaminc = vitaminc;
     }
 
@@ -364,11 +369,11 @@ public class FoodNutrition {
         this.vitaminc_unit = vitaminc_unit;
     }
 
-    public String getVitamine() {
+    public Float getVitamine() {
         return vitamine;
     }
 
-    public void setVitamine(String vitamine) {
+    public void setVitamine(Float vitamine) {
         this.vitamine = vitamine;
     }
 
@@ -380,11 +385,11 @@ public class FoodNutrition {
         this.vitamine_unit = vitamine_unit;
     }
 
-    public String getCa() {
+    public Float getCa() {
         return ca;
     }
 
-    public void setCa(String ca) {
+    public void setCa(Float ca) {
         this.ca = ca;
     }
 
@@ -396,11 +401,11 @@ public class FoodNutrition {
         this.ca_unit = ca_unit;
     }
 
-    public String getP() {
+    public Float getP() {
         return p;
     }
 
-    public void setP(String p) {
+    public void setP(Float p) {
         this.p = p;
     }
 
@@ -412,11 +417,11 @@ public class FoodNutrition {
         this.p_unit = p_unit;
     }
 
-    public String getK() {
+    public Float getK() {
         return k;
     }
 
-    public void setK(String k) {
+    public void setK(Float k) {
         this.k = k;
     }
 
@@ -428,11 +433,11 @@ public class FoodNutrition {
         this.k_unit = k_unit;
     }
 
-    public String getNa() {
+    public Float getNa() {
         return na;
     }
 
-    public void setNa(String na) {
+    public void setNa(Float na) {
         this.na = na;
     }
 
@@ -444,11 +449,11 @@ public class FoodNutrition {
         this.na_unit = na_unit;
     }
 
-    public String getMg() {
+    public Float getMg() {
         return mg;
     }
 
-    public void setMg(String mg) {
+    public void setMg(Float mg) {
         this.mg = mg;
     }
 
@@ -460,11 +465,11 @@ public class FoodNutrition {
         this.mg_unit = mg_unit;
     }
 
-    public String getFe() {
+    public Float getFe() {
         return fe;
     }
 
-    public void setFe(String fe) {
+    public void setFe(Float fe) {
         this.fe = fe;
     }
 
@@ -476,11 +481,11 @@ public class FoodNutrition {
         this.fe_unit = fe_unit;
     }
 
-    public String getZn() {
+    public Float getZn() {
         return zn;
     }
 
-    public void setZn(String zn) {
+    public void setZn(Float zn) {
         this.zn = zn;
     }
 
@@ -492,11 +497,11 @@ public class FoodNutrition {
         this.zn_unit = zn_unit;
     }
 
-    public String getCu() {
+    public Float getCu() {
         return cu;
     }
 
-    public void setCu(String cu) {
+    public void setCu(Float cu) {
         this.cu = cu;
     }
 
@@ -508,11 +513,11 @@ public class FoodNutrition {
         this.cu_unit = cu_unit;
     }
 
-    public String getMn() {
+    public Float getMn() {
         return mn;
     }
 
-    public void setMn(String mn) {
+    public void setMn(Float mn) {
         this.mn = mn;
     }
 
@@ -524,11 +529,11 @@ public class FoodNutrition {
         this.mn_unit = mn_unit;
     }
 
-    public String getSe() {
+    public Float getSe() {
         return se;
     }
 
-    public void setSe(String se) {
+    public void setSe(Float se) {
         this.se = se;
     }
 
@@ -540,11 +545,11 @@ public class FoodNutrition {
         this.se_unit = se_unit;
     }
 
-    public String getCreatetime() {
+    public Date getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(String createtime) {
+    public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
 }

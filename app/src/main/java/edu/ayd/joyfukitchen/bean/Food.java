@@ -1,19 +1,32 @@
 package edu.ayd.joyfukitchen.bean;
 
+import java.util.Date;
+
 /**
  * Created by 萝莉 on 2017/3/28.
+ * 食品类型
  */
 public class Food {
-    private String id;
-    private String title;
-    private String alias;
-    private String createtime;
+    private Integer id;      //编号
+    private String title;   //类型
+    private String alias;   //别名
+    private Date createtime;//创建时间
 
-    public String getId() {
+    @Override
+    public String toString() {
+        return "Food{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", alias='" + alias + '\'' +
+                ", createtime=" + createtime +
+                '}';
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -33,20 +46,11 @@ public class Food {
         this.alias = alias;
     }
 
-    public String getCreatetime() {
+    public Date getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(String createtime) {
+    public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
-
-    public Food(String id, String title, String alias, String createtime) {
-        this.id = id;
-        this.title = title;
-        this.alias = alias;
-        this.createtime = createtime;
-    }
-
-
 }
