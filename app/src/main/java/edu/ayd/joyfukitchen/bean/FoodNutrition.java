@@ -9,6 +9,7 @@ public class FoodNutrition {
     private String name;
     private String water;
     private String water_unit;
+    //热量
     private String energy;
     private String energy_unit;
     private String protein;
@@ -58,6 +59,9 @@ public class FoodNutrition {
     private String se;
     private String se_unit;
     private String createtime;
+
+    public FoodNutrition() {
+    }
 
     public FoodNutrition(String id, String food_id, String name, String water, String water_unit, String energy, String energy_unit, String protein, String protein_unit, String fat, String fat_unit, String carbohydrate, String carbohydrate_unit, String df, String df_unit, String cholesterol, String cholesterol_unit, String vitamina, String vitamina_unit, String carotene, String carotene_unit, String retinol, String retinol_unit, String vitaminb1, String vitaminb1_unit, String vitaminb2, String vitaminb2_unit, String niacin, String niacin_unit, String vitaminc, String vitaminc_unit, String vitamine, String vitamine_unit, String ca, String ca_unit, String p, String p_unit, String k, String k_unit, String na, String na_unit, String mg, String mg_unit, String fe, String fe_unit, String zn, String zn_unit, String cu, String cu_unit, String mn, String mn_unit, String se, String se_unit, String createtime) {
         this.id = id;

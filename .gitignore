@@ -41,3 +41,6 @@ captures/
 
 #g_* bat file 
 g_*.bat
+
+#.idea
+.idea/
