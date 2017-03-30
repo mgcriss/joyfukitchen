@@ -31,8 +31,12 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:21.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
-    compile 'com.j256.ormlite:ormlite-core:4.48'            /*orm所需的jar包ormlite-core (tang)*/
-    compile 'com.j256.ormlite:ormlite-android:4.48'          /*orm所需的jar包ormlite-android (tang)*/
+
+    // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core
+    compile 'com.j256.ormlite:ormlite-core:5.0'
+    compile 'com.j256.ormlite:ormlite-android:5.0'
+
 
     testCompile 'junit:junit:4.12'
 }
+

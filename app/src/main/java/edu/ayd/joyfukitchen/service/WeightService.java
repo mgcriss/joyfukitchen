@@ -12,6 +12,7 @@ public class WeightService {
 
     /**返回重量数据  单位:g */
     public Float getWeight(){
+        //获取蓝牙的重量数据
         return null;
     }
 
@@ -21,6 +22,8 @@ public class WeightService {
      *
      * */
     public Float getEnerge(Float weight){
+        //需要查询食物包含的热量  xxx/100g
+        //计算
         return null;
     }
 
@@ -29,6 +32,8 @@ public class WeightService {
      * @Param 需要参数:称量的
      * */
     public boolean saveRecord(){
+        //建好记录表
+        //保存方法
         return false;
     }
 
