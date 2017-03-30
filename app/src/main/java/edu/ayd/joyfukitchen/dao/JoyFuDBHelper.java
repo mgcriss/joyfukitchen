@@ -26,14 +26,14 @@ public class JoyFuDBHelper extends OrmLiteSqliteOpenHelper{
     private static final String databaseName = "joyfu";
     private static final Integer databaseVersion = 1;
 
-    private JoyFuDBHelper joyFuDBHelper;
+    private static JoyFuDBHelper joyFuDBHelper;
     private Map<String, Dao> daos = new HashMap<String, Dao>();
 
     //构造器.单例
     private JoyFuDBHelper(Context context) {
         super(context, databaseName, null, databaseVersion);
     }
-    public JoyFuDBHelper getInstance(Context context){
+    public static JoyFuDBHelper getInstance(Context context){
         if(joyFuDBHelper == null){
             joyFuDBHelper = new JoyFuDBHelper(context);
         }
