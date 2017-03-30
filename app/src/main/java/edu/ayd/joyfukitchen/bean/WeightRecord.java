@@ -22,6 +22,8 @@ public class WeightRecord implements Serializable{
     private Float weight;
     @DatabaseField
     private Date weightingTime;
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
+    private OnceRecord onceRecord;
 
     @Override
     public String toString() {
