@@ -7,7 +7,6 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 
 import edu.ayd.joyfukitchen.bean.OnceRecord;
-import edu.ayd.joyfukitchen.bean.WeightRecord;
 
 /**
  * Created by Administrator on 2017/3/30.
@@ -15,7 +14,7 @@ import edu.ayd.joyfukitchen.bean.WeightRecord;
 
 public class OnceRecordDao {
     private JoyFuDBHelper joyFuDBHelper;
-    private Dao<WeightRecord, Integer> dao;
+    private Dao<OnceRecord, Integer> dao;
 
     //构造器
     public OnceRecordDao(Context context) {
