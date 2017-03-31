@@ -8,14 +8,5 @@ import android.content.Context;
  */
 public class FoodNutritionDao {
 
-    //表文件示newfood.db
-    private String DB_Name = "newfood.db";
-    //获取一个上下文
-    private Context mContext;
 
-    public FoodNutritionDao(Context mContext) {
-        this.mContext=mContext;
-    }
-
-    
 }
