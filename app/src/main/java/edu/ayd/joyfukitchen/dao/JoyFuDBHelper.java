@@ -45,9 +45,9 @@ public class JoyFuDBHelper extends OrmLiteSqliteOpenHelper{
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         //创建表
         try{
-            TableUtils.createTable(connectionSource, OnceRecord.class);
-            TableUtils.createTable(connectionSource, User.class);
-            TableUtils.createTable(connectionSource, WeightRecord.class);
+            TableUtils.createTable(connectionSource, OnceRecord.class);    /* 创建OnceRecord表*/
+            TableUtils.createTable(connectionSource, User.class);           /*创建User表*/
+            TableUtils.createTable(connectionSource, WeightRecord.class);   /*创建WeightRecord表*/
         }catch(SQLException e){
             Log.e("JoyFuDBHelper","oncreate创建表失败");
         }

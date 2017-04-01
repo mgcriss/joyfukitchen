@@ -1,4 +1,4 @@
-package edu.ayd.joyfukitchen;
+package edu.ayd.joyfukitchen.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,11 +10,12 @@ import com.j256.ormlite.support.ConnectionSource;
  * Created by tangtang on 2017/3/29 10:16.
  */
 
-public class OrmTang extends OrmLiteSqliteOpenHelper{
+public class TangDBHelper extends OrmLiteSqliteOpenHelper{
 
 
-    public OrmTang(Context context, String databaseName, SQLiteDatabase.CursorFactory factory, int databaseVersion) {
+    public TangDBHelper(Context context, String databaseName, SQLiteDatabase.CursorFactory factory, int databaseVersion) {
         super(context, databaseName, factory, databaseVersion);
+
 
 
     }
@@ -24,6 +25,8 @@ public class OrmTang extends OrmLiteSqliteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
+
+
 
     }
 
