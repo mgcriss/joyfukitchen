@@ -1,65 +1,130 @@
 package edu.ayd.joyfukitchen.bean;
 
+import com.j256.ormlite.field.DatabaseField;
+
 import java.util.Date;
 
 /**
  * Created by 萝莉 on 2017/3/28.
+ * 食品元素表
  */
 public class FoodNutrition {
+    @DatabaseField
     private Integer id;   //编号
+    @DatabaseField
     private Integer food_id;  //类型（外键Food_id）
+    @DatabaseField
     private String name;    //名称
+    @DatabaseField
     private Float water;
+    @DatabaseField
     private String water_unit;
+    @DatabaseField
     private Float energy;
+    @DatabaseField
     private String energy_unit;
+    @DatabaseField
+
     private Float protein;
+    @DatabaseField
     private String protein_unit;
+    @DatabaseField
     private Float fat;
+    @DatabaseField
+
     private String fat_unit;
+    @DatabaseField
+
     private Float carbohydrate;
+    @DatabaseField
     private String carbohydrate_unit;
+
+    @DatabaseField
     private Float df;
+    @DatabaseField
     private String df_unit;
+    @DatabaseField
     private Float cholesterol;
+    @DatabaseField
     private String cholesterol_unit;
+    @DatabaseField
     private Float vitamina;
+    @DatabaseField
     private String vitamina_unit;
+    @DatabaseField
     private Float carotene;
+    @DatabaseField
     private String carotene_unit;
+    @DatabaseField
     private Float retinol;
+    @DatabaseField
     private String retinol_unit;
+    @DatabaseField
     private Float vitaminb1;
+    @DatabaseField
     private String vitaminb1_unit;
+    @DatabaseField
     private Float vitaminb2;
+    @DatabaseField
     private String vitaminb2_unit;
+    @DatabaseField
     private Float niacin;
+    @DatabaseField
     private String niacin_unit;
+    @DatabaseField
     private Float vitaminc;
+    @DatabaseField
     private String vitaminc_unit;
+    @DatabaseField
     private Float vitamine;
+    @DatabaseField
     private String vitamine_unit;
+    @DatabaseField
     private Float ca;
+    @DatabaseField
     private String ca_unit;
+    @DatabaseField
     private Float p;
+    @DatabaseField
     private String p_unit;
+    @DatabaseField
     private Float k;
+    @DatabaseField
     private String k_unit;
+    @DatabaseField
     private Float na;
+    @DatabaseField
     private String na_unit;
+    @DatabaseField
     private Float mg;
+    @DatabaseField
     private String mg_unit;
+    @DatabaseField
     private Float fe;
+    @DatabaseField
     private String fe_unit;
+    @DatabaseField
     private Float zn;
+    @DatabaseField
     private String zn_unit;
+    @DatabaseField
     private Float cu;
+    @DatabaseField
     private String cu_unit;
+    @DatabaseField
     private Float mn;
+    @DatabaseField
     private String mn_unit;
+    @DatabaseField
     private Float se;
+    @DatabaseField
     private String se_unit;
+    @DatabaseField
     private Date createtime;
+
+
+    @DatabaseField(foreign = true,foreignAutoRefresh = true)
+    private Food food;
 
     @Override
     public String toString() {
@@ -551,5 +616,14 @@ public class FoodNutrition {
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+    }
+
+
+    public Food getFood() {
+        return food;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
     }
 }

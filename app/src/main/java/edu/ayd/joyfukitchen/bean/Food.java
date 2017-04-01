@@ -1,5 +1,9 @@
 package edu.ayd.joyfukitchen.bean;
 
+import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+
 import java.util.Date;
 
 /**
@@ -7,10 +11,17 @@ import java.util.Date;
  * 食品类型
  */
 public class Food {
+    @DatabaseField
     private Integer id;      //编号
+    @DatabaseField
     private String title;   //类型
+    @DatabaseField
     private String alias;   //别名
+    @DatabaseField
     private Date createtime;//创建时间
+
+    @ForeignCollectionField
+    private ForeignCollection<FoodNutrition> FoodNutrition;
 
     @Override
     public String toString() {
