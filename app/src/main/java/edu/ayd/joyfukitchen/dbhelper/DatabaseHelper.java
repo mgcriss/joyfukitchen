@@ -1,10 +1,11 @@
-package edu.ayd.joyfukitchen.util;
+package edu.ayd.joyfukitchen.dbhelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -13,6 +14,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.ayd.joyfukitchen.bean.Food;
 import edu.ayd.joyfukitchen.bean.FoodNutrition;
@@ -25,7 +28,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private Context mContext;
     private String DATABASE_PATH=mContext.getApplicationContext().getFilesDir().getAbsolutePath()+DB_Name;
-
+    private static DatabaseHelper instance;
+    private Map<String, Dao> daos = new HashMap<String, Dao>();
     /**
      * 将db文件移动到手机中，并创建并打开
      * @param context
@@ -97,26 +101,55 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     /**
-     *清除
+     * 单例获取该Helper
+     *
+     * @param context
+     * @return
      */
-    public void deleteDB() {
-        if (mContext != null) {
-            File f = mContext.getDatabasePath(DB_Name);
-            if (f.exists()) {
-                f.delete();
-            } else {
-                mContext.deleteDatabase(DB_Name);
-            }
-
-            File file = mContext.getDatabasePath(DATABASE_PATH);
-            if (file.exists()) {
-                file.delete();
+    public static synchronized DatabaseHelper getHelper(Context context)
+    {
+        context = context.getApplicationContext();
+        if (instance == null)
+        {
+            synchronized (DatabaseHelper.class)
+            {
+                if (instance == null)
+                    instance = new DatabaseHelper(context);
             }
         }
+
+        return instance;
     }
+
+    /**
+     *Dao，用作增删改查
+     */
+    public synchronized Dao getDao(Class clazz) throws SQLException
+    {
+        Dao dao = null;
+        String className = clazz.getSimpleName();
+
+        if (daos.containsKey(className))
+        {
+            dao = daos.get(className);
+        }
+        if (dao == null)
+        {
+            dao = super.getDao(clazz);
+            daos.put(className, dao);
+        }
+        return dao;
+    }
+
+
 
     @Override
     public void close() {
         super.close();
+        for (String key : daos.keySet())
+        {
+            Dao dao = daos.get(key);
+            dao = null;
+        }
     }
 }
