@@ -35,15 +35,10 @@ dependencies {
     // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core
     compile 'com.j256.ormlite:ormlite-core:5.0'
     compile 'com.j256.ormlite:ormlite-android:5.0'
-
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 
     testCompile 'junit:junit:4.12'
 
-    // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core
-    compile group: 'com.j256.ormlite', name: 'ormlite-core', version: '4.48'
-
-    // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-android
-    compile group: 'com.j256.ormlite', name: 'ormlite-android', version: '4.48'
 
 }
 
