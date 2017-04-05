@@ -47,7 +47,7 @@ public class FoodNutritionDao {
      * @param food_id 食材类型的id
      * @return List<FoodNutrition>
      */
-   public List<FoodNutrition> showFoodById(Integer food_id){
+   public List<FoodNutrition> showFoodByTypeId(Integer food_id){
        try {
            return daos.queryForEq("food_id", food_id);
        } catch (SQLException e) {
@@ -69,4 +69,20 @@ public class FoodNutritionDao {
         }
         return null;
     }
+
+    /**
+     * 通过食材id得到食材
+     * @param id
+     * @return FoodNutrition
+     */
+    public FoodNutrition showFoodByFoodId(Integer id){
+        try {
+            return daos.queryForId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }
