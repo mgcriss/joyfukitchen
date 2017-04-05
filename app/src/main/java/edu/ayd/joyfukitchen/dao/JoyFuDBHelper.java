@@ -23,7 +23,7 @@ import edu.ayd.joyfukitchen.bean.WeightRecord;
 
 public class JoyFuDBHelper extends OrmLiteSqliteOpenHelper{
 
-    private static final String databaseName = "joyfu";
+    private static final String databaseName = "joyfu.db";
     private static final Integer databaseVersion = 1;
 
     private static JoyFuDBHelper joyFuDBHelper;

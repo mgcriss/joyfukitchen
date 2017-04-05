@@ -22,7 +22,6 @@ public class OnceRecordDao {
     private JoyFuDBHelper joyFuDBHelper;
     private Dao<OnceRecord, Integer> dao;
 
-    private Dao<Food, Integer> foodDao;
 
     //构造器
     public OnceRecordDao(Context context) {
@@ -35,25 +34,6 @@ public class OnceRecordDao {
         }
     }
 
-
-    /**显示所有食材类型*/
-    public List<Food> showAllFoodType(){
-        List<OnceRecord> onceRecords = dao.queryForAll();
-
-        return List<Food>;
-
-    }
-
-    /*列出该食材类型的所有食材*/
-
-    public List<FoodNutrition> showAllFoodNutrition(Integer id){
-        List<OnceRecord> query = dao.query();
-
-    }
-
-    /*搜索食材，模糊查询，并将关键字高亮*/
-
-    public
 
 
 

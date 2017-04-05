@@ -10,7 +10,7 @@ public class Md5Util {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//加盐
+		//加密
 		String psd = "123"+"abc";
 		encoder(psd);
 	}
