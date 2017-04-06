@@ -22,7 +22,10 @@ public class OnceRecordDao {
     private JoyFuDBHelper joyFuDBHelper;
     private Dao<OnceRecord, Integer> dao;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
     //构造器
     public OnceRecordDao(Context context) {
         try {
@@ -35,6 +38,9 @@ public class OnceRecordDao {
     }
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 
 }

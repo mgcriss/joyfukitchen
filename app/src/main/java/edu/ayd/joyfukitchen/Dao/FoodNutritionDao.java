@@ -15,7 +15,6 @@ import edu.ayd.joyfukitchen.dbhelper.DatabaseHelper;
  * Created by 萝莉 on 2017/3/29.
  */
 public class FoodNutritionDao {
-    private Context mctx;
     private Dao<FoodNutrition,Integer> daos;
 
     private Dao<Food, Integer> foodDao;
@@ -24,7 +23,6 @@ public class FoodNutritionDao {
     private DatabaseHelper DHelper;
 
     public FoodNutritionDao(Context mctx) {
-        this.mctx = mctx;
         try
         {
             DHelper = DatabaseHelper.getHelper(mctx);
@@ -39,6 +37,7 @@ public class FoodNutritionDao {
     }
 
 
+<<<<<<< HEAD
     /**查询出所有的食材类型*/
     public List<Food> showAllFoodType(){
 
@@ -53,6 +52,62 @@ public class FoodNutritionDao {
 
 
 
+=======
+    /**
+     * 查询所有食材
+     * @return  List<FoodNutrition>
+     */
+    public List<FoodNutrition> showAllFood(){
+        try {
+           return daos.queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 通过食材类型id查询出食材
+     * @param food_id 食材类型的id
+     * @return List<FoodNutrition>
+     */
+   public List<FoodNutrition> showFoodByTypeId(Integer food_id){
+       try {
+           return daos.queryForEq("food_id", food_id);
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
+        return null;
+   }
+
+    /**
+     * 通过食材名字搜索食材，模糊查询
+     * @param name
+     * @return
+     */
+    public List<FoodNutrition> showFoodByName(String name){
+        try {
+            return (List<FoodNutrition>) daos.queryBuilder().where().like("name","%"+name+"%");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 通过食材id得到食材
+     * @param id
+     * @return FoodNutrition
+     */
+    public FoodNutrition showFoodByFoodId(Integer id){
+        try {
+            return daos.queryForId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+>>>>>>> dev
 
 
 }
