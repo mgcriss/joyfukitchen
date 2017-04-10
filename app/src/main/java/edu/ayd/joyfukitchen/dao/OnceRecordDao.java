@@ -1,15 +1,11 @@
 package edu.ayd.joyfukitchen.dao;
 
 import android.content.Context;
-import android.content.Intent;
 
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
-import java.util.List;
 
-import edu.ayd.joyfukitchen.bean.Food;
-import edu.ayd.joyfukitchen.bean.FoodNutrition;
 import edu.ayd.joyfukitchen.bean.OnceRecord;
 
 /**
@@ -19,20 +15,17 @@ import edu.ayd.joyfukitchen.bean.OnceRecord;
 
 public class OnceRecordDao {
 
-    private JoyFuDBHelper joyFuDBHelper;
+    private edu.ayd.joyfukitchen.dao.JoyFuDBHelper joyFuDBHelper;
     private Dao<OnceRecord, Integer> dao;
 
     //构造器
     public OnceRecordDao(Context context) {
         try {
-            joyFuDBHelper = JoyFuDBHelper.getInstance(context);
+            joyFuDBHelper = edu.ayd.joyfukitchen.dao.JoyFuDBHelper.getInstance(context);
             dao = joyFuDBHelper.getDao(OnceRecord.class);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-
-
 }
