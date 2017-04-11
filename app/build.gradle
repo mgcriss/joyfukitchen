@@ -52,6 +52,8 @@ dependencies {
     compile group: 'org.achartengine', name: 'achartengine', version: '1.2.0'
     //字体
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
+    //图片
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 
     testCompile 'junit:junit:4.12'
 

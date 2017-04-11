@@ -14,7 +14,7 @@ public class MyApplication extends Application {
         super.onCreate();
         //加载字体框架
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/Roboto-RobotoRegular.ttf")
+                .setDefaultFontPath("fonts/fzyxj.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );

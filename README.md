@@ -14,6 +14,14 @@
    1=m/p    m=质量  p=密度
 
 
-WeightService:
-模块1:称量
-    1.
+
+设置字体: fontpath
+设置圆形图片:用自定义布局
+<de.hdodenhof.circleimageview.CircleImageView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_image"
+    android:layout_width="96dp"
+    android:layout_height="96dp"
+    android:src="@drawable/profile"
+    app:civ_border_width="2dp"
+    app:civ_border_color="#FF000000"/>

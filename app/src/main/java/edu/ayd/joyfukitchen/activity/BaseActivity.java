@@ -7,6 +7,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by Administrator on 2017/4/11.
+ * 所有Activity的父类
  */
 
 public class BaseActivity extends Activity {
