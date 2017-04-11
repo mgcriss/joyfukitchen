@@ -67,4 +67,19 @@ public class UserDao {
         }
     }
 
+    /**
+     * 根据账号查询用户信息
+     * @param email
+     * @return
+     */
+    public User queryUser(String email){
+        try {
+            return (User) dao.queryForEq("email",email);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
+
