@@ -46,8 +46,12 @@ dependencies {
     // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core
     compile 'com.j256.ormlite:ormlite-core:5.0'
     compile 'com.j256.ormlite:ormlite-android:5.0'
+    //标题栏
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    //图表
     compile group: 'org.achartengine', name: 'achartengine', version: '1.2.0'
+    //字体
+    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
 
     testCompile 'junit:junit:4.12'
 
