@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * Created by Administrator on 2017/3/30.
- * 一条称取记录
+ * 一条称取记录，称取一种食材的记录
  */
 
 @DatabaseTable(tableName = "weight_record")

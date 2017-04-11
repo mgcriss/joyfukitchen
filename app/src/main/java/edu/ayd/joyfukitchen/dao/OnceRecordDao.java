@@ -22,10 +22,7 @@ public class OnceRecordDao {
     private JoyFuDBHelper joyFuDBHelper;
     private Dao<OnceRecord, Integer> dao;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> dev
     //构造器
     public OnceRecordDao(Context context) {
         try {
@@ -38,9 +35,45 @@ public class OnceRecordDao {
     }
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> dev
+
+    /**
+     * 添加一条记录，
+     * @param ord
+     */
+    public void addOneFoodRecord(OnceRecord ord){
+        try {
+            dao.create(ord);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * 查询所有记录
+     * @return
+     */
+    public List<OnceRecord> showRecords(){
+        try {
+            return dao.queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 删除一条记录
+     * @param id
+     */
+    public void deleteRecordById(Integer id){
+        try {
+             dao.deleteById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

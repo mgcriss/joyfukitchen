@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.Where;
 
 import java.sql.SQLException;
 
@@ -65,6 +66,20 @@ public class UserDao {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /**
+     * 根据账号查询用户信息
+     * @param email
+     * @return
+     */
+    public User queryUser(String email){
+        try {
+            return (User) dao.queryForEq("email",email);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
