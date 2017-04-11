@@ -16,4 +16,6 @@ public class BaseActivity extends Activity {
         //初始化字体框架
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+
+
 }

@@ -9,7 +9,7 @@ android {
         //主程序包，相当于eclipse的manifast下面的package
         applicationId "edu.ayd.joyfukitchen"
         //最小支持版本  这里是4.4
-        minSdkVersion 17
+        minSdkVersion 19
         //目标版本
         targetSdkVersion 21
         versionCode 1
