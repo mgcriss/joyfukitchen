@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 apply plugin: 'com.android.application'
 
 android {
@@ -51,7 +50,6 @@ dependencies {
 
 }
 
-=======
 apply plugin: 'com.android.application'
 
 android {
@@ -114,4 +112,3 @@ dependencies {
 
 }
 
->>>>>>> dev
