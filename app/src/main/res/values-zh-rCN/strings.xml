@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="next">下一步</string>
+
+    <string name="unit_g">克</string>
+    <string name="unit_oz">盎司</string>
+    <string name="unit_ml">毫升</string>
+    <string name="unit_lb">磅</string>
+    <string name="unit_l">两</string>
+</resources>

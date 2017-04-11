@@ -9,7 +9,7 @@ android {
         //主程序包，相当于eclipse的manifast下面的package
         applicationId "edu.ayd.joyfukitchen"
         //最小支持版本  这里是4.4
-        minSdkVersion 19
+        minSdkVersion 17
         //目标版本
         targetSdkVersion 21
         versionCode 1
@@ -54,6 +54,7 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
     //图片
     compile 'de.hdodenhof:circleimageview:2.1.0'
+
 
     testCompile 'junit:junit:4.12'
 

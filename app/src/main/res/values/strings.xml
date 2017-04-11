@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">JoyfuKitChen</string>
+    <string name="next">next</string>
+
+    <string name="unit_g">g</string>
+    <string name="unit_oz">oz</string>
+    <string name="unit_ml">ml</string>
+    <string name="unit_lb">lb</string>
+    <string name="unit_l">两</string>
+
+    <string name="index_ftv_initlization">0</string>
 </resources>

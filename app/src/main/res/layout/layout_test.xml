@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <edu.ayd.joyfukitchen.view.FontSizeAutoAdjustTextView
+        android:id="@+id/ftv_1"
+        fontPath="onts/fzyxj.ttf"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:text="g"
+        android:textColor="@color/index_unit_gray"
+        android:textSize="70sp" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="btn2"
+        android:id="@+id/btn1"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn2"
+        android:text="btn2"
+        />
+</LinearLayout>

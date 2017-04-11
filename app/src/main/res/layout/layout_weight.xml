@@ -1,18 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/layout_weight_bg"
     >
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
-        android:layout_width="398dp"
-        android:layout_height="246dp"
+        android:layout_width="match_parent"
+        android:layout_height="242dp"
+        android:layout_marginTop="30dp"
         android:src="@mipmap/show_weight_bg"
-        app:civ_border_width="0dp"
-        app:civ_border_color="#FF000000"/>
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="0dp" />
+
+    <edu.ayd.joyfukitchen.view.FontSizeAutoAdjustTextView
+        android:id="@+id/ftv_unit"
+        fontPath="onts/fzyxj.ttf"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="225dp"
+        android:layout_marginTop="142dp"
+        android:text="g"
+        android:textColor="@color/index_unit_gray"
+        android:textSize="70sp" />
+
+    <edu.ayd.joyfukitchen.view.FontSizeAutoAdjustTextView
+        android:id="@+id/ftv_weight_value"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="92dp"
+        android:layout_marginTop="109dp"
+        android:gravity="right"
+        android:text="@string/index_ftv_initlization"
+        android:textSize="70sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="292dp"
+        android:background="@drawable/shape_corner"
+        android:text="@string/next"
+        android:textColor="@color/index_page_light_blue" />
+
+    <ImageButton
+        android:id="@+id/imageButton_next"
+        android:layout_width="26dp"
+        android:layout_height="27dp"
+        android:layout_marginLeft="283dp"
+        android:layout_marginTop="244dp"
+        android:background="@mipmap/unit_change" />
+
 
 </FrameLayout>
