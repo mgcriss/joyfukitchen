@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 apply plugin: 'com.android.application'
 
 android {
@@ -50,3 +51,67 @@ dependencies {
 
 }
 
+=======
+apply plugin: 'com.android.application'
+
+android {
+    //编译版本
+    compileSdkVersion 21
+    //编译工具版本
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        //主程序包，相当于eclipse的manifast下面的package
+        applicationId "edu.ayd.joyfukitchen"
+        //最小支持版本  这里是4.4
+        minSdkVersion 19
+        //目标版本
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+//引入achartengine
+repositories {
+    mavenCentral()
+    maven {
+        url "https://repository-achartengine.forge.cloudbees.com/snapshot/"
+    }
+}
+
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:21.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+
+    // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core
+    compile 'com.j256.ormlite:ormlite-core:5.0'
+    compile 'com.j256.ormlite:ormlite-android:5.0'
+    //标题栏
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    //图表
+    compile group: 'org.achartengine', name: 'achartengine', version: '1.2.0'
+    //字体
+    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
+    //图片
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+
+    testCompile 'junit:junit:4.12'
+
+
+}
+
+>>>>>>> dev
