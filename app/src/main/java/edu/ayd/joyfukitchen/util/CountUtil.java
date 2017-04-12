@@ -488,7 +488,6 @@ public class CountUtil {
 
     /**
      * 判断
-     * 根据个人资料返回什么鬼
      * */
     public void setACAndWeight(Context context, String email){
         User user = new UserDao(context).queryUser(email);
