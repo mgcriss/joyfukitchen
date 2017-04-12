@@ -5,25 +5,29 @@
 
 
     <RadioGroup
+        android:id="@+id/rg_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/rb_weight"
             style="@style/bottom_radioGroup"
-            android:drawableTop="@mipmap/bottom_weight" />
+            android:drawableTop="@drawable/bottom_weight_select" />
 
         <RadioButton
+            android:id="@+id/rb_recider"
             style="@style/bottom_radioGroup"
-            android:drawableTop="@mipmap/bottom_recider" />
+            android:drawableTop="@drawable/bottom_recider_select" />
 
         <RadioButton
+            android:id="@+id/rb_history"
             style="@style/bottom_radioGroup"
-            android:drawableTop="@mipmap/bottom_history" />
+            android:drawableTop="@drawable/bottom_history_select" />
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/rb_user"
             style="@style/bottom_radioGroup"
-            android:drawableTop="@mipmap/bottom_user" />
+            android:drawableTop="@drawable/bottom_user_select" />
     </RadioGroup>
 </LinearLayout>

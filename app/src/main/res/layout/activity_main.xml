@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.ayd.joyfukitchen.activity.MainActivity">
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_index"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
 
-    <edu.ayd.joyfukitchen.view.FontSizeAutoAdjustTextView
-        android:id="@+id/ftv_1"
-        android:layout_width="121dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:background="#000"
-        android:text="字幕"
-        android:gravity="center"
-        android:textColor="#fff" />
+    </android.support.v4.view.ViewPager>
 
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:layout_alignParentBottom="true">
+
+        <include layout="@layout/activity_bottom" />
+    </LinearLayout>
+
+</LinearLayout>
