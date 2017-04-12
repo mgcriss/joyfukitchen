@@ -5,5 +5,7 @@ package edu.ayd.joyfukitchen.constants;
  */
 
 public enum Sex {
-    MALE,FEMALE;
+    MALE,       //男
+
+    FEMALE;             //女
 }

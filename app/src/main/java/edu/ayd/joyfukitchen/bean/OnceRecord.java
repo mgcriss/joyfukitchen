@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * Created by Administrator on 2017/3/30.
- * 一次称取的记录，一次可能有多条
+ * 一次称取的记录，一次可能有多条，一道菜的记录
  * 在称取的时候，以次来作为计算单位
  */
 

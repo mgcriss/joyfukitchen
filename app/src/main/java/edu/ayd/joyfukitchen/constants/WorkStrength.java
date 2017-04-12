@@ -6,16 +6,17 @@ package edu.ayd.joyfukitchen.constants;
 
 public enum WorkStrength {
 
-    /*脑力劳动*/
+    /*较轻体力劳动*/
     HEADWORK,
 
     /*中度体力劳动*/
     MIDDLEWORK,
 
-    /*较体力劳动*/
+    /*轻体力劳动*/
     HIGHWORK,
 
 
 
 
 }
+
