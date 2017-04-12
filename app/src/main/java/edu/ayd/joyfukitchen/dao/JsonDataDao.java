@@ -2,15 +2,15 @@ package edu.ayd.joyfukitchen.dao;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.util.List;
 
 import edu.ayd.joyfukitchen.bean.MenuResult;
 import edu.ayd.joyfukitchen.bean.RecipeType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by tangtang on 2017/4/12 09:11.

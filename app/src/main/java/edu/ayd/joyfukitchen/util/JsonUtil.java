@@ -3,14 +3,13 @@ package edu.ayd.joyfukitchen.util;
 import android.view.View;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by tangtang on 2017/4/5 09:49.
@@ -23,8 +22,8 @@ public class JsonUtil {
     private OkHttpClient myClient ;
     private Gson gson = new Gson();
 
-  
-    public  doGet(View v , String url_json) throws IOException {
+
+    public void doGet(View v , String url_json) throws IOException {
 
         myClient = new OkHttpClient();
         Request request = new Request.Builder().url(url_json).build();
