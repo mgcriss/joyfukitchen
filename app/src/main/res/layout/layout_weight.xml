@@ -1,86 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg_redicer_bg"
-   >
+    android:orientation="vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="242dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="40dp"
-        android:src="@mipmap/show_weight_bg"
-        app:civ_border_width="0dp" />
+        android:background="@color/index_page_light_blue"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:layout_marginTop="20dp"
+            android:text="@string/index_date"
+            android:id="@+id/textView" />
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="match_parent"
+            android:layout_height="242dp"
+            android:src="@mipmap/show_weight_bg"
+            app:civ_border_width="0dp"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentStart="true" />
 
 
+        <TextView
+            android:id="@+id/box_1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="110dp" />
 
-    <TextView
-        android:id="@+id/box_1"
-        android:layout_width="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
-        android:layout_height="40dp" />
+        <edu.ayd.joyfukitchen.view.FontSizeAutoAdjustTextView
+            android:id="@+id/ftv_weight_value"
+            android:layout_width="121dp"
+            android:layout_height="80dp"
+            android:gravity="right|top"
+            android:text="@string/index_ftv_initlization"
+            android:textSize="70sp"
+            android:layout_alignTop="@+id/box_1"
+            android:layout_toStartOf="@+id/ftv_unit" />
 
-    <edu.ayd.joyfukitchen.view.FontSizeAutoAdjustTextView
-        android:id="@+id/ftv_weight_value"
-        android:layout_width="121dp"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:text="@string/index_ftv_initlization"
-        android:textSize="70sp"
-        android:layout_alignTop="@+id/box_1"
-        android:layout_alignRight="@+id/box_1" />
-
-    <edu.ayd.joyfukitchen.view.FontSizeAutoAdjustTextView
-        android:id="@+id/ftv_unit"
-        fontPath="onts/fzyxj.ttf"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="@string/unit_g"
-        android:textColor="@color/index_unit_gray"
-        android:textSize="60sp"
-        android:layout_toRightOf="@+id/box_1"
-        android:layout_alignBottom="@id/profile_image"
-        android:layout_below="@id/box_1"
-        android:gravity="center_horizontal"
-        android:paddingBottom="15dp"
-        />
+        <edu.ayd.joyfukitchen.view.FontSizeAutoAdjustTextView
+            android:id="@+id/ftv_unit"
+            fontPath="onts/fzyxj.ttf"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/profile_image"
+            android:layout_below="@id/box_1"
+            android:layout_toRightOf="@+id/box_1"
+            android:gravity="center_horizontal"
+            android:paddingBottom="15dp"
+            android:text="@string/unit_g"
+            android:textColor="@color/index_unit_gray"
+            android:textSize="40sp" />
 
 
+        <ImageButton
+            android:id="@+id/imageButton_change_unit"
+            android:layout_width="26dp"
+            android:layout_height="27dp"
+            android:layout_alignBottom="@id/ftv_unit"
+            android:layout_toRightOf="@id/ftv_unit"
+            android:background="@mipmap/unit_change" />
 
-    <ImageButton
-        android:id="@+id/imageButton_change_unit"
-        android:layout_width="26dp"
-        android:layout_height="27dp"
-        android:background="@mipmap/unit_change"
-        android:layout_toRightOf="@id/ftv_unit"
-        android:layout_alignBottom="@id/ftv_unit"
-        />
-
-<TextView
-    android:id="@+id/box_2"
-    android:layout_width="match_parent"
-    android:layout_height="10dp"
-    android:layout_below="@id/profile_image"
-    />
-
-
-    <Button
-    android:id="@+id/btn_next"
-    android:layout_width="250dp"
-    android:layout_height="wrap_content"
-    android:background="@drawable/shape_corner"
-    android:text="@string/next"
-    android:textColor="@color/index_page_light_blue"
-    android:layout_below="@id/box_2"
-    android:layout_centerHorizontal="true" />
-
+        <TextView
+            android:id="@+id/box_2"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@id/profile_image" />
 
 
 
 
-</RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_corner"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

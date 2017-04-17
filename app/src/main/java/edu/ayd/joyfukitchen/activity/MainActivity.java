@@ -10,7 +10,6 @@ import android.widget.RadioGroup;
 import java.util.ArrayList;
 
 import edu.ayd.joyfukitchen.Adapter.MyFragmentPageAdapter;
-import edu.ayd.joyfukitchen.Fragment.HistoryFragment;
 import edu.ayd.joyfukitchen.Fragment.ReciderFragment;
 import edu.ayd.joyfukitchen.Fragment.UserFragment;
 import edu.ayd.joyfukitchen.Fragment.WeightFragment;
@@ -60,11 +59,8 @@ public class MainActivity extends BaseActivity {
                     case R.id.rb_recider:
                         position = 1;
                         break;
-                    case R.id.rb_history:
-                        position = 2;
-                        break;
                     case R.id.rb_user:
-                        position = 3;
+                        position = 2;
                         break;
                     default:
                         ;
@@ -98,9 +94,6 @@ public class MainActivity extends BaseActivity {
                         id = R.id.rb_recider;
                         break;
                     case 2:
-                        id = R.id.rb_history;
-                        break;
-                    case 3:
                         id = R.id.rb_user;
                         break;
                     default:
@@ -128,13 +121,11 @@ public class MainActivity extends BaseActivity {
 
         Fragment weightFragment = new WeightFragment(this);
         ReciderFragment reciderFragment = new ReciderFragment(this);
-        HistoryFragment historyFragment = new HistoryFragment(this);
         UserFragment userFragment = new UserFragment(this);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(weightFragment);
         fragments.add(reciderFragment);
-        fragments.add(historyFragment);
         fragments.add(userFragment);
 
         myFragmentPageAdapter = new MyFragmentPageAdapter(getSupportFragmentManager(), fragments);

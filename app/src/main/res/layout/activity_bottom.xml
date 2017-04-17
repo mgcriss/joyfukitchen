@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="55dp">
+    android:gravity="center"
+    android:layout_height="wrap_content">
 
 
     <RadioGroup
         android:id="@+id/rg_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/rb_weight"
             style="@style/bottom_radioGroup"
+            android:gravity="center"
             android:drawableTop="@drawable/bottom_weight_select" />
 
         <RadioButton
             android:id="@+id/rb_recider"
+            android:gravity="center"
             style="@style/bottom_radioGroup"
             android:drawableTop="@drawable/bottom_recider_select" />
 
         <RadioButton
-            android:id="@+id/rb_history"
-            style="@style/bottom_radioGroup"
-            android:drawableTop="@drawable/bottom_history_select" />
-
-        <RadioButton
             android:id="@+id/rb_user"
+            android:gravity="center"
             style="@style/bottom_radioGroup"
             android:drawableTop="@drawable/bottom_user_select" />
     </RadioGroup>

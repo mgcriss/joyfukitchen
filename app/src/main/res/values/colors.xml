@@ -10,8 +10,10 @@
 
 
 <!-- 首页颜色 -->
-    <color name="index_page_light_blue">#5BB7F9</color>
+    <color name="index_page_light_blue">#12d9c5</color>
     <color name="index_unit_gray">#B5C1C0</color>
+
+
 
 
     <color name="statusBar">#FF5CC3FE</color>
