@@ -47,4 +47,3 @@ public class Md5Util {
 		return stringBuffer.toString();
 	}
 }
-

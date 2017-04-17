@@ -57,13 +57,12 @@ dependencies {
     compile  'com.squareup.okhttp3:okhttp:3.5.0'
 
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    //gson
     compile 'com.google.code.gson:gson:2.8.0'
-
-
-
 
 
     testCompile 'junit:junit:4.12'
 
-
+    compile 'junit:junit:4.12'
 }
+
