@@ -35,7 +35,7 @@ public class MainActivity extends BaseActivity {
 
         init();
         vp_index.setAdapter(myFragmentPageAdapter);
-        rg_bottom.check(0);
+        rg_bottom.check(R.id.rb_weight);
         setPageChangeListener();
         setCheckedChangeListener();
 
@@ -123,7 +123,7 @@ public class MainActivity extends BaseActivity {
         ReciderFragment reciderFragment = new ReciderFragment(this);
         UserFragment userFragment = new UserFragment(this);
 
-        ArrayList<Fragment> fragments = new ArrayList<>();
+        ArrayList<Fragment> fragments = new ArrayList<Fragment>();
         fragments.add(weightFragment);
         fragments.add(reciderFragment);
         fragments.add(userFragment);
