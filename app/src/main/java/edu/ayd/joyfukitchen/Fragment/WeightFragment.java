@@ -10,13 +10,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
 import edu.ayd.joyfukitchen.activity.R;
 import edu.ayd.joyfukitchen.service.BluetoothService;
 import edu.ayd.joyfukitchen.util.EmptyUtils;
+import edu.ayd.joyfukitchen.util.ToastUtil;
+import edu.ayd.joyfukitchen.view.DiyProgressbarView;
 import edu.ayd.joyfukitchen.view.FontSizeAutoAdjustTextView;
 
 /**
@@ -25,10 +27,13 @@ import edu.ayd.joyfukitchen.view.FontSizeAutoAdjustTextView;
 
 public class WeightFragment extends Fragment {
     private View view;
-    private Button btn_next;
     private Context context;
+    private ImageButton imageButton_change_unit;
     private FontSizeAutoAdjustTextView ftv_weight_value;
     private FontSizeAutoAdjustTextView ftv_unit;
+    private DiyProgressbarView dv_1;
+    private DiyProgressbarView dv_2;
+    private DiyProgressbarView dv_3;
 
     //蓝牙所需
     private final static String TAG = "WeightFragment";
@@ -54,7 +59,7 @@ public class WeightFragment extends Fragment {
             view = inflater.inflate(R.layout.layout_weight, container, false);
         }
         init();
-//        setListener();
+        setListener();
 
         return view;
     }
@@ -64,18 +69,40 @@ public class WeightFragment extends Fragment {
     private void init() {
         ftv_weight_value = (FontSizeAutoAdjustTextView) view.findViewById(R.id.ftv_weight_value);
         ftv_unit = (FontSizeAutoAdjustTextView) view.findViewById(R.id.ftv_unit);
+        imageButton_change_unit = (ImageButton) view.findViewById(R.id.imageButton_change_unit);
+        dv_1 = (DiyProgressbarView) view.findViewById(R.id.dv_1);
+        dv_2 = (DiyProgressbarView) view.findViewById(R.id.dv_2);
+        dv_3 = (DiyProgressbarView) view.findViewById(R.id.dv_3);
     }
+
     /**给控件设置监听事件*/
-//    private void setListener() {
-//        btn_next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ToastUtil.show(context, "click next");
-//                ftv_weight_value.setText("0000");
-//                ftv_unit.setText("毫升");
-//            }
-//        });
-//    }
+    private void setListener() {
+        imageButton_change_unit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtil.show(context, "click next");
+                ftv_weight_value.setText("0000");
+                ftv_unit.setText("毫升");
+                dv_1.setText("热量");
+                dv_1.setTopMax("100");
+                dv_1.setTopProgress("90");
+                dv_1.setBottomMax("100");
+                dv_1.setBottomProgress("10");
+
+                dv_2.setText("脂肪");
+                dv_2.setTopMax("100");
+                dv_2.setTopProgress("80");
+                dv_2.setBottomMax("100");
+                dv_2.setBottomProgress("20");
+
+                dv_3.setText("蛋白质");
+                dv_3.setTopMax("100");
+                dv_3.setTopProgress("70");
+                dv_3.setBottomMax("100");
+                dv_3.setBottomProgress("30");
+            }
+        });
+    }
 
 
     @Override
