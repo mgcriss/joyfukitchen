@@ -13,4 +13,14 @@
 
 
     <string name="index_date">2016-4-17</string>
+
+    <string name="year">年</string>
+    <string name="month">月</string>
+
+    <string name="weight_title">称重</string>
+
+    <string name="table_empty_text">没有数据</string>
+
+    <string name="point_text">健康提示</string>
+
 </resources>

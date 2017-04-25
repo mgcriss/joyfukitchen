@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+
+            <!-- 周日历 -->
+            <com.loonggg.weekcalendar.view.WeekCalendar
+                android:id="@+id/week_calendar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="10dp"
+                app:daysSelectedBackground="@mipmap/circle"
+                app:isCornerMark="true"
+                app:monthBackgroundColor="@color/white"
+                app:monthTextColor="@color/month_text_color"
+                app:nextArrowBg="@mipmap/next"
+                app:preArrowBg="@mipmap/pre"
+                app:todayTextColor="@color/today_text_color" />
+
+
+            <!-- 称量 -->
+            <LinearLayout
+                android:id="@+id/weight_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp">
+
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                        android:layout_width="200dp"
+                        android:layout_height="185dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        app:background_progressbar_color="@color/circle_progressbar_bgcolor"
+                        app:background_progressbar_width="5dp"
+                        app:progress="50"
+                        app:progressbar_color="@color/circle_progressbar_color"
+                        app:progressbar_width="8dp" />
+
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                        android:layout_width="173dp"
+                        android:layout_height="173dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        app:background_progressbar_color="@color/circle_inner_bgcolor"
+                        app:background_progressbar_width="2dp" />
+
+                    <TextView
+                        android:id="@+id/unit_ke"
+                        android:layout_width="115dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="right"
+                        android:text="8888"
+                        android:textColor="@color/today_text_color"
+                        android:textSize="50sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_marginLeft="63dp"
+                        android:layout_marginTop="22dp"
+                        android:text="@string/unit_g"
+                        android:textColor="@color/unit_color"
+                        android:textSize="20dp" />
+
+                </FrameLayout>
+
+                <Button
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/shape_corner_half"
+                    android:text="@string/next"
+                    android:textColor="@color/white" />
+
+                <!-- 单位换算值 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal">
+
+                    <edu.ayd.joyfukitchen.view.DiyTableView
+                        android:id="@+id/unit_bang"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:bottomTex="0"
+                        app:topTex="@string/unit_l" />
+
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/hlv_top" />
+
+
+                    <edu.ayd.joyfukitchen.view.DiyTableView
+                        android:id="@+id/unit_liang"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:bottomTex="0"
+                        app:topTex="@string/unit_lb" />
+
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/hlv_top" />
+
+                    <edu.ayd.joyfukitchen.view.DiyTableView
+                        android:id="@+id/unit_anshi"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:bottomTex="0"
+                        app:topTex="@string/unit_oz" />
+
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/hlv_top" />
+
+                    <edu.ayd.joyfukitchen.view.DiyTableView
+                        android:id="@+id/unit_haosheng"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:bottomTex="0"
+                        app:topTex="@string/unit_ml" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- 柱状图 -->
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barchart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="48dp"></com.github.mikephil.charting.charts.BarChart>
+
+            <!-- 健康提示 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@mipmap/point"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="@string/point_text"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/point_title_text_color"
+                    android:layout_height="match_parent" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/point"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="24dp"
+                android:textColor="@color/point_text_color"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="24dp"
+                android:layout_height="wrap_content"
+                android:text="            累了困了透支了,喝什么？喝营养快线!"
+                />
+
+            <!-- 分割线1 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:background="@color/dividing_line"
+                android:layout_height="1dp" />
+
+            <!-- 元素含量 -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_element_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- 分割线1 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:background="@color/dividing_line"
+                android:layout_height="1dp" />
+
+
+            <!-- 称量食材记录 -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_food_material_history"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="40dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

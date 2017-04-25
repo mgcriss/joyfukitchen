@@ -29,9 +29,14 @@ android {
 //引入achartengine
 repositories {
     mavenCentral()
-    maven {
-        url "https://repository-achartengine.forge.cloudbees.com/snapshot/"
+    maven{
+        url "https://jitpack.io"
     }
+
+    maven {
+        url  'http://dl.bintray.com/gigamole/maven/'
+    }
+
 }
 
 
@@ -42,24 +47,30 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 
     // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core
     compile 'com.j256.ormlite:ormlite-core:5.0'
     compile 'com.j256.ormlite:ormlite-android:5.0'
     //图表
-    compile group: 'org.achartengine', name: 'achartengine', version: '1.2.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     //图片
     compile 'de.hdodenhof:circleimageview:2.1.0'
 
     // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
-    compile  'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
 
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     //gson
     compile 'com.google.code.gson:gson:2.8.0'
 
+    //calendar
+    compile 'com.github.loonggg:WeekCalendar:v1.3'
+
+    compile 'com.mikhaellopez:circularprogressbar:1.0.1'
+
+
     testCompile 'junit:junit:4.12'
 
+    compile 'com.android.support:design:25.1.0'
 }
 
