@@ -1,10 +1,23 @@
 package edu.ayd.joyfukitchen.activity;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattService;
+import android.bluetooth.BluetoothManager;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -14,18 +27,25 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.loonggg.weekcalendar.view.WeekCalendar;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import edu.ayd.joyfukitchen.Adapter.ElementRecycleViewAdapter;
 import edu.ayd.joyfukitchen.bean.FoodElement;
+import edu.ayd.joyfukitchen.service.BluetoothService;
 import edu.ayd.joyfukitchen.util.ToastUtil;
 import edu.ayd.joyfukitchen.view.DiyTableView;
 
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends BaseActivity {
+
+
+
     //view
     private WeekCalendar weekCalendar;
     private TextView tv_ke;
@@ -36,12 +56,30 @@ public class MainActivity extends BaseActivity {
     private BarChart chart;
     private RecyclerView rv_element;
     private RecyclerView rv_food;
+    //圆圈中间的textView
+    private TextView unit_ke;
+    //中间circleProgressBar
+    private CircularProgressBar circleProgressBar_index;
+
+
+
+    /*蓝牙所需*/
+    private BluetoothAdapter.LeScanCallback lazyCallback;
+    private BluetoothAdapter mBluetoothAdapter;
+    private String mDeviceAddress =null;
+    private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics = new ArrayList();
+    private BluetoothGattCharacteristic mNotifyCharacteristic;
+    private BluetoothService mBluetoothLeService;
+    private static final int REQUEST_ENABLE_BT = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_weight_new);
+        setContentView(R.layout.layout_index);
         setStatusBarTrans();
+        //打开蓝牙
+        BluetoothManager bluetoothManager =(BluetoothManager)MainActivity.this.getSystemService(Context.BLUETOOTH_SERVICE);
+        mBluetoothAdapter = bluetoothManager.getAdapter();
         init();
     }
 
@@ -55,6 +93,7 @@ public class MainActivity extends BaseActivity {
         chart = (BarChart) findViewById(R.id.barchart);
         rv_element = (RecyclerView) findViewById(R.id.rv_element_content);
         rv_food = (RecyclerView) findViewById(R.id.rv_food_material_history);
+        unit_ke = (TextView) findViewById(R.id.unit_ke);
 
         //设置点击事件
         weekCalendar.setOnDateClickListener(new WeekCalendar.OnDateClickListener() {
@@ -191,5 +230,289 @@ public class MainActivity extends BaseActivity {
 
 
 
+    /**
+     * 设置显示的textView的值，并自动设置CircleProgressBar进度
+     * */
+    public void setShowWeightData(String data){
+        //给显示的TextView设置值
+        unit_ke.setText(data);
+
+        //计算比例(最大值5000)
+        float f = 0;
+        try {
+            f = Float.parseFloat(data);
+        } catch (Exception e){
+            e.printStackTrace();
+            Log.i(TAG, "setShowWeightData: float = "+ f + "数值字符串转float转换错误");
+        }
+        //计算进度
+        float progress = f/5000;
+        //给ProgressBar设置进度
+        circleProgressBar_index.setProgress(progress);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*-----------------------蓝牙----------------------------*/
+    // 代码管理服务生命周期
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+
+        //服务保持连接
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder service) {
+            mBluetoothLeService = ((BluetoothService.LocalBinder)service).getService();
+            if (!mBluetoothLeService.initialize()) {
+                Log.i(TAG, "无法初始化蓝牙");
+            }
+
+            Toast.makeText(MainActivity.this, "连接设备", Toast.LENGTH_LONG).show();
+            // 自动连接到设备成功启动初始化。
+            mBluetoothLeService.connect(mDeviceAddress);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            Log.i(TAG, "无法连接");
+            mBluetoothLeService = null;
+        }
+    };
+
+    //广播
+    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (BluetoothService.ACTION_GATT_CONNECTED.equals(action)) {
+                Toast.makeText(context, "连接成功", Toast.LENGTH_LONG).show();
+            } else if (BluetoothService.ACTION_GATT_DISCONNECTED.equals(action)) {
+                Toast.makeText(context, "断开连接", Toast.LENGTH_LONG).show();
+            } else if (BluetoothService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
+                // 显示所有用户界面上的支持服务和特色
+                displayGattServices(mBluetoothLeService.getSupportedGattServices());
+            } else if (BluetoothService.ACTION_DATA_AVAILABLE.equals(action)) {
+                //String data = intent.getStringExtra(BluetoothService.EXTRA_DATA);
+
+                String jstate = intent.getStringExtra(BluetoothService.JSTATE);
+                String jdata = intent.getStringExtra(BluetoothService.JDATA);
+
+                //给控件设置值
+                setShowWeightData(jdata);
+
+                Log.i("--状态----------------",jstate);
+                Log.i("--数据----------------", jdata);
+            }
+        }
+    };
+
+    private void displayGattServices(List<BluetoothGattService> gattServices) {
+        if (gattServices != null) {
+            ArrayList<HashMap<String, String>> gattServiceData = new ArrayList();
+            //ArrayList<ArrayList<HashMap<String, String>>> gattCharacteristicData = new ArrayList();
+            mGattCharacteristics = new ArrayList();
+            for (BluetoothGattService gattService : gattServices) {
+                HashMap<String, String> currentServiceData = new HashMap();
+                String uuid = gattService.getUuid().toString();
+                if (Objects.equals(uuid, "0000fff0-0000-1000-8000-00805f9b34fb")) {
+                    currentServiceData.put("UUID", uuid);
+                    gattServiceData.add(currentServiceData);
+                    ArrayList<HashMap<String, String>> gattCharacteristicGroupData = new ArrayList();
+                    List<BluetoothGattCharacteristic> gattCharacteristics = gattService.getCharacteristics();
+                    ArrayList<BluetoothGattCharacteristic> charas = new ArrayList();
+                    for (BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) {
+                        charas.add(gattCharacteristic);
+                        HashMap<String, String> currentCharaData = new HashMap();
+                        currentCharaData.put("UUID", gattCharacteristic.getUuid().toString());
+                        gattCharacteristicGroupData.add(currentCharaData);
+                    }
+                    mGattCharacteristics.add(charas);
+                    if (mGattCharacteristics != null) {
+                        BluetoothGattCharacteristic characteristic = (BluetoothGattCharacteristic) ((ArrayList) this.mGattCharacteristics.get(0)).get(3);
+                        int charaProp = characteristic.getProperties();
+                        if ((charaProp | 2) > 0) {
+                            if (mNotifyCharacteristic != null) {
+                                mBluetoothLeService.setCharacteristicNotification(this.mNotifyCharacteristic, false);
+                                mNotifyCharacteristic = null;
+                            }
+                            mBluetoothLeService.readCharacteristic(characteristic);
+                        }
+                        if ((charaProp | 16) > 0) {
+                            mNotifyCharacteristic = characteristic;
+                            mBluetoothLeService.setCharacteristicNotification(characteristic, true);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //懒加载回调
+    private class LazyCallback implements BluetoothAdapter.LeScanCallback {
+        @Override
+        public void onLeScan(BluetoothDevice bluetoothDevice, int i, byte[] bytes) {
+            //Log.i("开始查询","LazyCallback");
+            String name = bluetoothDevice.getName();
+            String address = bluetoothDevice.getAddress();
+            if (address != null) {
+                Log.i("查到的地址:", address);
+                //7C:EC:79:55:63:29
+            }
+            if (name != null && "BIGCARE_BC301".equals(name)) {
+                //String address2 = bluetoothDevice.getAddress();
+                mDeviceAddress = bluetoothDevice.getAddress();
+                Log.i("---查到的名字-----:", mDeviceAddress);
+
+                mBluetoothAdapter.stopLeScan(lazyCallback);
+
+                //Intent gattServiceIntent = new Intent(getActivity(), BluetoothService.class);
+                boolean ble = MainActivity.this.getApplicationContext().bindService(new Intent(MainActivity.this.getApplication(), BluetoothService.class), mServiceConnection, Context.BIND_AUTO_CREATE);//绑定服务
+
+                if (ble) {
+                    Log.i("绑定成功", "dd");
+                } else {
+                    Log.i("绑定失败", "dd");
+                }
+
+                MainActivity.this.registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+
+            }
+
+            /*try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*/
+        }
+    }
+
+    private static IntentFilter makeGattUpdateIntentFilter() {
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothService.ACTION_GATT_CONNECTED);
+        intentFilter.addAction(BluetoothService.ACTION_GATT_DISCONNECTED);
+        intentFilter.addAction(BluetoothService.ACTION_GATT_SERVICES_DISCOVERED);
+        intentFilter.addAction(BluetoothService.ACTION_DATA_AVAILABLE);
+        return intentFilter;
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i(TAG,"onStart-1");
+
+        Log.i("sssss",mDeviceAddress+"");
+        if (mDeviceAddress != null) {
+            Intent gattServiceIntent = new Intent(MainActivity.this, BluetoothService.class);
+            if(mBluetoothLeService ==null)
+                MainActivity.this.bindService(gattServiceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);//绑定服务
+            MainActivity.this.registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+        }
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG,"onResume--1");
+
+        Log.i("onresume","什么事都没做");
+
+        if (!mBluetoothAdapter.isEnabled()) {
+            Toast.makeText(MainActivity.this, "打开蓝牙成功", Toast.LENGTH_LONG).show();
+            Log.i("打开蓝牙成功", "BluetoothConnection");
+            Intent enableBtIntent = new Intent( BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+
+        Toast.makeText(MainActivity.this,"打开蓝牙后", Toast.LENGTH_LONG).show();
+
+        if (lazyCallback == null) {
+            Log.i("lazyCallback","lazyCallback  new前");
+            lazyCallback = new LazyCallback();
+        }
+        Log.i("lazyCallback","new 后");
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    boolean d = mBluetoothAdapter.startLeScan(lazyCallback);
+                    Log.i("扫描状态：",d+"");
+                }catch (Exception e){
+                    Log.i("异常：",e.toString());
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+
+        if (mBluetoothLeService != null) {
+            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+            Log.i(TAG, "连接请求的结果=" + result);
+        }
+    }
+
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG,"onPause--1");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i(TAG,"onStop--1");
+        if (mDeviceAddress != null) {
+            if (mBluetoothLeService.isRestricted()){
+                if(mServiceConnection != null) {
+                    if(mBluetoothLeService != null)
+                        MainActivity.this.unbindService(mServiceConnection);
+                }
+            }
+        }
+
+        if (mDeviceAddress != null && mGattCharacteristics != null) {
+            MainActivity.this.unregisterReceiver(mGattUpdateReceiver);
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG,"onDestroy--1");
+
+
+        if (mBluetoothAdapter != null) {
+            mBluetoothAdapter.disable();
+        }
+
+        mBluetoothLeService = null;
+        mBluetoothAdapter.stopLeScan(lazyCallback);
+    }
+
+
 
 }
+
+
+
+
+
