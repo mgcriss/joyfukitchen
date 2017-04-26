@@ -3,12 +3,19 @@
     package="edu.ayd.joyfukitchen.activity">
 
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <!--蓝牙所要的权限-->
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
+    <!-- Android6.0 蓝牙扫描才需要-->
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
 
     <application
         android:name=".MyApplication"
@@ -26,7 +33,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".BaseActivity"/>
+        <activity android:name=".BaseActivity" />
 
 
         <!--蓝牙所需Service-->

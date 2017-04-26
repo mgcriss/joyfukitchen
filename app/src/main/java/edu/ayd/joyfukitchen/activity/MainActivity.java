@@ -1,5 +1,6 @@
 package edu.ayd.joyfukitchen.activity;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -11,8 +12,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -44,7 +49,8 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends BaseActivity {
 
-
+    //requestCODE
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 1;
 
     //view
     private WeekCalendar weekCalendar;
@@ -62,11 +68,10 @@ public class MainActivity extends BaseActivity {
     private CircularProgressBar circleProgressBar_index;
 
 
-
     /*蓝牙所需*/
     private BluetoothAdapter.LeScanCallback lazyCallback;
     private BluetoothAdapter mBluetoothAdapter;
-    private String mDeviceAddress =null;
+    private String mDeviceAddress = null;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics = new ArrayList();
     private BluetoothGattCharacteristic mNotifyCharacteristic;
     private BluetoothService mBluetoothLeService;
@@ -78,12 +83,36 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.layout_index);
         setStatusBarTrans();
         //打开蓝牙
-        BluetoothManager bluetoothManager =(BluetoothManager)MainActivity.this.getSystemService(Context.BLUETOOTH_SERVICE);
+        BluetoothManager bluetoothManager = (BluetoothManager) MainActivity.this.getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
+        //判断是否有权限
+// Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)
+
+//请求权限
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
+//判断是否需要 向用户解释，为什么要申请该权限
+        ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.READ_CONTACTS);
+
+
         init();
     }
 
-    public void init(){
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION){
+
+        }
+    }
+
+    public void init() {
         weekCalendar = (WeekCalendar) findViewById(R.id.week_calendar);
         tv_ke = (TextView) findViewById(R.id.unit_ke);
         tb_bang = (DiyTableView) findViewById(R.id.unit_bang);
@@ -94,6 +123,7 @@ public class MainActivity extends BaseActivity {
         rv_element = (RecyclerView) findViewById(R.id.rv_element_content);
         rv_food = (RecyclerView) findViewById(R.id.rv_food_material_history);
         unit_ke = (TextView) findViewById(R.id.unit_ke);
+        circleProgressBar_index = (CircularProgressBar) findViewById(R.id.circleProgressBar_index);
 
         //设置点击事件
         weekCalendar.setOnDateClickListener(new WeekCalendar.OnDateClickListener() {
@@ -105,10 +135,9 @@ public class MainActivity extends BaseActivity {
         });
 
 
-
         //设置recycleView测试数据
         List<FoodElement> foodElements = new ArrayList<>();
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             FoodElement foodElement = new FoodElement();
             foodElement.setElementName("天地一哈哈");
             foodElement.setElementValue("150mg");
@@ -124,9 +153,6 @@ public class MainActivity extends BaseActivity {
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rv_food.setLayoutManager(linearLayoutManager1);
         rv_food.setAdapter(new ElementRecycleViewAdapter(this, foodElements));
-
-
-
 
 
         //X轴的测试数据
@@ -150,37 +176,30 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
-
-
-
-
     /**
      * BarChart设置数据
+     *
      * @param data1:第一列的值 也就是推荐摄入量的值
-     *          data2： 第二列的值 就是实际摄入量的值
-     *             element: 元素的名称（蛋白质  脂肪等等）,只能有三个
-     * */
-    public void setChartData(List<Float> data1, List<Float> data2, final List<String> element){
+     *                    data2： 第二列的值 就是实际摄入量的值
+     *                    element: 元素的名称（蛋白质  脂肪等等）,只能有三个
+     */
+    public void setChartData(List<Float> data1, List<Float> data2, final List<String> element) {
 
         //Y轴的测试数据
         List<BarEntry> entriesGroup1 = new ArrayList<>();
         List<BarEntry> entriesGroup2 = new ArrayList<>();
 
         //设置数据
-       for(int i = 0; i < data1.size(); i++){
-           entriesGroup1.add(new BarEntry(i, data1.get(i)));
-           entriesGroup2.add(new BarEntry(i, data2.get(i)));
-       }
+        for (int i = 0; i < data1.size(); i++) {
+            entriesGroup1.add(new BarEntry(i, data1.get(i)));
+            entriesGroup2.add(new BarEntry(i, data2.get(i)));
+        }
 
 
         BarDataSet set1 = new BarDataSet(entriesGroup1, "推荐摄入量");
         set1.setColor(getResources().getColor(R.color.barChart1_color));
         BarDataSet set2 = new BarDataSet(entriesGroup2, "实际摄入量");
         set2.setColor(getResources().getColor(R.color.barChart2_color));
-
-
-
 
 
         float groupSpace = 0.55f;
@@ -207,13 +226,20 @@ public class MainActivity extends BaseActivity {
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                Log.i(TAG, "getFormattedValue: value="+value);
+                Log.i(TAG, "getFormattedValue: value=" + value);
                 String v = "a";
-                switch ((int)value){
-                    case 0: v = element.get(0);break;
-                    case 1: v = element.get(1); break;
-                    case 2: v = element.get(2);break;
-                    default:break;
+                switch ((int) value) {
+                    case 0:
+                        v = element.get(0);
+                        break;
+                    case 1:
+                        v = element.get(1);
+                        break;
+                    case 2:
+                        v = element.get(2);
+                        break;
+                    default:
+                        break;
                 }
                 return v;
             }
@@ -229,11 +255,10 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
     /**
      * 设置显示的textView的值，并自动设置CircleProgressBar进度
-     * */
-    public void setShowWeightData(String data){
+     */
+    public void setShowWeightData(String data) {
         //给显示的TextView设置值
         unit_ke.setText(data);
 
@@ -241,31 +266,16 @@ public class MainActivity extends BaseActivity {
         float f = 0;
         try {
             f = Float.parseFloat(data);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            Log.i(TAG, "setShowWeightData: float = "+ f + "数值字符串转float转换错误");
+            Log.i(TAG, "setShowWeightData: float = " + f + "数值字符串转float转换错误");
         }
         //计算进度
-        float progress = f/5000;
+        float progress = f / 5000 * 100;
+        Log.i(TAG, "setShowWeightData: f = " + f);
         //给ProgressBar设置进度
         circleProgressBar_index.setProgress(progress);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /*-----------------------蓝牙----------------------------*/
@@ -275,7 +285,7 @@ public class MainActivity extends BaseActivity {
         //服务保持连接
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder service) {
-            mBluetoothLeService = ((BluetoothService.LocalBinder)service).getService();
+            mBluetoothLeService = ((BluetoothService.LocalBinder) service).getService();
             if (!mBluetoothLeService.initialize()) {
                 Log.i(TAG, "无法初始化蓝牙");
             }
@@ -313,7 +323,7 @@ public class MainActivity extends BaseActivity {
                 //给控件设置值
                 setShowWeightData(jdata);
 
-                Log.i("--状态----------------",jstate);
+                Log.i("--状态----------------", jstate);
                 Log.i("--数据----------------", jdata);
             }
         }
@@ -322,7 +332,6 @@ public class MainActivity extends BaseActivity {
     private void displayGattServices(List<BluetoothGattService> gattServices) {
         if (gattServices != null) {
             ArrayList<HashMap<String, String>> gattServiceData = new ArrayList();
-            //ArrayList<ArrayList<HashMap<String, String>>> gattCharacteristicData = new ArrayList();
             mGattCharacteristics = new ArrayList();
             for (BluetoothGattService gattService : gattServices) {
                 HashMap<String, String> currentServiceData = new HashMap();
@@ -412,12 +421,12 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onStart() {
         super.onStart();
-        Log.i(TAG,"onStart-1");
+        Log.i(TAG, "onStart-1");
 
-        Log.i("sssss",mDeviceAddress+"");
+        Log.i("sssss", mDeviceAddress + "");
         if (mDeviceAddress != null) {
             Intent gattServiceIntent = new Intent(MainActivity.this, BluetoothService.class);
-            if(mBluetoothLeService ==null)
+            if (mBluetoothLeService == null)
                 MainActivity.this.bindService(gattServiceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);//绑定服务
             MainActivity.this.registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
         }
@@ -427,34 +436,34 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        Log.i(TAG,"onResume--1");
+        Log.i(TAG, "onResume--1");
 
-        Log.i("onresume","什么事都没做");
+        Log.i("onresume", "什么事都没做");
 
         if (!mBluetoothAdapter.isEnabled()) {
             Toast.makeText(MainActivity.this, "打开蓝牙成功", Toast.LENGTH_LONG).show();
             Log.i("打开蓝牙成功", "BluetoothConnection");
-            Intent enableBtIntent = new Intent( BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
 
-        Toast.makeText(MainActivity.this,"打开蓝牙后", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "打开蓝牙后", Toast.LENGTH_LONG).show();
 
         if (lazyCallback == null) {
-            Log.i("lazyCallback","lazyCallback  new前");
+            Log.i("lazyCallback", "lazyCallback  new前");
             lazyCallback = new LazyCallback();
         }
-        Log.i("lazyCallback","new 后");
+        Log.i("lazyCallback", "new 后");
 
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     boolean d = mBluetoothAdapter.startLeScan(lazyCallback);
-                    Log.i("扫描状态：",d+"");
-                }catch (Exception e){
-                    Log.i("异常：",e.toString());
+                    Log.i("扫描状态：", d + "");
+                } catch (Exception e) {
+                    Log.i("异常：", e.toString());
                     e.printStackTrace();
                 }
 
@@ -468,21 +477,20 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
     @Override
     public void onPause() {
         super.onPause();
-        Log.i(TAG,"onPause--1");
+        Log.i(TAG, "onPause--1");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.i(TAG,"onStop--1");
+        Log.i(TAG, "onStop--1");
         if (mDeviceAddress != null) {
-            if (mBluetoothLeService.isRestricted()){
-                if(mServiceConnection != null) {
-                    if(mBluetoothLeService != null)
+            if (mBluetoothLeService.isRestricted()) {
+                if (mServiceConnection != null) {
+                    if (mBluetoothLeService != null)
                         MainActivity.this.unbindService(mServiceConnection);
                 }
             }
@@ -497,7 +505,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i(TAG,"onDestroy--1");
+        Log.i(TAG, "onDestroy--1");
 
 
         if (mBluetoothAdapter != null) {
@@ -507,7 +515,6 @@ public class MainActivity extends BaseActivity {
         mBluetoothLeService = null;
         mBluetoothAdapter.stopLeScan(lazyCallback);
     }
-
 
 
 }
