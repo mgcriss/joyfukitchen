@@ -30,9 +30,6 @@ public class MainActivity extends BaseActivity {
 
         super.setStatusBarTrans();
 
-
-
-
         init();
         vp_index.setAdapter(myFragmentPageAdapter);
         rg_bottom.check(R.id.rb_weight);

@@ -52,6 +52,9 @@ public class BluetoothService extends Service {
     public final static String EXTRA_DATA =
             "com.example.bluetooth.le.EXTRA_DATA";
 
+    public final static String JDATA = "JADTA";
+    public final static String JSTATE = "JSTATE";
+
     //这就是我们项目蓝牙要用到的uuid
     public final static UUID UUID_HEART = UUID.fromString("00002a37-0000-1000-8000-00805f9b34fb");
 
@@ -151,9 +154,14 @@ public class BluetoothService extends Service {
                     stringBuilder.append(String.format("%02X ", objArr2));
                 }
                 int n = (stringBuilder.toString()).length();
-                String data1 =  "状态："+(stringBuilder.toString()).substring(0,2) + "\n" +(Integer.parseInt((stringBuilder.toString()).substring(3,5),16)*255+ Integer.parseInt((stringBuilder.toString()).substring(n-9,n-7),16))+"克";
-                intent.putExtra(EXTRA_DATA,data1);
-                /*intent.putExtra(EXTRA_DATA, new String(data) + "\n" + stringBuilder.toString());*/
+               /* String data1 =  "状态："+(stringBuilder.toString()).substring(0,2) + "\n" +(Integer.parseInt((stringBuilder.toString()).substring(3,5),16)*255+ Integer.parseInt((stringBuilder.toString()).substring(n-9,n-7),16))+"克";
+                intent.putExtra(EXTRA_DATA,data1);*/
+
+                String jstate = (stringBuilder.toString()).substring(0,2);
+                String jdata = (Integer.parseInt((stringBuilder.toString()).substring(3,5),16)*255+ Integer.parseInt((stringBuilder.toString()).substring(n-9,n-7),16))+"";
+
+                intent.putExtra(JDATA,jdata);
+                intent.putExtra(JSTATE,jstate);
             }
         }
         sendBroadcast(intent);
@@ -226,14 +234,14 @@ public class BluetoothService extends Service {
             Log.i(TAG,"BluetoothAdapter没有初始化或未指明的地址。");
             return false;
         }
-        if (mBluetoothDeviceAddress != null && address.equals(mBluetoothDeviceAddress) && mBluetoothGatt != null) {
+       /* if (mBluetoothDeviceAddress != null && address.equals(mBluetoothDeviceAddress) && mBluetoothGatt != null) {
             if (mBluetoothGatt.connect()) {
                 MConnectionState = STATE_CONNECTING;
                 return true;
             }else {
                 return false;
             }
-        }
+        }*/
         //设备
         final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
         if (device == null) {
