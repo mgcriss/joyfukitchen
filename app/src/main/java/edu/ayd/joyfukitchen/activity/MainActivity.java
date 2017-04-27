@@ -21,6 +21,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 import edu.ayd.joyfukitchen.Adapter.ElementRecycleViewAdapter;
 import edu.ayd.joyfukitchen.bean.FoodElement;
@@ -66,6 +69,8 @@ public class MainActivity extends BaseActivity {
     private TextView unit_ke;
     //中间circleProgressBar
     private CircularProgressBar circleProgressBar_index;
+    //下一步
+    private Button btn_next;
 
 
     /*蓝牙所需*/
@@ -76,6 +81,8 @@ public class MainActivity extends BaseActivity {
     private BluetoothGattCharacteristic mNotifyCharacteristic;
     private BluetoothService mBluetoothLeService;
     private static final int REQUEST_ENABLE_BT = 0;
+    //默认动画时长
+    private int animationDuration = 2500; // 2500ms = 2,5s
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,17 +92,16 @@ public class MainActivity extends BaseActivity {
         //打开蓝牙
         BluetoothManager bluetoothManager = (BluetoothManager) MainActivity.this.getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
-        //判断是否有权限
-// Here, thisActivity is the current activity
+        //判断是否有权限,判断dangerous permission
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED)
 
-//请求权限
+            //请求权限
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
-//判断是否需要 向用户解释，为什么要申请该权限
+        //判断是否需要 向用户解释，为什么要申请该权限
         ActivityCompat.shouldShowRequestPermissionRationale(this,
                 Manifest.permission.READ_CONTACTS);
 
@@ -107,7 +113,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION){
+        if (requestCode == MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION) {
 
         }
     }
@@ -124,6 +130,8 @@ public class MainActivity extends BaseActivity {
         rv_food = (RecyclerView) findViewById(R.id.rv_food_material_history);
         unit_ke = (TextView) findViewById(R.id.unit_ke);
         circleProgressBar_index = (CircularProgressBar) findViewById(R.id.circleProgressBar_index);
+        btn_next = (Button) findViewById(R.id.btn_next);
+
 
         //设置点击事件
         weekCalendar.setOnDateClickListener(new WeekCalendar.OnDateClickListener() {
@@ -172,6 +180,17 @@ public class MainActivity extends BaseActivity {
 
         setChartData(data1, data2, xValue);
 
+
+        final Random random = new Random();
+        //设置下一步事件 测试用
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float v1 = random.nextInt(100);
+                Log.i(TAG, "onClick: v1 = "+v1);
+                circleProgressBar_index.setProgressWithAnimation(v1, animationDuration);
+            }
+        });
 
     }
 
@@ -273,8 +292,9 @@ public class MainActivity extends BaseActivity {
         //计算进度
         float progress = f / 5000 * 100;
         Log.i(TAG, "setShowWeightData: f = " + f);
-        //给ProgressBar设置进度
-        circleProgressBar_index.setProgress(progress);
+        //给ProgressBar设置进度,自带动画的
+
+        circleProgressBar_index.setProgressWithAnimation(progress, animationDuration);
     }
 
 

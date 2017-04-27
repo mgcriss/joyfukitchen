@@ -160,6 +160,8 @@ public class BluetoothService extends Service {
                 String jstate = (stringBuilder.toString()).substring(0,2);
                 String jdata = (Integer.parseInt((stringBuilder.toString()).substring(3,5),16)*255+ Integer.parseInt((stringBuilder.toString()).substring(n-9,n-7),16))+"";
 
+                Log.i("16----------高位", stringBuilder.toString().substring(3,5));
+                Log.i("16----------低位", stringBuilder.toString().substring(n-9,n-7));
                 intent.putExtra(JDATA,jdata);
                 intent.putExtra(JSTATE,jstate);
             }
