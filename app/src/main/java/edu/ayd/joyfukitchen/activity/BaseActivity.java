@@ -1,8 +1,8 @@
 package edu.ayd.joyfukitchen.activity;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -14,12 +14,14 @@ import android.widget.FrameLayout;
  * 所有Activity的父类
  */
 
-public class BaseActivity extends FragmentActivity {
 
+public class BaseActivity extends Activity {
 
-    /**
+/*
+*
      * 设置4.4以上版本顶部状态栏为透明
      * */
+
     public void setStatusBarTrans() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
 
