@@ -15,6 +15,7 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -36,6 +37,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.loonggg.weekcalendar.view.WeekCalendar;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,11 +48,16 @@ import edu.ayd.joyfukitchen.Adapter.ElementRecycleViewAdapter;
 import edu.ayd.joyfukitchen.bean.FoodElement;
 import edu.ayd.joyfukitchen.service.BluetoothService;
 import edu.ayd.joyfukitchen.util.ToastUtil;
+import edu.ayd.joyfukitchen.util.WeightUtil;
 import edu.ayd.joyfukitchen.view.DiyTableView;
 
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends BaseActivity {
+
+    //Manager
+    private PowerManager.WakeLock mWakeLock;
+    private DecimalFormat decimalFormat;
 
     //requestCODE
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 1;
@@ -132,6 +139,11 @@ public class MainActivity extends BaseActivity {
         circleProgressBar_index = (CircularProgressBar) findViewById(R.id.circleProgressBar_index);
         btn_next = (Button) findViewById(R.id.btn_next);
 
+        decimalFormat = new DecimalFormat("##.00");
+
+        //获取屏幕亮度管理
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        mWakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
 
         //设置点击事件
         weekCalendar.setOnDateClickListener(new WeekCalendar.OnDateClickListener() {
@@ -186,9 +198,9 @@ public class MainActivity extends BaseActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                float v1 = random.nextInt(100);
-                Log.i(TAG, "onClick: v1 = "+v1);
-                circleProgressBar_index.setProgressWithAnimation(v1, animationDuration);
+                int v1 = random.nextInt(5000);
+                Log.i(TAG, "onClick: v1 = " + v1);
+                setShowWeightData(v1 + "");
             }
         });
 
@@ -278,8 +290,7 @@ public class MainActivity extends BaseActivity {
      * 设置显示的textView的值，并自动设置CircleProgressBar进度
      */
     public void setShowWeightData(String data) {
-        //给显示的TextView设置值
-        unit_ke.setText(data);
+
 
         //计算比例(最大值5000)
         float f = 0;
@@ -293,9 +304,61 @@ public class MainActivity extends BaseActivity {
         float progress = f / 5000 * 100;
         Log.i(TAG, "setShowWeightData: f = " + f);
         //给ProgressBar设置进度,自带动画的
-
         circleProgressBar_index.setProgressWithAnimation(progress, animationDuration);
+
+        //给显示的TextView设置值 unit_g
+        int g = (int) f;
+        unit_ke.setText(g + "");
+        //给其他单位设置值
+        String liang = null;
+        String anshi = null;
+        String bang = null;
+        String haosheng = null;
+        try {
+            liang = decimalFormat.format(WeightUtil.toLiang(f)).toString();
+            anshi = decimalFormat.format(WeightUtil.toAnShi(f)).toString();
+            bang = decimalFormat.format(WeightUtil.toBang(f)).toString();
+
+            //毫升的液体暂时密度按1来算
+            haosheng = decimalFormat.format(WeightUtil.toHaoSheng(f, 1f)).toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.i(TAG, "setShowWeightData: exception " + e);
+        }
+
+        tb_liang.setBottomText(liang);
+        tb_anshi.setBottomText(anshi);
+        tb_bang.setBottomText(bang);
+        tb_haosheng.setBottomText(haosheng);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /*-----------------------蓝牙----------------------------*/
@@ -456,6 +519,9 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
+        //添加唤醒锁,保持设备唤醒状态
+        mWakeLock.acquire();
+
         Log.i(TAG, "onResume--1");
 
         Log.i("onresume", "什么事都没做");
@@ -501,6 +567,9 @@ public class MainActivity extends BaseActivity {
     public void onPause() {
         super.onPause();
         Log.i(TAG, "onPause--1");
+
+        //释放唤醒锁
+        mWakeLock.release();
     }
 
     @Override
