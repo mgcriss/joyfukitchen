@@ -23,4 +23,6 @@
 
     <string name="point_text">健康提示</string>
 
+    <string name="searchView_hint">输入搜索的驶入,如:大米、西红柿等</string>
+
 </resources>

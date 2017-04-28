@@ -21,7 +21,6 @@ public class BaseActivity extends Activity {
 *
      * 设置4.4以上版本顶部状态栏为透明
      * */
-
     public void setStatusBarTrans() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
 

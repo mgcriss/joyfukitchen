@@ -68,6 +68,9 @@ dependencies {
 
     compile 'com.mikhaellopez:circularprogressbar:1.0.1'
 
+    //searchView
+    compile 'com.github.mancj:MaterialSearchBar:0.1.0'
+
 
     testCompile 'junit:junit:4.12'
 
