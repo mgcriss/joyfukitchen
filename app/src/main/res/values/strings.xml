@@ -23,6 +23,10 @@
 
     <string name="point_text">健康提示</string>
 
+    <!-- 搜索框提示字 -->
     <string name="searchView_hint">输入搜索的驶入,如:大米、西红柿等</string>
+
+    <string name="search_food_label">搜索食材</string>
+
 
 </resources>

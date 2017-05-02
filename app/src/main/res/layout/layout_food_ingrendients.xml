@@ -16,6 +16,10 @@
         >
 
         <EditText
+            android:id="@+id/et_search"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+
             android:layout_width="match_parent"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"

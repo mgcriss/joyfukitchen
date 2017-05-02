@@ -64,6 +64,9 @@ public class FoodClassRecycleViewAdapter extends RecyclerView.Adapter implements
 
             view = LayoutInflater.from(context).inflate(R.layout.item_rv_food_class,null);
 
+        //将创建的View注册点击事件
+        view.setOnClickListener(this);
+
         return new FoodClassRecycleViewHolder(view);
     }
 
@@ -85,6 +88,7 @@ public class FoodClassRecycleViewAdapter extends RecyclerView.Adapter implements
 
 
 
+    //ItemView的点击事件
     @Override
     public void onClick(View v) {
         if (mOnItemClickListener != null) {

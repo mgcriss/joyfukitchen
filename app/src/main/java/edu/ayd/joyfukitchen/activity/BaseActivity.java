@@ -1,8 +1,8 @@
 package edu.ayd.joyfukitchen.activity;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
  */
 
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
 
 /*
 *
