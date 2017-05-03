@@ -51,7 +51,12 @@ public class FoodClassIficationActivity extends BaseActivity {
             public void onItemClick(View view, int position) {
                 TextView tv_food_title = (TextView) view.findViewById(R.id.food_title);
                 String title = (String) tv_food_title.getText();
+                Integer id = (Integer) tv_food_title.getTag();
                 ToastUtil.show(FoodClassIficationActivity.this, "click "+title);
+                Intent intent = new Intent(FoodClassIficationActivity.this, CheckIngredientsActivity.class);
+                intent.putExtra(CheckIngredientsActivity.REQUESTCODE, id);
+                FoodClassIficationActivity.this.startActivity(intent);
+                finish();
             }
         });
         rv_food_class.setAdapter(foodClassRecycleViewAdapter);

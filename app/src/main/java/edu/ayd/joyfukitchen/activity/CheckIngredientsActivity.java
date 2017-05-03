@@ -8,11 +8,15 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.SearchRecentSuggestions;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.InflateException;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,7 +24,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.ayd.joyfukitchen.Adapter.MyFoodDetailsRecyclerViewAdapter;
 import edu.ayd.joyfukitchen.Adapter.MySearchRecentSuggestionAdapter;
+import edu.ayd.joyfukitchen.bean.FoodNutrition;
+import edu.ayd.joyfukitchen.dao.FoodNutritionDao;
 import edu.ayd.joyfukitchen.provider.MySearchRecentSuggestionsProvider;
 
 /**
@@ -29,13 +40,48 @@ import edu.ayd.joyfukitchen.provider.MySearchRecentSuggestionsProvider;
 
 public class CheckIngredientsActivity extends BaseActivity {
     //view
-   /* private SearchView search_food;
-    private ImageView iv_back;*/
+   private RecyclerView rv_food_details;
 
     //else
     private MySearchRecentSuggestionsProvider mySuggestionProvider;
     private SearchRecentSuggestions suggestions;
     private MySearchRecentSuggestionAdapter mySearchRecentSuggestionAdapter;
+
+    //data
+    private List<FoodNutrition> datas = new ArrayList<FoodNutrition>();
+
+    //adapter
+    static MyFoodDetailsRecyclerViewAdapter myFoodDetailsRecyclerViewAdapter;
+
+
+    //Constants
+    public static String REQUESTCODE = "request_code";
+    //更新数据请求
+    public static final int UPDATEDATAS = 0;
+
+    //handler
+    private final Handler mHandler = new MyHandler(this);
+
+
+    private static class MyHandler extends Handler {
+
+        private final WeakReference<CheckIngredientsActivity> mActivity;
+
+        public MyHandler(CheckIngredientsActivity activity) {
+            mActivity = new WeakReference<CheckIngredientsActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            switch (msg.what){
+                case UPDATEDATAS : myFoodDetailsRecyclerViewAdapter.notifyDataSetChanged();break;
+                default:;break;
+            }
+        }
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +94,7 @@ public class CheckIngredientsActivity extends BaseActivity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
@@ -73,7 +119,7 @@ public class CheckIngredientsActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         //监听返回键
-        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             backToFoodClassIficationActivity();
         }
         return false;
@@ -81,12 +127,18 @@ public class CheckIngredientsActivity extends BaseActivity {
 
     private void init() {
         //初始化控件
-
+        rv_food_details = (RecyclerView) findViewById(R.id.rv_food_details);
         //初始化MySearchRecentSuggestionsProvider访问类
         suggestions = new SearchRecentSuggestions(this,
                 MySearchRecentSuggestionsProvider.AUTHORITY, MySearchRecentSuggestionsProvider.MODE);
 
         mySearchRecentSuggestionAdapter = new MySearchRecentSuggestionAdapter(this, null, 0);
+
+        //以下显示食材名
+        myFoodDetailsRecyclerViewAdapter = new MyFoodDetailsRecyclerViewAdapter(datas, this);
+        rv_food_details.setAdapter(myFoodDetailsRecyclerViewAdapter);
+        rv_food_details.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
     }
 
 
@@ -103,7 +155,7 @@ public class CheckIngredientsActivity extends BaseActivity {
         uriBuilder.appendPath(SearchManager.SUGGEST_URI_PATH_QUERY);
 
         String selection = " ?";
-        String[] selArgs = new String[] { query };
+        String[] selArgs = new String[]{query};
 
         Uri uri = uriBuilder.build();
 
@@ -117,15 +169,18 @@ public class CheckIngredientsActivity extends BaseActivity {
     }
 
 
-    /**返回上一个页面*/
+    /**
+     * 返回上一个页面
+     */
     private void backToFoodClassIficationActivity() {
         Intent intent = new Intent(this, FoodClassIficationActivity.class);
         startActivity(intent);
         finish();
     }
+
     /**
      * 存储搜索值
-     * */
+     */
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
@@ -172,27 +227,49 @@ public class CheckIngredientsActivity extends BaseActivity {
             }
         });
 
-        //获取焦点
-        searchView.requestFocus();
-        //展开搜索框
-        searchItem.expandActionView();
+        //判断参数FOOD_CLASS_NAME,上一个页面传过来的类型id
+        final int food_class_name = getIntent().getIntExtra(REQUESTCODE, 0);
+        Log.i("CheckIngredientsActivit", "setupSearchView: food_class_name = "+ food_class_name);
+        //如果没有附带数据,则获取焦点 ，自动展开搜索框，弹出输入法
+        if (food_class_name == 0) {
+            //获取焦点
+//            searchView.requestFocus();
+            //展开搜索框
+            //searchItem.expandActionView();  //这个无效
+            searchView.onActionViewExpanded(); //这个有效
+        } else {
+            //如果有附带id数据,则查询出数据并显示在页面
+            new Thread(){
+                @Override
+                public void run() {
+                    FoodNutritionDao foodNutritionDao = new FoodNutritionDao(CheckIngredientsActivity.this);
+                    List<FoodNutrition> foodNutritions = foodNutritionDao.showFoodById(food_class_name);
+                    datas.clear();
+                    datas.addAll(foodNutritions);
+                    Log.i("CheckIngredientsActivit", "run: foodNutritions.size="+foodNutritions.size());
+                    Message message = mHandler.obtainMessage(CheckIngredientsActivity.UPDATEDATAS);
+                    mHandler.sendMessage(message);
+                }
+            }.start();
+
+        }
+
 
     }
 
 
+    protected void setMenuBackground() {
 
-    protected void setMenuBackground(){
-
-        getLayoutInflater().setFactory( new LayoutInflater.Factory() {
+        getLayoutInflater().setFactory(new LayoutInflater.Factory() {
 
             @Override
-            public View onCreateView (String name, Context context, AttributeSet attrs ) {
+            public View onCreateView(String name, Context context, AttributeSet attrs) {
 
-                if ( name.equalsIgnoreCase( "com.android.internal.view.menu.IconMenuItemView" ) ) {
+                if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")) {
 
                     try { // Ask our inflater to create the view
                         LayoutInflater f = getLayoutInflater();
-                        final View view = f.createView( name, null, attrs );
+                        final View view = f.createView(name, null, attrs);
                             /*
                              * The background gets refreshed each time a new item is added the options menu.
                              * So each time Android applies the default background we need to set our own
@@ -200,14 +277,14 @@ public class CheckIngredientsActivity extends BaseActivity {
                              * object
                              */
                         new Handler().post(new Runnable() {
-                            public void run () {
+                            public void run() {
                                 view.setBackgroundColor(getResources().getColor(R.color.white));
                             }
-                        } );
+                        });
                         return view;
+                    } catch (InflateException e) {
+                    } catch (ClassNotFoundException e) {
                     }
-                    catch ( InflateException e ) {}
-                    catch ( ClassNotFoundException e ) {}
                 }
                 return null;
             }

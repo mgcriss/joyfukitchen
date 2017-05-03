@@ -9,7 +9,7 @@ import java.util.Date;
  * 食品元素表
  */
 public class FoodNutrition {
-    @DatabaseField
+    @DatabaseField(id=true)
     private Integer id;   //编号
     @DatabaseField
     private Integer food_id;  //类型（外键Food_id）

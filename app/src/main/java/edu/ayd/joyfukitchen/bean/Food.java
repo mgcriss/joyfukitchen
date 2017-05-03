@@ -11,7 +11,7 @@ import java.util.Date;
  * 食品类型
  */
 public class Food {
-    @DatabaseField
+    @DatabaseField(id=true)
     private Integer id;      //编号
     @DatabaseField
     private String title;   //类型

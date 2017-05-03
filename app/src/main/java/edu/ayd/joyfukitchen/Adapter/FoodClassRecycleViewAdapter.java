@@ -76,6 +76,7 @@ public class FoodClassRecycleViewAdapter extends RecyclerView.Adapter implements
         Log.i(TAG, "onBindViewHolder: position = " + position);
         myHolder.food_icon.setImageDrawable(context.getResources().getDrawable(icons[position]));
         myHolder.food_title.setText(titles[position]);
+        myHolder.food_title.setTag(position+1);
 
         //将position保存在itemView的Tag中，以便点击时进行获取
         myHolder.itemView.setTag(position);
@@ -106,8 +107,8 @@ public class FoodClassRecycleViewAdapter extends RecyclerView.Adapter implements
 
     static class FoodClassRecycleViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView food_icon;
-        TextView food_title;
+        public ImageView food_icon;
+        public TextView food_title;
 
 
         public FoodClassRecycleViewHolder(View view) {

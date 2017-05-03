@@ -2,7 +2,6 @@ package edu.ayd.joyfukitchen.dbhelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -24,24 +23,38 @@ import edu.ayd.joyfukitchen.bean.FoodNutrition;
  * Created by 萝莉 on 2017/3/29.
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
-    private static final String DB_Name="newfood.db";
+    private static final String DB_Name = "newfood.db";
     private static final int DATABASE_VERSION = 1;
-    private Context mContext;
-    private String DATABASE_PATH=mContext.getApplicationContext().getFilesDir().getAbsolutePath()+DB_Name;
+    private static Context mContext;
+
+    private static String DATABASE_PATH;
+
     private static DatabaseHelper instance;
     private Map<String, Dao> daos = new HashMap<String, Dao>();
+
+
     /**
      * 将db文件移动到手机中，并创建并打开
+     *
      * @param context
      */
     public DatabaseHelper(Context context) {
         super(context, DB_Name, null, DATABASE_VERSION);
         mContext = context;
-        String dbPath= mContext.getApplicationContext().getFilesDir().getAbsolutePath()+DB_Name;
-        File file=new File(dbPath);
-        if (file.exists()) {
+
+        try {
+            Context applicationContext = mContext.getApplicationContext();
+            File filesDir = applicationContext.getFilesDir();
+            String absolutePath = filesDir.getAbsolutePath();
+            DATABASE_PATH = absolutePath + "/"+DB_Name;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        File file = new File(DATABASE_PATH);
+        if (!file.exists()) {
             try {
-                FileOutputStream out = new FileOutputStream(dbPath);
+                FileOutputStream out = new FileOutputStream(DATABASE_PATH);
                 InputStream in = mContext.getAssets().open("newfood.db");
                 byte[] buffer = new byte[1024];
                 int readBytes = 0;
@@ -69,33 +82,35 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     /**
      * 创建表
+     *
      * @param db
      * @param connectionSource
      */
     @Override
     public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
-       try {
-           TableUtils.clearTable(connectionSource,Food.class);
-           TableUtils.clearTable(connectionSource,FoodNutrition.class);
-       }catch (SQLException e){
-           e.printStackTrace();
-       }
+        try {
+            TableUtils.clearTable(connectionSource, Food.class);
+            TableUtils.clearTable(connectionSource, FoodNutrition.class);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     *当应用程序升级时，它会被调用，并且它具有较高的
-     *版本号。这允许您调整各种数据以匹配
-     *新版本号。
+     * 当应用程序升级时，它会被调用，并且它具有较高的
+     * 版本号。这允许您调整各种数据以匹配
+     * 新版本号。
+     *
      * @param db
      * @param connectionSource
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
-            TableUtils.dropTable(connectionSource,Food.class,true);
-            TableUtils.dropTable(connectionSource,FoodNutrition.class,true);
-            onCreate(db,connectionSource);
-        }catch (SQLException e){
+            TableUtils.dropTable(connectionSource, Food.class, true);
+            TableUtils.dropTable(connectionSource, FoodNutrition.class, true);
+            onCreate(db, connectionSource);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -106,13 +121,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * @param context
      * @return
      */
-    public static synchronized DatabaseHelper getHelper(Context context)
-    {
+    public static synchronized DatabaseHelper getHelper(Context context) {
         context = context.getApplicationContext();
-        if (instance == null)
-        {
-            synchronized (DatabaseHelper.class)
-            {
+        if (instance == null) {
+            synchronized (DatabaseHelper.class) {
                 if (instance == null)
                     instance = new DatabaseHelper(context);
             }
@@ -122,32 +134,34 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     /**
-     *Dao，用作增删改查
+     * Dao，用作增删改查
      */
-    public synchronized Dao getDao(Class clazz) throws SQLException
-    {
-        Dao dao = null;
+    public synchronized Dao getDao(Class clazz) throws SQLException {
+
         String className = clazz.getSimpleName();
 
-        if (daos.containsKey(className))
-        {
-            dao = daos.get(className);
+        if (daos.containsKey(className)) {
+           return daos.get(className);
         }
-        if (dao == null)
-        {
-            dao = super.getDao(clazz);
-            daos.put(className, dao);
-        }
-        return dao;
-    }
 
+        Dao dao = null;
+        try {
+             dao = super.getDao(clazz);
+            daos.put(className, dao);
+            return dao;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return dao;
+        }
+
+    }
 
 
     @Override
     public void close() {
         super.close();
-        for (String key : daos.keySet())
-        {
+        for (String key : daos.keySet()) {
             Dao dao = daos.get(key);
             dao = null;
         }
