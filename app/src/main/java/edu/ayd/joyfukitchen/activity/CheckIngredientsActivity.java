@@ -15,14 +15,10 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.InflateException;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -56,7 +52,7 @@ public class CheckIngredientsActivity extends BaseActivity {
 
     //Constants
     public static String REQUESTCODE = "request_code";
-    //更新数据请求
+    //正常更新数据请
     public static final int UPDATEDATAS = 0;
 
     //handler
@@ -99,7 +95,6 @@ public class CheckIngredientsActivity extends BaseActivity {
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         setupSearchView(searchItem);
-//        setMenuBackground();
 
         return true;
     }
@@ -147,6 +142,10 @@ public class CheckIngredientsActivity extends BaseActivity {
     }
 
 
+
+    /**
+     *  模糊查询历史记录,返回结果集
+     * */
     public Cursor getRecentSuggestions(String query) {
         Uri.Builder uriBuilder = new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
@@ -200,15 +199,39 @@ public class CheckIngredientsActivity extends BaseActivity {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
         searchView.setSuggestionsAdapter(mySearchRecentSuggestionAdapter);
+
+        //设置
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            //用户查询时调用,返回true表示已处理,返回false表示需要searchView通过Intent来处理查询
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(final String query) {
+                Log.i("Check...Activity", "onQueryTextSubmit: queryString = "+ query);
+                new Thread(){
+                    @Override
+                    public void run() {
+                        List<FoodNutrition> foodNutritions = null;
+                        try {
+                            FoodNutritionDao foodNutritionDao = new FoodNutritionDao(CheckIngredientsActivity.this);
+                            foodNutritions = foodNutritionDao.showFoodByName(query);
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        datas.clear();
+                        datas.addAll(foodNutritions);
+                        //设置高亮关键字
+                        myFoodDetailsRecyclerViewAdapter.setHighLightText(query);
+                        Message message = mHandler.obtainMessage(CheckIngredientsActivity.UPDATEDATAS);
+                        mHandler.sendMessage(message);
+                    }
+                }.start();
                 return false;
             }
 
+            //用户更改输入框文本时调用
             @Override
             public boolean onQueryTextChange(String newText) {
                 Cursor cursor = getRecentSuggestions(newText);
+                //将结果集通过适配器显示到界面
                 mySearchRecentSuggestionAdapter.swapCursor(cursor);
                 return false;
             }
@@ -236,6 +259,9 @@ public class CheckIngredientsActivity extends BaseActivity {
 //            searchView.requestFocus();
             //展开搜索框
             //searchItem.expandActionView();  //这个无效
+
+            //设置取消高亮
+            myFoodDetailsRecyclerViewAdapter.setHighLightText(null);
             searchView.onActionViewExpanded(); //这个有效
         } else {
             //如果有附带id数据,则查询出数据并显示在页面
@@ -257,37 +283,4 @@ public class CheckIngredientsActivity extends BaseActivity {
 
     }
 
-
-    protected void setMenuBackground() {
-
-        getLayoutInflater().setFactory(new LayoutInflater.Factory() {
-
-            @Override
-            public View onCreateView(String name, Context context, AttributeSet attrs) {
-
-                if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")) {
-
-                    try { // Ask our inflater to create the view
-                        LayoutInflater f = getLayoutInflater();
-                        final View view = f.createView(name, null, attrs);
-                            /*
-                             * The background gets refreshed each time a new item is added the options menu.
-                             * So each time Android applies the default background we need to set our own
-                             * background. This is done using a thread giving the background change as runnable
-                             * object
-                             */
-                        new Handler().post(new Runnable() {
-                            public void run() {
-                                view.setBackgroundColor(getResources().getColor(R.color.white));
-                            }
-                        });
-                        return view;
-                    } catch (InflateException e) {
-                    } catch (ClassNotFoundException e) {
-                    }
-                }
-                return null;
-            }
-        });
-    }
 }

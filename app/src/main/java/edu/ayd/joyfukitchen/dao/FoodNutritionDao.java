@@ -28,7 +28,8 @@ public class FoodNutritionDao {
 
     public FoodNutritionDao(Context mctx) {
         try {
-            DHelper = DatabaseHelper.getHelper(mctx);
+            DHelper = DatabaseHelper.getInstance(mctx);
+
             daos = DHelper.getDao(FoodNutrition.class);
 
             foodDao = DHelper.getDao(Food.class);
@@ -93,7 +94,8 @@ public class FoodNutritionDao {
      */
     public List<FoodNutrition> showFoodByName(String name) {
         try {
-            return (List<FoodNutrition>) daos.queryBuilder().where().like("name", "%" + name + "%");
+            List<FoodNutrition> foodNutritions = daos.queryBuilder().where().like("name", "%" + name + "%").query();
+            return foodNutritions;
         } catch (SQLException e) {
             e.printStackTrace();
         }

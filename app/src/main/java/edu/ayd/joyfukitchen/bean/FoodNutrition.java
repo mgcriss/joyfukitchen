@@ -2,8 +2,6 @@ package edu.ayd.joyfukitchen.bean;
 
 import com.j256.ormlite.field.DatabaseField;
 
-import java.util.Date;
-
 /**
  * Created by 萝莉 on 2017/3/28.
  * 食品元素表
@@ -119,12 +117,7 @@ public class FoodNutrition {
     private Float se;
     @DatabaseField
     private String se_unit;
-    @DatabaseField
-    private Date createtime;
 
-
-    @DatabaseField(foreign = true,foreignAutoRefresh = true)
-    private Food food;
 
     @Override
     public String toString() {
@@ -182,7 +175,6 @@ public class FoodNutrition {
                 ", mn_unit='" + mn_unit + '\'' +
                 ", se=" + se +
                 ", se_unit='" + se_unit + '\'' +
-                ", createtime=" + createtime +
                 '}';
     }
 
@@ -610,20 +602,4 @@ public class FoodNutrition {
         this.se_unit = se_unit;
     }
 
-    public Date getCreatetime() {
-        return createtime;
-    }
-
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
-
-
-    public Food getFood() {
-        return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
-    }
 }

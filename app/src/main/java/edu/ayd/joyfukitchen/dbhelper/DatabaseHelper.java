@@ -2,6 +2,7 @@ package edu.ayd.joyfukitchen.dbhelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -18,6 +19,8 @@ import java.util.Map;
 
 import edu.ayd.joyfukitchen.bean.Food;
 import edu.ayd.joyfukitchen.bean.FoodNutrition;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by 萝莉 on 2017/3/29.
@@ -46,29 +49,50 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Context applicationContext = mContext.getApplicationContext();
             File filesDir = applicationContext.getFilesDir();
             String absolutePath = filesDir.getAbsolutePath();
-            DATABASE_PATH = absolutePath + "/"+DB_Name;
+            DATABASE_PATH = absolutePath + "/" + DB_Name;
+            Log.i(TAG, "DatabaseHelper: databasePath = " + DATABASE_PATH);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         File file = new File(DATABASE_PATH);
+        FileOutputStream out = null;
+        InputStream in = null;
         if (!file.exists()) {
             try {
-                FileOutputStream out = new FileOutputStream(DATABASE_PATH);
-                InputStream in = mContext.getAssets().open("newfood.db");
+                out = new FileOutputStream(file);
+                in = mContext.getAssets().open("newfood.db");
                 byte[] buffer = new byte[1024];
-                int readBytes = 0;
+                int readBytes = -1;
                 while ((readBytes = in.read(buffer)) != -1)
                     out.write(buffer, 0, readBytes);
-                in.close();
-                out.close();
+
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    if (in != null && out != null) {
+                        in.close();
+                        out.close();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
-        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(DATABASE_PATH, null);
-        onCreate(db);
-        db.close();
+
+
+        SQLiteDatabase db = null;
+        try {
+            db = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
+            Log.i(TAG, "DatabaseHelper: db打开成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (db != null) {
+                db.close();
+            }
+        }
     }
 
     @Override
@@ -121,7 +145,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * @param context
      * @return
      */
-    public static synchronized DatabaseHelper getHelper(Context context) {
+    public static synchronized DatabaseHelper getInstance(Context context) {
         context = context.getApplicationContext();
         if (instance == null) {
             synchronized (DatabaseHelper.class) {
@@ -141,16 +165,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         String className = clazz.getSimpleName();
 
         if (daos.containsKey(className)) {
-           return daos.get(className);
+            return daos.get(className);
         }
 
         Dao dao = null;
         try {
-             dao = super.getDao(clazz);
+            dao = super.getDao(clazz);
             daos.put(className, dao);
             return dao;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return dao;
         }
