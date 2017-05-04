@@ -68,6 +68,8 @@
                 android:resource="@xml/searchable" />
         </activity>
 
+        <activity android:name=".FoodDetailsActivity"/>
+
 
         <!-- provider -->
         <provider

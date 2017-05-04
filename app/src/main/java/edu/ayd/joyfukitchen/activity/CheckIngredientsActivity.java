@@ -19,6 +19,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ import edu.ayd.joyfukitchen.Adapter.MySearchRecentSuggestionAdapter;
 import edu.ayd.joyfukitchen.bean.FoodNutrition;
 import edu.ayd.joyfukitchen.dao.FoodNutritionDao;
 import edu.ayd.joyfukitchen.provider.MySearchRecentSuggestionsProvider;
+import edu.ayd.joyfukitchen.util.EmptyUtils;
 
 /**
  * Created by Administrator on 2017/5/2.
@@ -99,16 +102,6 @@ public class CheckIngredientsActivity extends BaseActivity {
         return true;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        /*search_food.requestFocus();
-        //添加提交按钮
-        search_food.setSubmitButtonEnabled(true);*/
-
-        //展开(可输入状态)
-//        search_food.onActionViewExpanded();
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -131,6 +124,25 @@ public class CheckIngredientsActivity extends BaseActivity {
 
         //以下显示食材名
         myFoodDetailsRecyclerViewAdapter = new MyFoodDetailsRecyclerViewAdapter(datas, this);
+
+        //设置RecyclerView子项点击事件,并实现ItemClick方法
+        myFoodDetailsRecyclerViewAdapter.setOnItemClickListener(new MyFoodDetailsRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                TextView tv_ck_food_name = (TextView) view.findViewById(R.id.tv_ck_food_name);
+                //在tag中获取出点击的食材的id
+                Integer foodId = (Integer) tv_ck_food_name.getTag();
+                //如果id不为空,则跳转到详情页进行查询显示详细信息
+                if(EmptyUtils.isNotEmpty(foodId)){
+                    Intent intent = new Intent(CheckIngredientsActivity.this, FoodDetailsActivity.class);
+                    intent.putExtra("title",tv_ck_food_name.getText().toString());
+                    Log.i("点击的食材view获取的text", "onItemClick: tag = " + tv_ck_food_name.getText().toString());
+                    intent.putExtra("foodId",foodId);
+                    //跳转过去不关闭本页面
+                    startActivity(intent);
+                }
+            }
+        });
         rv_food_details.setAdapter(myFoodDetailsRecyclerViewAdapter);
         rv_food_details.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 

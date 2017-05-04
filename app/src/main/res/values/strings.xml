@@ -29,4 +29,9 @@
     <string name="search_food_label">查找食材</string>
 
 
+    <string name="yingyangcf">营养成分</string>
+    <string name="curhanliang">含量</string>
+    <string name="hanliang">参考值/100g</string>
+
+
 </resources>

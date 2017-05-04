@@ -82,15 +82,6 @@ public class FoodClassIficationActivity extends BaseActivity {
 
     //设置各种监听事件
     private void setListener() {
-//        search_food.setOnSearchClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //获取用户输入的搜索信息并保存
-//                String queryString = (String) search_food.getQuery();
-//                suggestions.saveRecentQuery(queryString, null);
-//
-//            }
-//        });
 
         et_search.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
