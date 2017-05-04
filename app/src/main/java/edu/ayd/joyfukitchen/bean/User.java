@@ -23,7 +23,7 @@ public class User {
 
     @DatabaseField(id = true)
     private Integer id;
-    private String email;                 //账户2017-4-10 新增email字段
+    private String username;                 //账户2017-4-10 新增email字段
     private String nickname;
     private Date birth;
     private Sex sex;
@@ -97,12 +97,12 @@ public class User {
         return nickname;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username=username;
     }
 
     public void setNickname(String nickname) {
@@ -139,6 +139,24 @@ public class User {
 
     public void setWorkStrength(WorkStrength workStrength) {
         this.workStrength = workStrength;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", birth=" + birth +
+                ", sex=" + sex +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", age=" + age +
+                ", target=" + target +
+                ", workStrength=" + workStrength +
+                ", workTimes=" + workTimes +
+                ", onceRecords=" + onceRecords +
+                '}';
     }
 }
 

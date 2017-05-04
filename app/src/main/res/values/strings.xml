@@ -7,6 +7,20 @@
     <string name="unit_ml">ml</string>
     <string name="unit_lb">lb</string>
     <string name="unit_l">两</string>
-
     <string name="index_ftv_initlization">0</string>
+
+
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">登录</string>
+    <string name="regist">新用户注册</string>
+
+    <string name="regist_regist">注册</string>
+    <string name="next_btn">下一步</string>
+    <string name="agree">注册视为同意</string>
+    <string name="user_agree">用户协议</string>
+
+
+
 </resources>

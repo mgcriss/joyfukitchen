@@ -20,14 +20,15 @@ public class ReciderFragment extends Fragment{
 
     private Context context;
 
-    public ReciderFragment(Context context) {
+   public ReciderFragment(Context context) {
         this.context = context;
     }
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_recider, container, false);
         return view;
     }
+
+
 }

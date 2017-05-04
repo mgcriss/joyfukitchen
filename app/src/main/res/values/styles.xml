@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="myTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="myTheme" parent="android:Theme.Holo.Light.Dialog.NoActionBar">
         <item name="android:windowTranslucentStatus">false</item>
         <!--<item name="android:windowTranslucentNavigation">true</item>-->
         <!--<item name="android:statusBarColor">@android:color/transparent</item>-->

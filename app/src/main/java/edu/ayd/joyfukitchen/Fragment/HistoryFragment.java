@@ -18,10 +18,10 @@ public class HistoryFragment extends Fragment{
 
     private Context context;
 
+
     public HistoryFragment(Context context) {
         this.context = context;
     }
-
 
     @Nullable
     @Override

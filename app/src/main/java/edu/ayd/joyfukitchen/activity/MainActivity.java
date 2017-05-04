@@ -28,7 +28,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         super.setStatusBarTrans();
 
 
@@ -127,9 +126,13 @@ public class MainActivity extends BaseActivity {
 
 
         Fragment weightFragment = new WeightFragment(this);
+        /*Fragment weightFragment = new WeightFragment();*/
         ReciderFragment reciderFragment = new ReciderFragment(this);
+        /*ReciderFragment reciderFragment = new ReciderFragment();*/
         HistoryFragment historyFragment = new HistoryFragment(this);
+        /*HistoryFragment historyFragment = new HistoryFragment();*/
         UserFragment userFragment = new UserFragment(this);
+        /*UserFragment userFragment = new UserFragment();*/
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(weightFragment);

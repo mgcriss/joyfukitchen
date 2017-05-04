@@ -22,6 +22,7 @@ public class UserFragment extends Fragment{
         this.context = context;
     }
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

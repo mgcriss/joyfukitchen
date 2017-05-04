@@ -2,7 +2,6 @@ package edu.ayd.joyfukitchen.dbhelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -19,6 +18,7 @@ import java.util.Map;
 
 import edu.ayd.joyfukitchen.bean.Food;
 import edu.ayd.joyfukitchen.bean.FoodNutrition;
+import edu.ayd.joyfukitchen.bean.Tips;
 
 /**
  * Created by 萝莉 on 2017/3/29.
@@ -77,6 +77,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
        try {
            TableUtils.clearTable(connectionSource,Food.class);
            TableUtils.clearTable(connectionSource,FoodNutrition.class);
+           TableUtils.clearTable(connectionSource,Tips.class);
        }catch (SQLException e){
            e.printStackTrace();
        }
@@ -94,6 +95,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.dropTable(connectionSource,Food.class,true);
             TableUtils.dropTable(connectionSource,FoodNutrition.class,true);
+            TableUtils.dropTable(connectionSource,Tips.class,true);
             onCreate(db,connectionSource);
         }catch (SQLException e){
             e.printStackTrace();

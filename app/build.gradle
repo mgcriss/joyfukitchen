@@ -23,6 +23,10 @@ android {
         }
     }
 
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 //引入achartengine
@@ -36,33 +40,26 @@ repositories {
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:21.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
-
     // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core
     compile 'com.j256.ormlite:ormlite-core:5.0'
     compile 'com.j256.ormlite:ormlite-android:5.0'
     //图表
-    compile group: 'org.achartengine', name: 'achartengine', version: '1.2.0'
+    compile 'org.achartengine:achartengine:1.2.0'
     //字体
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
     //图片
     compile 'de.hdodenhof:circleimageview:2.1.0'
-
     // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
-    compile  'com.squareup.okhttp3:okhttp:3.5.0'
-
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     //gson
     compile 'com.google.code.gson:gson:2.8.0'
-
-
     testCompile 'junit:junit:4.12'
-
     compile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:21.1.0'
 }
 
