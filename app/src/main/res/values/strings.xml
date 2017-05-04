@@ -21,6 +21,58 @@
     <string name="agree">注册视为同意</string>
     <string name="user_agree">用户协议</string>
 
+    <string name="test">测试</string>
+
+
+    <string name="index_date">2016-4-17</string>
+
+    <string name="year">年</string>
+    <string name="month">月</string>
+
+    <string name="weight_title">称重</string>
+
+    <string name="table_empty_text">没有数据</string>
+
+    <string name="point_text">健康提示</string>
+
+    <!-- 搜索框提示字 -->
+    <string name="searchView_hint">输入搜索的驶入,如:大米、西红柿等</string>
+
+    <string name="search_food_label">查找食材</string>
+
+
+    <string name="yingyangcf">营养成分</string>
+    <string name="curhanliang">含量</string>
+    <string name="hanliang">参考值/100g</string>
+
+
+
+    <!-- 元素 -->
+    <string name="Ca">钙</string>
+    <string name="Carbohydrate">糖分</string>
+    <string name="Carotene">糖</string>
+    <string name="Cholesterol">胆固醇</string>
+    <string name="Cu">铜</string>
+    <string name="Df">糖</string>
+    <string name="Energy">能量</string>
+    <string name="Fat">脂肪</string>
+    <string name="Fe">铁</string>
+    <string name="K">钾</string>
+    <string name="Mg">镁</string>
+    <string name="Mn">锰</string>
+    <string name="Na">钠</string>
+    <string name="Niacin">维生素B3</string>
+    <string name="P">磷</string>
+    <string name="Protein">蛋白质</string>
+    <string name="Retinol">维生素a</string>
+    <string name="Se">硒</string>
+    <string name="Vitamina">维生素 A</string>
+    <string name="Vitaminb1">维生素 B1</string>
+    <string name="Vitaminb2">维生素 B2</string>
+    <string name="Vitaminc">维生素 C</string>
+    <string name="Vitamine">维生素 E</string>
+    <string name="Water">水</string>
+    <string name="Zn">锌</string>
 
 
 </resources>

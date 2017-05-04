@@ -20,7 +20,7 @@ public class TextUtil {
      * @param content 原文本内容
      * @param keyword 关键字
      */
-    private SpannableString setKeyWordColor(String content, String keyword){
+    public static SpannableString setKeyWordColor(String content, String keyword){
         SpannableString s = new SpannableString(content);
         Pattern p = Pattern.compile(keyword);
         Matcher m = p.matcher(s);

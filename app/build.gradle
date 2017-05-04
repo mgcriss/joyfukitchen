@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
 
+
 android {
     //编译版本
-    compileSdkVersion 21
+    compileSdkVersion 25
     //编译工具版本
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -11,7 +12,7 @@ android {
         //最小支持版本  这里是4.4
         minSdkVersion 19
         //目标版本
-        targetSdkVersion 21
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -32,9 +33,14 @@ android {
 //引入achartengine
 repositories {
     mavenCentral()
-    maven {
-        url "https://repository-achartengine.forge.cloudbees.com/snapshot/"
+    maven{
+        url "https://jitpack.io"
     }
+
+    maven {
+        url  'http://dl.bintray.com/gigamole/maven/'
+    }
+
 }
 
 
@@ -43,23 +49,33 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    compile 'com.android.support:appcompat-v7:25.+'
+
     // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core
     compile 'com.j256.ormlite:ormlite-core:5.0'
     compile 'com.j256.ormlite:ormlite-android:5.0'
     //图表
-    compile 'org.achartengine:achartengine:1.2.0'
-    //字体
-    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     //图片
     compile 'de.hdodenhof:circleimageview:2.1.0'
     // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
+
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     //gson
     compile 'com.google.code.gson:gson:2.8.0'
+
+    //calendar
+    compile 'com.github.loonggg:WeekCalendar:v1.3'
+
+    compile 'com.mikhaellopez:circularprogressbar:1.0.1'
+
+    //searchView
+    compile 'com.github.mancj:MaterialSearchBar:0.1.0'
+
+
     testCompile 'junit:junit:4.12'
-    compile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:21.1.0'
+
+    compile 'com.android.support:design:25.1.0'
 }
 

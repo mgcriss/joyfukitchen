@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import edu.ayd.joyfukitchen.bean.Food;
-import edu.ayd.joyfukitchen.bean.FoodNutrition;
 import edu.ayd.joyfukitchen.dbhelper.DatabaseHelper;
 
 /**
@@ -22,7 +21,7 @@ public class FoodDao {
     public FoodDao(Context mctx) {
         try
         {
-            DHelper = DatabaseHelper.getHelper(mctx);
+            DHelper = DatabaseHelper.getInstance(mctx);
             daos = DHelper.getDao(Food.class);
         } catch (SQLException e)
         {

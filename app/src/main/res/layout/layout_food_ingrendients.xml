@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/search_bgcolor"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+
+        <EditText
+            android:id="@+id/et_search"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+
+            android:layout_width="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="16dp"
+            android:hint="@string/searchView_hint"
+            android:paddingLeft="24dp"
+            android:background="@drawable/shape_corner_half_search"
+            android:layout_height="match_parent"
+            > </EditText>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/search_32"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_food_class"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/food_class_bg"
+        ></android.support.v7.widget.RecyclerView>
+
+
+</LinearLayout>

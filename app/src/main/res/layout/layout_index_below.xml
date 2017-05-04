@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="55dp">
+
+    <TextView
+        android:layout_width="80dp"
+        android:gravity="right"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:ellipsize="middle"
+        android:textSize="20sp"
+        android:text="@string/test"
+        android:textColor="@color/index_progressbar_color"
+        android:layout_marginRight="10dp"
+        android:id="@+id/tv_element_name" />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/progress_index_top"
+        android:minHeight="5dp"
+        android:max="100"
+        android:progress="40"
+        android:id="@+id/progressBar_top"
+        android:layout_alignTop="@+id/tv_element_name"
+        android:layout_toEndOf="@+id/tv_element_name" />
+
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/progress_index_bottom"
+        android:minHeight="5dp"
+        android:max="100"
+        android:progress="50"
+        android:id="@+id/progressBar_bottom"
+        android:layout_alignBottom="@+id/tv_element_name"
+        android:layout_toEndOf="@+id/tv_element_name" />
+
+
+
+
+</RelativeLayout>

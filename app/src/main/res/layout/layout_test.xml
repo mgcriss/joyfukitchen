@@ -5,7 +5,6 @@
 
     <edu.ayd.joyfukitchen.view.FontSizeAutoAdjustTextView
         android:id="@+id/ftv_1"
-        fontPath="onts/fzyxj.ttf"
         android:layout_width="80dp"
         android:layout_height="100dp"
         android:text="g"
@@ -24,5 +23,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn2"
         android:text="btn2"
+        />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="asdasdasd"
+        android:translationZ="2dp"
+        android:background="@drawable/circle"
         />
 </LinearLayout>

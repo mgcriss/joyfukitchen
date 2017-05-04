@@ -1,8 +1,5 @@
 package edu.ayd.joyfukitchen.constants;
 
-import android.support.constraint.solver.widgets.ConstraintWidget;
-
-import static android.support.constraint.solver.widgets.ConstraintWidget.*;
 
 /**
  * Created by tangtang on 2017/3/30 20:23.

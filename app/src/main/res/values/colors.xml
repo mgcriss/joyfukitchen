@@ -5,16 +5,85 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
 
 
 
 
 <!-- 首页颜色 -->
-    <color name="index_page_light_blue">#5BB7F9</color>
+    <color name="index_page_light_blue">#12d9c5</color>
     <color name="index_unit_gray">#B5C1C0</color>
 
 
+
+
     <color name="statusBar">#FF5CC3FE</color>
+
+
+
+    <color name="rb_bottom">#12D9C5</color>
+
+    <color name="index_progressbar_color">#EAC8B4</color>
+    <color name="index_below_bgcolor">#EBEFEF</color>
+
+
+    <color name="diy_date_color">#535353</color>
+
+
+
+    <!-- 自定义hlv的textView字体颜色 -->
+    <color name="hlv_top">#d1d1d1</color>
+    <color name="hlv_bottom">#595959</color>
+
+
+    <!-- header字体颜色 -->
+    <color name="header_text_color">#F4FCF3</color>
+
+    <!-- header背景颜色 -->
+    <color name="header_bg_color">#70DF6C</color>
+
+    <!-- 日历当前日期颜色 -->
+    <color name="today_text_color">#85E482</color>
+    <!-- 日历年月textcolor -->
+    <color name="month_text_color">#929292</color>
+
+    <!-- 进度条颜色 -->
+    <color name="circle_progressbar_bgcolor">#f5f6f5</color>
+    <color name="circle_progressbar_color">#70df6c</color>
+    
+    <!-- 内圈颜色 -->
+    <color name="circle_inner_bgcolor">#F6F8F7</color>
+
+    <!-- 单位颜色 -->
+    <color name="unit_color">#757575</color>
+
+    <!-- tab_top字体颜色 -->
+    <color name="tab_top_textColor">#0F0F0F</color>
+    <!-- tab_bottom字体颜色 -->
+    <color name="tab_bottom_textColor">#565656</color>
+
+    <!-- 柱状图颜色 -->
+    <color name="barChart1_color">#71E06B</color>
+    <color name="barChart2_color">#F5F677</color>
+
+    <!-- 健康提示 -->
+    <color name="point_title_text_color">#8AE080</color>
+    <color name="point_text_color">#D9DBDA</color>
+
+    <!-- 分割线 -->
+    <color name="dividing_line">#CAE9CF</color>
+
+    <!-- 元素含量字体 -->
+    <color name="rv_element_content_color">#5E5E5E</color>
+
+    <!-- 食材搜索框背景颜色 -->
+    <color name="search_bgcolor">#EBEBEB</color>
+
+    <!-- 食材分类背景色 -->
+    <color name="food_class_bg">#F7F7F7</color>
+
+
 
 
 

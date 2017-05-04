@@ -24,7 +24,7 @@ public class TipsDao {
     public TipsDao(Context mctx) {
         try
         {
-            DHelper = DatabaseHelper.getHelper(mctx);
+            DHelper = DatabaseHelper.getInstance(mctx);
             daos =DHelper.getDao(Tips.class);
         } catch (SQLException e)
         {

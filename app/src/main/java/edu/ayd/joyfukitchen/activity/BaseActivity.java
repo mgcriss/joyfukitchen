@@ -1,35 +1,24 @@
 package edu.ayd.joyfukitchen.activity;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
 /**
  * Created by Administrator on 2017/4/11.
  * 所有Activity的父类
  */
 
-public class BaseActivity extends FragmentActivity {
 
+public class BaseActivity extends AppCompatActivity {
 
-
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        //初始化字体框架
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
-    /**
+/*
+*
      * 设置4.4以上版本顶部状态栏为透明
      * */
     public void setStatusBarTrans() {
@@ -41,7 +30,7 @@ public class BaseActivity extends FragmentActivity {
             //首先使 ChildView 不预留空间
             View mChildView = mContentView.getChildAt(0);
             if (mChildView != null) {
-                ViewCompat.setFitsSystemWindows(mChildView, false);
+                mChildView.setFitsSystemWindows(false);
             }
 
             //获取状态栏高度
@@ -85,7 +74,7 @@ public class BaseActivity extends FragmentActivity {
             View mChildView = mContentView.getChildAt(0);
             if (mChildView != null) {
                 //注意不是设置 ContentView 的 FitsSystemWindows, 而是设置 ContentView 的第一个子 View . 使其不为系统 View 预留空间.
-                ViewCompat.setFitsSystemWindows(mChildView, false);
+                mChildView.setFitsSystemWindows(false);
             }
         }
     }

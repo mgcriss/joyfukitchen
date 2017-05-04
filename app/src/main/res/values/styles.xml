@@ -8,11 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="myTheme" parent="android:Theme.Holo.Light.Dialog.NoActionBar">
+
+    <style name="myTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowTranslucentStatus">false</item>
-        <!--<item name="android:windowTranslucentNavigation">true</item>-->
-        <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
-        <!--<item name="android:clipToPadding">false</item>-->
+        <item name="colorPrimary">@color/header_bg_color</item>
+        <item name="colorPrimaryDark">@color/header_bg_color</item>
+        <item name="colorAccent">@color/header_bg_color</item>
     </style>
 
 
@@ -24,5 +25,16 @@
         <item name="android:paddingTop">3dp</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+
+
+    <!-- 自定义view diyDateView属性 -->
+    <style name="diyDateViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/diy_date_color</item>
+        <item name="android:textSize">20sp</item>
+
+    </style>
+
 
 </resources>
