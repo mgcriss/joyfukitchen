@@ -61,6 +61,8 @@ public class CheckIngredientsActivity extends BaseActivity {
     //handler
     private final Handler mHandler = new MyHandler(this);
 
+    private String weight;
+
 
     private static class MyHandler extends Handler {
 
@@ -87,6 +89,8 @@ public class CheckIngredientsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 //        super.setStatusBarTrans();
         setContentView(R.layout.layout_food_details);
+        Intent intent = getIntent();
+        weight = intent.getStringExtra("weight");
         init();
         setListener();
     }
@@ -136,6 +140,14 @@ public class CheckIngredientsActivity extends BaseActivity {
                 if(EmptyUtils.isNotEmpty(foodId)){
                     Intent intent = new Intent(CheckIngredientsActivity.this, FoodDetailsActivity.class);
                     intent.putExtra("title",tv_ck_food_name.getText().toString());
+                    float v1 = 0f;
+                    try {
+                        v1 = Float.parseFloat(weight);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    Log.i("weight转换", "onFocusChange: weight = "+ weight);
+                    intent.putExtra("weight", v1);
                     Log.i("点击的食材view获取的text", "onItemClick: tag = " + tv_ck_food_name.getText().toString());
                     intent.putExtra("foodId",foodId);
                     //跳转过去不关闭本页面
@@ -228,6 +240,7 @@ public class CheckIngredientsActivity extends BaseActivity {
                         }catch(Exception e){
                             e.printStackTrace();
                         }
+                        Log.i("搜索的foodNutritions.size", "run: size = " + foodNutritions.size());
                         datas.clear();
                         datas.addAll(foodNutritions);
                         //设置高亮关键字
@@ -280,13 +293,18 @@ public class CheckIngredientsActivity extends BaseActivity {
             new Thread(){
                 @Override
                 public void run() {
-                    FoodNutritionDao foodNutritionDao = new FoodNutritionDao(CheckIngredientsActivity.this);
-                    List<FoodNutrition> foodNutritions = foodNutritionDao.showFoodById(food_class_name);
-                    datas.clear();
-                    datas.addAll(foodNutritions);
-                    Log.i("CheckIngredientsActivit", "run: foodNutritions.size="+foodNutritions.size());
-                    Message message = mHandler.obtainMessage(CheckIngredientsActivity.UPDATEDATAS);
-                    mHandler.sendMessage(message);
+                    try {
+                        FoodNutritionDao foodNutritionDao = new FoodNutritionDao(CheckIngredientsActivity.this);
+                        List<FoodNutrition> foodNutritions = foodNutritionDao.showFoodById(food_class_name);
+                        datas.clear();
+                        datas.addAll(foodNutritions);
+                        Log.i("CheckIngredientsActivit", "run: foodNutritions.size=" + foodNutritions.size());
+                        Message message = mHandler.obtainMessage(CheckIngredientsActivity.UPDATEDATAS);
+                        mHandler.sendMessage(message);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        Log.e("搜索框报错了", "run: e", e);
+                    }
                 }
             }.start();
 

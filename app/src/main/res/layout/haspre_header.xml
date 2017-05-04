@@ -9,6 +9,7 @@
 
 
     <ImageView
+        android:id="@+id/haspre_header_pre"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:src="@mipmap/pre_white_32" />

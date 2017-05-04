@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.reflect.Method;
@@ -27,12 +29,16 @@ public class FoodDetailsActivity extends BaseActivity {
     private RecyclerView fooddetails_rv;
     private TextView tv_title;
     private TextView fooddetails_tv_show_weight;
+    private ImageView haspre_header_pre;
 
     //adapter
     private MyFoodNutritionAdapter myFoodNutritionAdapter;
 
     //datas
     private List<FoodNutritrion_sub> foodNutritrionSubs = new ArrayList<FoodNutritrion_sub>();
+
+
+    private String weight;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +68,15 @@ public class FoodDetailsActivity extends BaseActivity {
         fooddetails_rv = (RecyclerView) findViewById(R.id.fooddetails_rv);
         tv_title = (TextView) findViewById(R.id.haspre_header_title);
         fooddetails_tv_show_weight = (TextView) findViewById(R.id.fooddetails_tv_show_weight);
+        haspre_header_pre = (ImageView) findViewById(R.id.haspre_header_pre);
+
+
+        haspre_header_pre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -27,8 +28,10 @@ public class FoodClassIficationActivity extends BaseActivity {
     private EditText et_search;
 
     //Constant
-    private static int REQUEST_RESULT = 0;
-    private static int REQUEST_NORESULT = 1;
+    public static final int REQUEST_RESULT = 0;
+    public static final int REQUEST_NORESULT = 1;
+
+    private String weight;
 
 
     @Override
@@ -39,6 +42,10 @@ public class FoodClassIficationActivity extends BaseActivity {
         getSupportActionBar().hide();
 
         setContentView(R.layout.layout_food_ingrendients);
+
+        Intent intent = getIntent();
+        weight = intent.getStringExtra("weight");
+
         init();
         setListener();
 
@@ -55,6 +62,7 @@ public class FoodClassIficationActivity extends BaseActivity {
                 ToastUtil.show(FoodClassIficationActivity.this, "click "+title);
                 Intent intent = new Intent(FoodClassIficationActivity.this, CheckIngredientsActivity.class);
                 intent.putExtra(CheckIngredientsActivity.REQUESTCODE, id);
+                intent.putExtra("weight", weight);
                 FoodClassIficationActivity.this.startActivity(intent);
                 finish();
             }
@@ -71,7 +79,13 @@ public class FoodClassIficationActivity extends BaseActivity {
     }
 
 
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+        }
+        return false;
+    }
 
     //初始化
     private void init() {

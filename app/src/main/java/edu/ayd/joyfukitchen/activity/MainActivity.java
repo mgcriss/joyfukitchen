@@ -95,6 +95,8 @@ public class MainActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_index);
+        //隐藏标题栏
+        getSupportActionBar().hide();
         setStatusBarTrans();
         //打开蓝牙
         BluetoothManager bluetoothManager = (BluetoothManager) MainActivity.this.getSystemService(Context.BLUETOOTH_SERVICE);
@@ -124,6 +126,8 @@ public class MainActivity extends BaseActivity {
 
         }
     }
+
+
 
     public void init() {
         weekCalendar = (WeekCalendar) findViewById(R.id.week_calendar);
@@ -198,9 +202,13 @@ public class MainActivity extends BaseActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int v1 = random.nextInt(5000);
+               /* int v1 = random.nextInt(5000);
                 Log.i(TAG, "onClick: v1 = " + v1);
-                setShowWeightData(v1 + "");
+                setShowWeightData(v1 + "");*/
+
+                Intent intent = new Intent(MainActivity.this, FoodClassIficationActivity.class);
+                intent.putExtra("weight", unit_ke.getText().toString());
+                startActivity(intent);
             }
         });
 
@@ -460,7 +468,7 @@ public class MainActivity extends BaseActivity {
             String name = bluetoothDevice.getName();
             String address = bluetoothDevice.getAddress();
             if (address != null) {
-                Log.i("查到的地址:", address);
+//                Log.i("查到的地址:", address);
                 //7C:EC:79:55:63:29
             }
             if (name != null && "BIGCARE_BC301".equals(name)) {
