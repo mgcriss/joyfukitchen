@@ -58,6 +58,8 @@ public class CheckIngredientsActivity extends BaseActivity {
     //正常更新数据请
     public static final int UPDATEDATAS = 0;
 
+    public static final int SAVE = 1;
+
     //handler
     private final Handler mHandler = new MyHandler(this);
 
@@ -117,6 +119,19 @@ public class CheckIngredientsActivity extends BaseActivity {
         return false;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case SAVE:{
+                if(resultCode == FoodDetailsActivity.OK){
+                    finish();
+                }
+            };break;
+            default:;break;
+        }
+
+    }
+
     private void init() {
         //初始化控件
         rv_food_details = (RecyclerView) findViewById(R.id.rv_food_details);
@@ -151,7 +166,7 @@ public class CheckIngredientsActivity extends BaseActivity {
                     Log.i("点击的食材view获取的text", "onItemClick: tag = " + tv_ck_food_name.getText().toString());
                     intent.putExtra("foodId",foodId);
                     //跳转过去不关闭本页面
-                    startActivity(intent);
+                    startActivityForResult(intent, SAVE);
                 }
             }
         });
@@ -159,6 +174,7 @@ public class CheckIngredientsActivity extends BaseActivity {
         rv_food_details.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }
+
 
 
     private void setListener() {
