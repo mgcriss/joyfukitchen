@@ -14,7 +14,9 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.PowerManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -24,6 +26,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,8 +40,11 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.loonggg.weekcalendar.view.WeekCalendar;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -76,8 +82,15 @@ public class MainActivity extends BaseActivity {
     private TextView unit_ke;
     //中间circleProgressBar
     private CircularProgressBar circleProgressBar_index;
+    private SimpleDateFormat dateFormat;
+
+    private LinearLayout weight_weight;
     //下一步
     private Button btn_next;
+
+    //data
+    //设置recycleView测试数据
+    List<FoodElement> foodElements = new ArrayList<>();
 
 
     /*蓝牙所需*/
@@ -90,6 +103,31 @@ public class MainActivity extends BaseActivity {
     private static final int REQUEST_ENABLE_BT = 0;
     //默认动画时长
     private int animationDuration = 2500; // 2500ms = 2,5s
+
+
+    //handler
+    private final Handler mHandler = new MyHandler(this);
+
+    private static class MyHandler extends Handler {
+
+        private final WeakReference<MainActivity> mActivity;
+
+        public MyHandler(MainActivity activity) {
+            mActivity = new WeakReference<MainActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            switch (msg.what){
+
+                default:;break;
+            }
+        }
+    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,25 +180,33 @@ public class MainActivity extends BaseActivity {
         unit_ke = (TextView) findViewById(R.id.unit_ke);
         circleProgressBar_index = (CircularProgressBar) findViewById(R.id.circleProgressBar_index);
         btn_next = (Button) findViewById(R.id.btn_next);
+        weight_weight = (LinearLayout) findViewById(R.id.weight_weight);
 
         decimalFormat = new DecimalFormat("##.00");
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         //获取屏幕亮度管理
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
 
-        //设置点击事件
+        //日历设置点击事件
         weekCalendar.setOnDateClickListener(new WeekCalendar.OnDateClickListener() {
             @Override
             public void onDateClick(String s) {
                 //s为“yyyy-MM-dd”格式的日期字符串
                 ToastUtil.show(MainActivity.this, s);
+                String format = dateFormat.format(Calendar.getInstance().getTime());
+                //如果日期不相等,则隐藏称重
+                if(!s.equalsIgnoreCase(format)){
+                    weight_weight.setVisibility(View.GONE);
+                } else {
+                    weight_weight.setVisibility(View.VISIBLE);
+                }
             }
         });
 
 
-        //设置recycleView测试数据
-        List<FoodElement> foodElements = new ArrayList<>();
+
         for (int i = 0; i < 100; i++) {
             FoodElement foodElement = new FoodElement();
             foodElement.setElementName("天地一哈哈");

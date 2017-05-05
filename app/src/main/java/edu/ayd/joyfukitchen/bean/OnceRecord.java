@@ -1,12 +1,12 @@
 package edu.ayd.joyfukitchen.bean;
 
-import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/3/30.
@@ -21,7 +21,7 @@ public class OnceRecord implements Serializable{
     private Integer id;
 
     @ForeignCollectionField(eager = true)
-    private ForeignCollection<WeightRecord> weightRecords;
+    private List<WeightRecord> weightRecords;
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private User user;
@@ -45,11 +45,11 @@ public class OnceRecord implements Serializable{
         this.id = id;
     }
 
-    public ForeignCollection<WeightRecord> getWeightRecords() {
+    public List<WeightRecord> getWeightRecords() {
         return weightRecords;
     }
 
-    public void setWeightRecords(ForeignCollection<WeightRecord> weightRecords) {
+    public void setWeightRecords(List<WeightRecord> weightRecords) {
         this.weightRecords = weightRecords;
     }
 

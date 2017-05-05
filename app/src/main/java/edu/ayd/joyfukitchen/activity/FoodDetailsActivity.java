@@ -1,5 +1,6 @@
 package edu.ayd.joyfukitchen.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,17 +8,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edu.ayd.joyfukitchen.Adapter.MyFoodNutritionAdapter;
 import edu.ayd.joyfukitchen.bean.FoodNutrition;
 import edu.ayd.joyfukitchen.bean.FoodNutritrion_sub;
+import edu.ayd.joyfukitchen.bean.OnceRecord;
+import edu.ayd.joyfukitchen.bean.WeightRecord;
 import edu.ayd.joyfukitchen.dao.FoodNutritionDao;
+import edu.ayd.joyfukitchen.dao.OnceRecordDao;
+import edu.ayd.joyfukitchen.util.EmptyUtils;
 
 /**
  * Created by Administrator on 2017/5/3.
@@ -30,6 +37,7 @@ public class FoodDetailsActivity extends BaseActivity {
     private TextView tv_title;
     private TextView fooddetails_tv_show_weight;
     private ImageView haspre_header_pre;
+    private Button haspre_header_add;
 
     //adapter
     private MyFoodNutritionAdapter myFoodNutritionAdapter;
@@ -37,8 +45,9 @@ public class FoodDetailsActivity extends BaseActivity {
     //datas
     private List<FoodNutritrion_sub> foodNutritrionSubs = new ArrayList<FoodNutritrion_sub>();
 
+    private int foodId;
+    private Float weight;
 
-    private String weight;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,8 +62,8 @@ public class FoodDetailsActivity extends BaseActivity {
         //用来显示的title
         String title = intent.getStringExtra("title");
         //查询的食材的id
-        int foodId = intent.getIntExtra("foodId", 0);
-        float weight = intent.getFloatExtra("weight", 0f);
+        foodId = intent.getIntExtra("foodId", 0);
+        weight = intent.getFloatExtra("weight", 0f);
         tv_title.setText(title);
         fooddetails_tv_show_weight.setText("当前重量:"+weight+"克");
         queryFoodNutritionFromId(foodId, weight);
@@ -69,12 +78,51 @@ public class FoodDetailsActivity extends BaseActivity {
         tv_title = (TextView) findViewById(R.id.haspre_header_title);
         fooddetails_tv_show_weight = (TextView) findViewById(R.id.fooddetails_tv_show_weight);
         haspre_header_pre = (ImageView) findViewById(R.id.haspre_header_pre);
+        haspre_header_add = (Button) findViewById(R.id.haspre_header_add);
 
 
         haspre_header_pre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        //添加按钮事件,添加记录
+        haspre_header_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                //如果为空则保存
+                if(EmptyUtils.isEmpty(v.getTag())){
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                OnceRecord onceRecord = new OnceRecord();
+                                ArrayList<WeightRecord> weightRecords = new ArrayList<>();
+                                WeightRecord weightRecord = new WeightRecord();
+                                weightRecord.setFoodId(foodId);
+                                weightRecord.setWeight(weight);
+                                weightRecord.setWeightingTime(new Date());
+                                weightRecords.add(weightRecord);
+
+                                onceRecord.setRecordTime(new Date());
+                                onceRecord.setUser(((MyApplication) FoodDetailsActivity.this.getApplication()).getUser());
+                                onceRecord.setWeightRecords(weightRecords);
+                                OnceRecordDao onceRecordDao = new OnceRecordDao(FoodDetailsActivity.this);
+                                onceRecordDao.addOneFoodRecord(onceRecord);
+                                v.setTag(0);
+                            } catch (Exception e){
+                                Log.e("保存记录", "run: error = ", e );
+                                e.printStackTrace();
+                            }
+                        }
+                    }.start();
+                } else {
+                    //不为空则弹框提示已保存
+                    Dialog dialog = new Dialog(FoodDetailsActivity.this);
+                    dialog.show();
+                }
             }
         });
 
