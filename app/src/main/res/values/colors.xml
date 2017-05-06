@@ -76,6 +76,16 @@
     <!-- 元素含量字体 -->
     <color name="rv_element_content_color">#5E5E5E</color>
 
+    <!--泳哥字体-->
+    <color name="Textwhite">#fff</color>
+    <color name="backgroundColor">#70DF6C</color>
+    <color name="textColor_black">#000</color>
+    <color name="textColor_gray">#999</color>
+    <color name="textColor_E6">#E6E6E6</color>
 
+    <!--菜谱分类字体颜色-->
+    <color name="menu_list_red">#ff0000</color>
+
+    <!--泳哥字体完-->
 
 </resources>

@@ -72,5 +72,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.android.support:design:25.1.0'
+    /*TabLayout ViewPager支持包*/
+    compile 'com.android.support:design:22.2.0'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
 }
 

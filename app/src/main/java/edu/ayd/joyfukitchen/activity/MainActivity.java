@@ -537,6 +537,12 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    /*菜单
+
+    public void gomenu(View view){
+        Intent intent = new Intent(this,MenuClassificationActivity.class);
+        startActivity(intent);
+    }*/
 }
 
 

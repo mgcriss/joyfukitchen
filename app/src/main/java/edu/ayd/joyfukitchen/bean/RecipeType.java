@@ -39,6 +39,15 @@ public class RecipeType {
     }
 
     public static class ListBean {
+        @Override
+        public String toString() {
+            return "ListBean{" +
+                    "id='" + id + '\'' +
+                    ", name='" + name + '\'' +
+                    ", parentId='" + parentId + '\'' +
+                    '}';
+        }
+
         /**
          * id : 1
          * name : 家常菜

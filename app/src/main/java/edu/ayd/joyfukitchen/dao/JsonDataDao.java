@@ -52,14 +52,15 @@ public class JsonDataDao {
      * @throws IOException
      */
     public List<RecipeType> getMenuTypes(String typeName) throws IOException {
-        String url_json="http://localhost:8080/recipe/searchTags.do?recipeTypeName="+typeName;
+        //http://localhost:8080
+        String url_json="http://www.chedles.xyz/joyfulkitchen/recipe/searchTags.do?recipeTypeName="+typeName;
         OkHttpClient client=new OkHttpClient();
         Request request= new Request.Builder().url(url_json).build();
         Response response = null;
 
         try {
             response = client.newCall(request).execute();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -77,7 +78,7 @@ public class JsonDataDao {
      * @throws IOException
      */
     public List<MenuResult.ResultBean.DataBean> getMenuTypeIDALL(String recipeTypeId, Integer times) throws IOException {
-        String url_json="http://localhost:8080//recipe/searchRecipeFromTagId.do?recipeTypeId="+recipeTypeId+"&times="+times;
+        String url_json="http://www.chedles.xyz/joyfulkitchen/recipe/searchRecipeFromTagId.do?recipeTypeId="+recipeTypeId+"&times="+times;
         OkHttpClient client=new OkHttpClient();
         Request request= new Request.Builder().url(url_json).build();
         Response response = null;
@@ -102,7 +103,7 @@ public class JsonDataDao {
      * @throws IOException
      */
     public MenuResult getMenuIDALL(String recipeId) throws IOException {
-        String url_json="http://localhost:8080//recipe/searchRecipeFromRecipeId.do?recipeId="+recipeId;
+        String url_json="http://www.chedles.xyz/joyfulkitchen/recipe/searchRecipeFromRecipeId.do?recipeId="+recipeId;
         OkHttpClient client=new OkHttpClient();
         Request request= new Request.Builder().url(url_json).build();
         Response response = null;
