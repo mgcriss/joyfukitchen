@@ -6,8 +6,6 @@ import java.text.DecimalFormat;
 
 import edu.ayd.joyfukitchen.bean.FoodNutrition;
 import edu.ayd.joyfukitchen.bean.User;
-import edu.ayd.joyfukitchen.constants.Sex;
-import edu.ayd.joyfukitchen.constants.WorkStrength;
 import edu.ayd.joyfukitchen.dao.FoodNutritionDao;
 import edu.ayd.joyfukitchen.dao.UserDao;
 
@@ -450,7 +448,7 @@ public class CountUtil {
     private Float weight;  //体重
     private Double c;  // +的
     private Integer d; //工作强度消耗,单位千卡
-    private Long wt; //工作时间
+    private Integer wt; //工作时间
     private double count;
 
     /**
@@ -493,20 +491,20 @@ public class CountUtil {
         User user = new UserDao(context).queryUser(email);
         Integer age = user.getAge();
         weight = user.getWeight();
-        Sex sex = user.getSex();
-        WorkStrength ws = user.getWorkStrength();
+        String sex = user.getSex();
+        String ws = user.getWorkStrength();
         wt=user.getWorkTimes();
 
 
-        if(ws.equals(WorkStrength.HEADWORK)){
+        if(ws.equals("脑力劳动")){
             d = 95;
-        } else if(ws.equals(WorkStrength.HIGHWORK)) {
+        } else if(ws.equals("较体力劳动")) {
             d = 120;
-        } else if(ws.equals(WorkStrength.MIDDLEWORK)) {
+        } else if(ws.equals("中度体力劳动")) {
             d = 170;
         }
 
-        if(sex.equals(Sex.FEMALE)){
+        if(sex.equals("女")){
             if(age > 18 && age < 30){
                 a = 14.6;
                 c = 450.0;

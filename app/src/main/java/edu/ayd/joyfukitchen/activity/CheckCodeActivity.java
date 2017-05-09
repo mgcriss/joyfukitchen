@@ -26,7 +26,7 @@ import okhttp3.Response;
  * 输入验证码
  */
 
-public class CheckCodeActivity extends BaseActivity{
+public class CheckCodeActivity extends BaseActivity {
 
     private Button getcode_btn;
     private String code_url="";
@@ -37,6 +37,8 @@ public class CheckCodeActivity extends BaseActivity{
     private String checkCode;
     private String check_url="";
     private OkHttpClient okHttpClient;
+    private int jsonTo;
+
 
     private Handler handlerGetCcode = new Handler(){
         @Override
@@ -74,8 +76,6 @@ public class CheckCodeActivity extends BaseActivity{
             }
         }
     };
-
-
 
 
 
@@ -121,6 +121,7 @@ public class CheckCodeActivity extends BaseActivity{
                                 try {
 
                                    json=gson.fromJson(response.body().string(), Integer.TYPE);
+
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -152,7 +153,7 @@ public class CheckCodeActivity extends BaseActivity{
             check_url = "http://www.chedles.xyz/joyfulkitchen/recipe/judgmentVerificationCode.do";
 
             FormBody body=new FormBody.Builder()
-                    .add("Verification ", checkCode )
+                    .add("Verification", checkCode )
                     .build();
 
             //创建一个请求对象
@@ -173,12 +174,14 @@ public class CheckCodeActivity extends BaseActivity{
                             @Override
                             public void onResponse(Call call, Response response) throws IOException {
                                 try {
-                                    json=gson.fromJson(response.body().string(), Integer.TYPE);
-                                    /*Log.i("json",json+"");*/
+                                    jsonTo = Integer.parseInt(response.body().string());
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                                handlerCheckCode.sendEmptyMessage(json);
+                                if(jsonTo>0)
+                                    handlerCheckCode.sendEmptyMessage(1);
+                                else
+                                    handlerCheckCode.sendEmptyMessage(0);
                             }
                         });
                     }catch(Exception e){
@@ -186,7 +189,6 @@ public class CheckCodeActivity extends BaseActivity{
                     }
                 }
             }.start();
-
 
         }
     }

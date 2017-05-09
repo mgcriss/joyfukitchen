@@ -1,4 +1,5 @@
 package edu.ayd.joyfukitchen.activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,6 +24,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+
 public class LoginActivity extends BaseActivity{
     private EditText email_edt;
     private EditText password_edt;
@@ -35,17 +37,22 @@ public class LoginActivity extends BaseActivity{
     private String login_url;
     private User user;
 
+
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch(msg.what){
                 case 0:
-                    ToastUtil.show(LoginActivity.this,"登录失败！！！");
+                    ToastUtil.show(LoginActivity.this,"登录失败,账号或密码不正确！");
                     break;
                 case 1:
+                    //登录成功存储user
                     Intent intent = new Intent();
-                    intent.setClass(LoginActivity.this,CheckCodeActivity.class);
+                    ((MyApplication)LoginActivity.this.getApplication()).setUser(user);
+                    intent.setClass(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("user", user);
                     LoginActivity.this.startActivity(intent);
+                    finish();
                     break;
                 default:
                     break;
@@ -53,14 +60,15 @@ public class LoginActivity extends BaseActivity{
         }
     };
 
-
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        super.setStatusBarTrans();
+        //隐藏标题栏
+        getSupportActionBar().hide();
 		setContentView(R.layout.layout_login);
 		init();
 	}
-
 
 	private void init() {
         email_edt =(EditText) findViewById(R.id.email_edt);
@@ -75,6 +83,7 @@ public class LoginActivity extends BaseActivity{
 	}
 
 
+
     /**
      * 单击登录按钮，进行email与密码的校验
      */
@@ -84,20 +93,22 @@ public class LoginActivity extends BaseActivity{
 
             email = email_edt.getText().toString();
             password = password_edt.getText().toString();
+
             login_url = "http://www.chedles.xyz/joyfulkitchen/recipe/findOneUsers.do";
 
-            FormBody body=new FormBody.Builder()
+            FormBody body = new FormBody.Builder()
                     .add("userName", email)
                     .add("password", password)
                     .build();
 
             //创建一个请求对象
-            final Request request=new Request.Builder()
+            final Request request = new Request.Builder()
                     .url(login_url)
                     .post(body)
                     .build();
             //发送请求获取响应
-            new Thread(){
+
+            new Thread() {
                 @Override
                 public void run() {
                     try {
@@ -106,27 +117,29 @@ public class LoginActivity extends BaseActivity{
                             public void onFailure(Call call, IOException e) {
                                 Log.d("IOException", "IO异常");
                             }
+
                             @Override
                             public void onResponse(Call call, Response response) throws IOException {
                                 try {
-                                    user=gson.fromJson(response.body().string(), User.class);
-                                    Log.i("user",user.toString());
+                              /*      Log.i("body   dd ",response.body().string());*/
+                                    user = gson.fromJson(response.body().string(), User.class);
+
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                                if(user!=null){
+                                if (user != null) {
                                     handler.sendEmptyMessage(1);
-                                }else
+                                } else
                                     handler.sendEmptyMessage(0);
                             }
                         });
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }.start();
 
-        }
+            }
     }
 
 

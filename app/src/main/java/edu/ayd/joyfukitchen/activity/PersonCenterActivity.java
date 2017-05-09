@@ -1,62 +1,76 @@
 package edu.ayd.joyfukitchen.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.NumberPicker;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.text.DecimalFormat;
+
+import edu.ayd.joyfukitchen.bean.User;
 
 /**
  * Created by tangtang on 2017/4/25 09:47.
  */
 
 public class PersonCenterActivity extends BaseActivity {
-    private EditText edt_target;
+
+    private int i;
+    User user;
+    //目标
+    private TextView target_text,weight_text,height_text,strength_text,edi_text,login_nickName;
+    private LinearLayout target_LLay,weight_LLay,height_LLay,strength_LLay;
+    private String TAG = "PersonCenterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        super.setStatusBarTrans();
+        //隐藏标题栏
+        getSupportActionBar().hide();
         setContentView(R.layout.layout_persion_center);
 
-        edt_target =(EditText) findViewById(R.id.target_edt);
+        init();
+    }
 
-        edt_target.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private void init() {
+        target_LLay = (LinearLayout) findViewById(R.id.target_LLay);
+        weight_LLay = (LinearLayout) findViewById(R.id.weight_LLay);
+        height_LLay = (LinearLayout) findViewById(R.id.height_LLay);
+        strength_LLay = (LinearLayout) findViewById(R.id.strength_LLay);
+        target_text =(TextView) findViewById(R.id.target_txt);
+        weight_text = (TextView) findViewById(R.id.weight_text);
+        height_text = (TextView) findViewById(R.id.height_text);
+        strength_text = (TextView) findViewById(R.id.strength_text);
+        edi_text = (TextView) findViewById(R.id.edi_text);
+        login_nickName = (TextView) findViewById(R.id.login_nickName);
 
-                View qinganView=View.inflate(PersonCenterActivity.this, R.layout.target_scoll,null);
-                final NumberPicker numberPicker= (NumberPicker) qinganView.findViewById(R.id.numberPicker);
-                final String strs[]=new String[]{"减脂","增肌","维持体重"};
-                numberPicker.setDisplayedValues(strs);
-                numberPicker.setMaxValue(strs.length - 1);
-                numberPicker.setMinValue(0);
-                new AlertDialog.Builder(PersonCenterActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT)
-                        .setView(qinganView).setNegativeButton("提交", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        edi_text.setOnClickListener(new NextClickListener());
 
-                        Toast.makeText(PersonCenterActivity.this,strs[  numberPicker.getValue()],Toast.LENGTH_SHORT).show();
-                        edt_target.setText(strs[  numberPicker.getValue()]);
-                    }
-                }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        user = ((MyApplication)getApplication()).getUser();
+        Log.i(TAG, "init: 获取到的user = " + user);
 
-                    }
-                }).create().show();
-
-            }
-        });
-
-
+        DecimalFormat fnum = new DecimalFormat("#.##");
+        weight_text.setText(String.valueOf(fnum.format(user.getWeight())));
+        height_text.setText(String.valueOf(fnum.format(user.getHeight())));
+        target_text.setText(String.valueOf(user.getTarget()));
+        strength_text.setText(String.valueOf(user.getWorkStrength()));
+        login_nickName.setText(String.valueOf(user.getNickname()));
 
 
 
     }
 
-
-
+    /*点击编辑按钮，进入编辑页面*/
+    private class NextClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent =new  Intent(PersonCenterActivity.this,EditInformationActivity.class);
+            intent.putExtra("id",user.getId());
+            startActivity(intent);
+        }
+    }
 
 }

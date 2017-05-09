@@ -4,13 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.TextInputLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
+
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import edu.ayd.joyfukitchen.bean.User;
 import edu.ayd.joyfukitchen.service.UserService;
 import edu.ayd.joyfukitchen.util.ToastUtil;
@@ -39,8 +44,13 @@ public class RegistActivity extends BaseActivity {
     private UserService userService;
     private String login_url="";
     private Gson gson;
-
     private Integer json;
+
+    private String EMAIL_PATTERN;
+    private Pattern pattern;
+    private Matcher matcher;
+    private TextInputLayout emailWrapper;
+    private TextInputLayout passwordWrapper;
 
     private Handler handler = new Handler(){
         @Override
@@ -64,12 +74,14 @@ public class RegistActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        super.setStatusBarTrans();
+        //隐藏标题栏
+        getSupportActionBar().hide();
         setContentView(R.layout.layout_regist);
         init();
 
 
     }
-
 
 
     private void init() {
@@ -82,9 +94,23 @@ public class RegistActivity extends BaseActivity {
         userService=new UserService();
         gson=new Gson();
 
+        emailWrapper = (TextInputLayout) findViewById(R.id.regist_email_layout);
+        passwordWrapper = (TextInputLayout) findViewById(R.id.regist_password_layout);
+        EMAIL_PATTERN = "^[A-Za-z0-9][\\w\\._]*[a-zA-Z0-9]+@[A-Za-z0-9-_]+\\.([A-Za-z]{2,4})";
+        pattern = Pattern.compile(EMAIL_PATTERN);
+
         }
+    /*邮箱验证*/
+    public boolean validateEmail(String email) {
+        matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
 
+    /*密码不能低于5位*/
+    public boolean validatePassword(String password) {
+        return password.length() > 5;
 
+    }
 
 
     /**
@@ -93,15 +119,32 @@ public class RegistActivity extends BaseActivity {
     private class NextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
             nickName=nickName_edt.getText().toString();
             password=regist_password_edt.getText().toString();
             email=regist_email_edt.getText().toString();
 
-            user.setNickname(nickName);
-            user.setUsername(email);
-            String str_user=gson.toJson(user);
-            regist(str_user, password);
+
+            boolean emailIsValid = validateEmail(email);
+            boolean passwordIsValid = validatePassword(password);
+
+            if (!emailIsValid)
+                emailWrapper.setError("邮箱的格式输入有误！");
+            else
+                emailWrapper.setError("邮箱正确！");
+            if (!passwordIsValid)
+                passwordWrapper.setError("密码必须大于5位！");
+            else
+                passwordWrapper.setError("密码正确！");
+
+            if (emailIsValid && passwordIsValid) {
+
+                user.setNickname(nickName);
+                user.setUsername(email);
+                String str_user=gson.toJson(user);
+                regist(str_user, password);
+
+            }
+
 
         }
 
@@ -113,7 +156,6 @@ public class RegistActivity extends BaseActivity {
                     .add("user", users)
                     .add("password", password)
                     .build();
-
 
 
             //创建一个请求对象
@@ -134,7 +176,7 @@ public class RegistActivity extends BaseActivity {
                             @Override
                             public void onResponse(Call call, Response response) throws IOException {
                                 try {
-                                    json=gson.fromJson(response.body().string(), Integer.TYPE);
+                                    json=Integer.parseInt(response.body().string());
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -148,7 +190,6 @@ public class RegistActivity extends BaseActivity {
         }.start();
         }
     }
-
 
 
 
