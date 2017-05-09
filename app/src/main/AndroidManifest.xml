@@ -49,7 +49,7 @@
         <activity android:name=".CheckCodeActivity"/>
         <activity android:name=".RegistActivity"/>
         <activity android:name=".PersonCenterActivity"/>
-        <activity android:name="EditInformationActivity"/>
+        <activity android:name=".EditInformationActivity"/>
 
 
 
