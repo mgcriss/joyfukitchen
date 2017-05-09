@@ -37,14 +37,22 @@
                android:layout_height="50dp"
                android:src="@mipmap/left_email"
                />
-            <EditText
-                android:id="@+id/nickName_edt"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:hint="Nick Name"
 
-                android:layout_marginLeft="60dp"
-                />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/regist_email_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText
+                    android:id="@+id/regist_email_edt"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="Email"
+
+                    android:layout_marginLeft="60dp"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
         </RelativeLayout>
 
 
@@ -58,15 +66,22 @@
                 android:id="@+id/password_img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/left_password"
+                android:src="@mipmap/regist_user"
                 />
-            <EditText
-                android:id="@+id/regist_password_edt"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:hint="Password"
-                android:layout_marginLeft="60dp"
-                />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/regist_nickName_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText
+                    android:id="@+id/nickName_edt"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="nickName"
+                    android:layout_marginLeft="60dp"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
 
         </RelativeLayout>
 
@@ -80,15 +95,23 @@
                 android:id="@+id/email_img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/blue_email"
+                android:src="@mipmap/regist_password"
                 />
-            <EditText
-                android:id="@+id/regist_email_edt"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:hint="Email"
-                android:layout_marginLeft="60dp"
-                />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/regist_password_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText
+                    android:id="@+id/regist_password_edt"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="Password"
+                    android:password="true"
+                    android:layout_marginLeft="60dp"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
         </RelativeLayout>
 
         <Button

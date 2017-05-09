@@ -7,9 +7,11 @@
 
 
     <NumberPicker android:id="@+id/numberPicker"
-                  android:layout_width="130dp"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:focusable="true"
+        android:background="#E4E8F2"
+                  android:layout_gravity="center"
                   android:focusableInTouchMode="true"
         />
 
