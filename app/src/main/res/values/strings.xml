@@ -47,6 +47,12 @@
     <string name="hanliang">参考值/100g</string>
 
 
+    <dimen name="left_photo_volume">60dp</dimen>
+    <dimen name="left_text_size">20sp</dimen>
+    <dimen name="left_margin_left">10dp</dimen>
+
+
+
 
     <!-- 元素 -->
     <string name="Ca">钙</string>

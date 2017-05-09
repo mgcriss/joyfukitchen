@@ -40,6 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:id="@+id/liang"
+
                 android:layout_height="0dp" />
 
         </LinearLayout>
@@ -58,6 +60,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:id="@+id/bang"
+
                 android:gravity="center"
                 android:layout_height="0dp" />
 
@@ -78,6 +82,8 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:id="@+id/haosheng"
+
                 android:layout_height="0dp" />
 
         </LinearLayout>
@@ -96,6 +102,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:id="@+id/angsi"
+
                 android:gravity="center"
                 android:layout_height="0dp" />
 

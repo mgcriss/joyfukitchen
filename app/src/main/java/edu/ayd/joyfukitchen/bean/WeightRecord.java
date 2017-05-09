@@ -75,5 +75,9 @@ public class WeightRecord implements Serializable{
     public void setOnceRecord(OnceRecord onceRecord) {
         this.onceRecord = onceRecord;
     }
+
+
+
+
 }
 
