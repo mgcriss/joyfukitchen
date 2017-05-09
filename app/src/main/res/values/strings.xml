@@ -92,4 +92,6 @@
     <string name="will_return">我要返回</string>
     <string name="will_save">我要保存</string>
 
+    <string name="username_null">登录/注册</string>
+    <string name="no_username">空</string>
 </resources>

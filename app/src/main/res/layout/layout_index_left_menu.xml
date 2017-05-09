@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:id="@+id/show_user_name"
         android:paddingLeft="5dp"
         android:layout_marginBottom="15dp"
         android:background="@android:color/white"
@@ -23,6 +24,7 @@
             />
         <TextView
             android:layout_width="0dp"
+            android:id="@+id/username"
             android:layout_height="wrap_content"
             android:text="用户名"
             android:layout_marginLeft="20dp"
@@ -39,6 +41,7 @@
         android:background="@android:color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:id="@+id/menu"
         >
         <ImageView
             android:layout_width="@dimen/left_photo_volume"
@@ -47,7 +50,6 @@
             android:src="@mipmap/left_menu"
             />
         <TextView
-            android:id="@+id/menu"
             android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -66,6 +68,7 @@
         android:background="@android:color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:id="@+id/ingredients"
         >
         <ImageView
             android:layout_width="@dimen/left_photo_volume"
@@ -74,7 +77,6 @@
             android:src="@mipmap/left_ingredients"
             />
         <TextView
-            android:id="@+id/ingredients"
             android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -93,6 +95,7 @@
         android:background="@android:color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:id="@+id/personalData"
         >
         <ImageView
             android:layout_width="@dimen/left_photo_volume"
@@ -101,7 +104,6 @@
             android:src="@mipmap/left_personal_data"
             />
         <TextView
-            android:id="@+id/personalData"
             android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

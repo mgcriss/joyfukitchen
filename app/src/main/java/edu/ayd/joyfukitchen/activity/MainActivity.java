@@ -92,6 +92,15 @@ public class MainActivity extends BaseActivity {
     private BarChart chart;
     private RecyclerView rv_element;
     private RecyclerView rv_food;
+    private LinearLayout menu;
+    private LinearLayout ingredients;
+    private LinearLayout personalData;
+    private LinearLayout show_user_name;
+    private TextView username;
+
+
+
+
     //圆圈中间的textView
     private TextView unit_ke;
     //中间circleProgressBar
@@ -209,6 +218,49 @@ public class MainActivity extends BaseActivity {
 
 
         init();
+
+        //菜单页面跳转
+        //TODO
+//        menu.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, );
+//                startActivity(intent);
+//            }
+//        });
+
+        //食材页面跳转
+        ingredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CheckIngredientsActivity.class);
+                startActivity(intent);
+            }
+        });
+        //个人信息页面跳转
+        personalData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PersonCenterActivity.class);
+                startActivity(intent);
+            }
+        });
+        //头部头像用户名点击跳转
+        show_user_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User user = ((MyApplication) getApplication()).getUser();
+                //如果为空,进入登录页面
+                if(EmptyUtils.isEmpty(user)){
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(MainActivity.this, PersonCenterActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
 
@@ -236,6 +288,11 @@ public class MainActivity extends BaseActivity {
         circleProgressBar_index = (CircularProgressBar) findViewById(R.id.circleProgressBar_index);
         btn_next = (Button) findViewById(R.id.btn_next);
         weight_weight = (LinearLayout) findViewById(R.id.weight_weight);
+        menu = (LinearLayout) findViewById(R.id.menu);
+        ingredients = (LinearLayout) findViewById(R.id.ingredients);
+        personalData = (LinearLayout) findViewById(R.id.personalData);
+        show_user_name = (LinearLayout) findViewById(R.id.show_user_name);
+        username = (TextView) findViewById(R.id.username);
 
         decimalFormat = new DecimalFormat("##.00");
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -895,6 +952,21 @@ public class MainActivity extends BaseActivity {
         //添加唤醒锁,保持设备唤醒状态
         mWakeLock.acquire();
         queryAndSetData(dateFormat.format(Calendar.getInstance().getTime()));
+
+        //检查有没有登录,更新username   TextView显示的值
+        User user = ((MyApplication) getApplication()).getUser();
+        //如果为空
+        if(EmptyUtils.isEmpty(user)){
+            username.setText(getResources().getString(R.string.username_null));
+        } else {
+            //如果不为空
+            String name = user.getUsername();
+            if(EmptyUtils.isEmpty(name)){
+                username.setText(getResources().getString(R.string.no_username));
+            }else {
+                username.setText(name);
+            }
+        }
 
         Log.i(TAG, "onResume--1");
 
