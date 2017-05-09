@@ -112,7 +112,7 @@ public class FoodDetailsActivity extends BaseActivity {
         foodId = intent.getIntExtra("foodId", 0);
         weight = intent.getFloatExtra("weight", 0f);
         tv_title.setText(title);
-        fooddetails_tv_show_weight.setText("当前重量:" + weight + getResources().getString(R.string.unit_g));
+        fooddetails_tv_show_weight.setText(getResources().getString(R.string.current_weight) + weight + getResources().getString(R.string.unit_g));
         queryFoodNutritionFromId(foodId, weight);
     }
 
@@ -236,9 +236,9 @@ public class FoodDetailsActivity extends BaseActivity {
     private void showDialog2Add() {
 
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
-        builder.setTitle("添加称量记录");
-        builder.setMessage("记录保存成功");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setTitle(getResources().getString(R.string.dialog_title));
+        builder.setMessage(getResources().getString(R.string.save_success));
+        builder.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 clickReturn();
@@ -253,9 +253,9 @@ public class FoodDetailsActivity extends BaseActivity {
     private void showDialog2Return() {
 
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
-        builder.setTitle("添加称量记录");
-        builder.setMessage("改称量记录尚未保存,是否继续返回?");
-        builder.setNegativeButton("我要返回", new DialogInterface.OnClickListener() {
+        builder.setTitle(getResources().getString(R.string.dialog_title));
+        builder.setMessage(getResources().getString(R.string.dialog_content));
+        builder.setNegativeButton(getResources().getString(R.string.will_return), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 FoodDetailsActivity.this.setResult(CANCEL, intent);
@@ -263,7 +263,7 @@ public class FoodDetailsActivity extends BaseActivity {
             }
         });
 
-        builder.setPositiveButton("我要保存", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getResources().getString(R.string.will_save), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveRecord(haspre_header_add);

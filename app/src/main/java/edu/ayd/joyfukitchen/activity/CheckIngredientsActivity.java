@@ -213,6 +213,7 @@ public class CheckIngredientsActivity extends BaseActivity {
      */
     private void backToFoodClassIficationActivity() {
         Intent intent = new Intent(this, FoodClassIficationActivity.class);
+        intent.putExtra("weight", weight);
         startActivity(intent);
         finish();
     }

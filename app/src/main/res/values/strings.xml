@@ -82,4 +82,14 @@
     <string name="Zn">锌</string>
 
 
+    <string name="current_weight">当前重量:</string>
+
+    <string name="dialog_title">添加称量记录</string>
+    <string name="dialog_content">本次称量记录尚未保存,是否继续返回?</string>
+    <string name="save_success">记录保存成功</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="will_return">我要返回</string>
+    <string name="will_save">我要保存</string>
+
 </resources>
