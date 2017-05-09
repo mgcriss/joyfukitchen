@@ -233,34 +233,31 @@ public class MainActivity extends BaseActivity {
         ingredients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CheckIngredientsActivity.class);
+                Intent intent = new Intent(MainActivity.this, FoodClassIficationActivity.class);
                 startActivity(intent);
             }
         });
-        //个人信息页面跳转
-        personalData.setOnClickListener(new View.OnClickListener() {
+
+        View.OnClickListener clickPerson = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PersonCenterActivity.class);
-                startActivity(intent);
-            }
-        });
-        //头部头像用户名点击跳转
-        show_user_name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
                 User user = ((MyApplication) getApplication()).getUser();
-                //如果为空,进入登录页面
-                if(EmptyUtils.isEmpty(user)){
+                if(EmptyUtils.isEmpty(user)) {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
-                } else {
+                }else {
                     Intent intent = new Intent(MainActivity.this, PersonCenterActivity.class);
                     startActivity(intent);
                 }
             }
-        });
+        };
+
+        //个人信息页面跳转
+        personalData.setOnClickListener(clickPerson);
+        //头部头像用户名点击跳转
+        show_user_name.setOnClickListener(clickPerson);
     }
 
 

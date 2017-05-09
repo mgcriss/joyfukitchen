@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 
 import edu.ayd.joyfukitchen.bean.User;
+import edu.ayd.joyfukitchen.util.EmptyUtils;
 
 /**
  * Created by tangtang on 2017/4/25 09:47.
@@ -53,11 +54,15 @@ public class PersonCenterActivity extends BaseActivity {
         Log.i(TAG, "init: 获取到的user = " + user);
 
         DecimalFormat fnum = new DecimalFormat("#.##");
-        weight_text.setText(String.valueOf(fnum.format(user.getWeight())));
-        height_text.setText(String.valueOf(fnum.format(user.getHeight())));
-        target_text.setText(String.valueOf(user.getTarget()));
-        strength_text.setText(String.valueOf(user.getWorkStrength()));
-        login_nickName.setText(String.valueOf(user.getNickname()));
+        if(EmptyUtils.isEmpty(user)) {
+            Log.i(TAG, "init: 获取的user为空,因为没有登录");
+        } else {
+            weight_text.setText(String.valueOf(fnum.format(user.getWeight())));
+            height_text.setText(String.valueOf(fnum.format(user.getHeight())));
+            target_text.setText(String.valueOf(user.getTarget()));
+            strength_text.setText(String.valueOf(user.getWorkStrength()));
+            login_nickName.setText(String.valueOf(user.getNickname()));
+        }
 
 
 

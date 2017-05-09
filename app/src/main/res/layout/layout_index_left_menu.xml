@@ -50,7 +50,6 @@
             android:src="@mipmap/left_menu"
             />
         <TextView
-            android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="菜谱"
@@ -77,7 +76,6 @@
             android:src="@mipmap/left_ingredients"
             />
         <TextView
-            android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="食材"
@@ -104,7 +102,6 @@
             android:src="@mipmap/left_personal_data"
             />
         <TextView
-            android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="个人信息"
