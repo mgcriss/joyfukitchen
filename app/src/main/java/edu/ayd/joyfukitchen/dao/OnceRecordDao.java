@@ -5,6 +5,7 @@ import android.content.Context;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import edu.ayd.joyfukitchen.bean.OnceRecord;
@@ -56,8 +57,8 @@ public class OnceRecordDao {
             return dao.queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     /**
@@ -69,6 +70,19 @@ public class OnceRecordDao {
              dao.deleteById(id);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 根据时间日期查询记录
+     * */
+    public List<OnceRecord> queryForDate(Date date){
+        try {
+            return dao.queryForEq("recordTime", date);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

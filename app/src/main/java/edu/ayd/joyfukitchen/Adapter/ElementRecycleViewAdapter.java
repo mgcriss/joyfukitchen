@@ -7,10 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import edu.ayd.joyfukitchen.activity.R;
-import edu.ayd.joyfukitchen.bean.FoodElement;
+import edu.ayd.joyfukitchen.bean.FoodNutritrion_sub;
 
 /**
  * Created by Administrator on 2017/4/25.
@@ -20,18 +21,15 @@ import edu.ayd.joyfukitchen.bean.FoodElement;
 public class ElementRecycleViewAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private List<FoodElement> elementList;
+    private List<FoodNutritrion_sub> elementList;
 
-    public ElementRecycleViewAdapter() {
-
-    }
 
     /**
      * 构造器
      * @param context: context
      *         elementList: FoodElement集合用来装元素名和元素含量(包括单位)
      * */
-    public ElementRecycleViewAdapter(Context context, List<FoodElement> elementList) {
+    public ElementRecycleViewAdapter(Context context, List<FoodNutritrion_sub> elementList) {
         this.context = context;
         this.elementList = elementList;
     }
@@ -45,13 +43,24 @@ public class ElementRecycleViewAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MyElementViewHolder myElementViewHolder = (MyElementViewHolder) holder;
-        myElementViewHolder.tv_element_name.setText(elementList.get(position).getElementName());
-        myElementViewHolder.tv_element_value.setText(elementList.get(position).getElementValue());
+        FoodNutritrion_sub foodNutritrion_sub = elementList.get(position);
+        int anInt = 0;
+        try {
+            Field field = R.string.class.getField(foodNutritrion_sub.getName());
+            anInt = field.getInt(new R.string());
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        myElementViewHolder.tv_element_name.setText(context.getResources().getString(anInt));
+        myElementViewHolder.tv_element_value.setText(foodNutritrion_sub.getCurHanLiang()+foodNutritrion_sub.getUnitName());
     }
 
     @Override
     public int getItemCount() {
-        return elementList.size();
+        return elementList == null ? 0 :elementList.size();
     }
 
 

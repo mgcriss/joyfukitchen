@@ -84,7 +84,7 @@ public class FoodClassRecycleViewAdapter extends RecyclerView.Adapter implements
 
     @Override
     public int getItemCount() {
-        return icons.length;
+        return icons == null ? 0 : icons.length;
     }
 
 
