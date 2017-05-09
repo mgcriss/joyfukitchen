@@ -61,7 +61,7 @@ public class MyFoodNutritionAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        return datas == null ? 0 : datas.size();
     }
 
 

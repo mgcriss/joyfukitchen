@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -58,6 +59,10 @@ public class FoodDetailsActivity extends BaseActivity {
 
     private int foodId;
     private Float weight;
+    private String title;
+
+
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 
     //handler
@@ -102,7 +107,7 @@ public class FoodDetailsActivity extends BaseActivity {
         init();
         intent = getIntent();
         //用来显示的title
-        String title = intent.getStringExtra("title");
+        title = intent.getStringExtra("title");
         //查询的食材的id
         foodId = intent.getIntExtra("foodId", 0);
         weight = intent.getFloatExtra("weight", 0f);
@@ -281,9 +286,10 @@ public class FoodDetailsActivity extends BaseActivity {
                 public void run() {
                     try {
                         OnceRecord onceRecord = new OnceRecord();
-                        onceRecord.setRecordTime(new Date());
+                        String dateString = FoodDetailsActivity.this.format.format(new Date());
+                        onceRecord.setRecordTime(format.parse(dateString));
                         onceRecord.setUser(((MyApplication) FoodDetailsActivity.this.getApplication()).getUser());
-
+                        onceRecord.setDes(title);
                         OnceRecordDao onceRecordDao = new OnceRecordDao(FoodDetailsActivity.this);
                         onceRecordDao.addOneFoodRecord(onceRecord);
 

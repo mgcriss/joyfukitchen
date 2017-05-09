@@ -74,7 +74,7 @@ public class MyFoodDetailsRecyclerViewAdapter extends RecyclerView.Adapter  impl
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        return datas == null ? 0 : datas.size();
     }
 
 
