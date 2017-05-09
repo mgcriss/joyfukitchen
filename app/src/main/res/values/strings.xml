@@ -41,7 +41,6 @@
     <string name="search_food_label">查找食材</string>
 
 
-    <string name="add">添加</string>
     <string name="yingyangcf">营养成分</string>
     <string name="curhanliang">含量</string>
     <string name="hanliang">参考值/100g</string>
@@ -75,5 +74,7 @@
     <string name="Water">水</string>
     <string name="Zn">锌</string>
 
-
+    <dimen name="left_photo_volume">60dp</dimen>
+    <dimen name="left_text_size">20sp</dimen>
+    <dimen name="left_margin_left">10dp</dimen>
 </resources>

@@ -73,8 +73,10 @@ dependencies {
     //searchView
     compile 'com.github.mancj:MaterialSearchBar:0.1.0'
 
+/*
 
     testCompile 'junit:junit:4.12'
+*/
 
     compile 'com.android.support:design:25.1.0'
 }
