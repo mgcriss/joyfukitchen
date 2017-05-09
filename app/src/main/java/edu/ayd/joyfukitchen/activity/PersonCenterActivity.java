@@ -2,6 +2,7 @@ package edu.ayd.joyfukitchen.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class PersonCenterActivity extends BaseActivity {
     //目标
     private TextView target_text,weight_text,height_text,strength_text,edi_text,login_nickName;
     private LinearLayout target_LLay,weight_LLay,height_LLay,strength_LLay;
+    private String TAG = "PersonCenterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,8 @@ public class PersonCenterActivity extends BaseActivity {
 
         edi_text.setOnClickListener(new NextClickListener());
 
-        user = (User) getIntent().getSerializableExtra("user");
+        user = ((MyApplication)getApplication()).getUser();
+        Log.i(TAG, "init: 获取到的user = " + user);
 
         DecimalFormat fnum = new DecimalFormat("#.##");
         weight_text.setText(String.valueOf(fnum.format(user.getWeight())));

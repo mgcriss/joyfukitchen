@@ -267,12 +267,14 @@ public class MainActivity extends BaseActivity {
         //如果有数据则用用户关注的数据,没有则用默认的
         if(EmptyUtils.isNotEmpty(user)){
 
-        }else {
+        }
+        if(EmptyUtils.isNotEmpty(element)) {
             //设置图标x轴的默认数据
             element.add("Df");
             element.add("Fat");
             element.add("Protein");
         }
+
 
 
         //设置RecycleView

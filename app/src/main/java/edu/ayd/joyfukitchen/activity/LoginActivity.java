@@ -46,9 +46,10 @@ public class LoginActivity extends BaseActivity{
                     ToastUtil.show(LoginActivity.this,"登录失败,账号或密码不正确！");
                     break;
                 case 1:
-
+                    //登录成功存储user
                     Intent intent = new Intent();
-                    intent.setClass(LoginActivity.this,PersonCenterActivity.class);
+                    ((MyApplication)LoginActivity.this.getApplication()).setUser(user);
+                    intent.setClass(LoginActivity.this, MainActivity.class);
                     intent.putExtra("user", user);
                     LoginActivity.this.startActivity(intent);
                     finish();

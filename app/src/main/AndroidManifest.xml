@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.ayd.joyfukitchen.activity">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -9,9 +10,9 @@
 
 
     <!-- 在SDCard中创建与删除文件权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 往SDCard写入数据权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 屏幕亮度 -->
@@ -45,12 +46,14 @@
         </activity>
 
         <activity android:name=".BaseActivity" />
-        <activity android:name=".FoodClassIficationActivity"/>
-        <activity android:name=".CheckCodeActivity"/>
-        <activity android:name=".RegistActivity"/>
-        <activity android:name=".PersonCenterActivity"/>
-        <activity android:name=".EditInformationActivity"/>
-
+        <activity android:name=".FoodClassIficationActivity" />
+        <activity android:name=".CheckCodeActivity" />
+        <activity android:name=".RegistActivity" />
+        <activity android:name=".PersonCenterActivity" />
+        <activity android:name=".EditInformationActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".FoodDetailsActivity" />
+        <activity android:name=".RecordDetailsActivity"/>
 
 
         <activity
@@ -66,9 +69,6 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
-        <activity android:name=".FoodDetailsActivity"/>
-        <activity android:name=".RecordDetailsActivity"/>
 
 
         <!-- provider -->
