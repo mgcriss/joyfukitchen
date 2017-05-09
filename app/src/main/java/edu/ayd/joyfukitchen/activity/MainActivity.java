@@ -268,7 +268,8 @@ public class MainActivity extends BaseActivity {
         if(EmptyUtils.isNotEmpty(user)){
 
         }
-        if(EmptyUtils.isNotEmpty(element)) {
+        //再次判断如果为空则添加默认数据
+        if(EmptyUtils.isEmpty(element)) {
             //设置图标x轴的默认数据
             element.add("Df");
             element.add("Fat");
