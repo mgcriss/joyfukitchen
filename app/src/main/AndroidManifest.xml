@@ -69,6 +69,7 @@
         </activity>
 
         <activity android:name=".FoodDetailsActivity"/>
+        <activity android:name=".RecordDetailsActivity"/>
 
 
         <!-- provider -->

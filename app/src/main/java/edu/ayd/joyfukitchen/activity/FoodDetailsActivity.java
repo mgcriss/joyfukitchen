@@ -112,7 +112,7 @@ public class FoodDetailsActivity extends BaseActivity {
         foodId = intent.getIntExtra("foodId", 0);
         weight = intent.getFloatExtra("weight", 0f);
         tv_title.setText(title);
-        fooddetails_tv_show_weight.setText("当前重量:" + weight + "克");
+        fooddetails_tv_show_weight.setText("当前重量:" + weight + getResources().getString(R.string.unit_g));
         queryFoodNutritionFromId(foodId, weight);
     }
 

@@ -20,9 +20,27 @@ import static android.content.ContentValues.TAG;
  * Created by Administrator on 2017/5/8.
  */
 
-public class MyRecordsRecyclerViewAdapter extends Adapter {
+public class MyRecordsRecyclerViewAdapter extends Adapter implements View.OnClickListener{
     private Context context;
     private List<OnceRecord> onceRecords ;
+
+
+    //子项点击事件
+    private OnItemClickListener mOnItemClickListener = null;
+
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            //注意这里使用getTag方法获取position
+            mOnItemClickListener.onItemClick(v,(int)v.getTag());
+        }
+    }
+
+    //define interface
+    public static interface OnItemClickListener {
+        void onItemClick(View view , int position);
+    }
+
 
     public MyRecordsRecyclerViewAdapter(Context context, List<OnceRecord> onceRecords) {
         this.context = context;
@@ -32,12 +50,16 @@ public class MyRecordsRecyclerViewAdapter extends Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_rv_element, null);
+        //将创建的View注册点击事件
+        view.setOnClickListener(this);
         return new MyRecordsRecyclerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MyRecordsRecyclerViewHolder myRecordsHolder = (MyRecordsRecyclerViewHolder) holder;
+        //将当前view的position存入到当前view的tag中
+        myRecordsHolder.itemView.setTag(position);
 
         OnceRecord onceRecord = null;
         try {
@@ -59,6 +81,12 @@ public class MyRecordsRecyclerViewAdapter extends Adapter {
     @Override
     public int getItemCount() {
         return onceRecords == null ? 0 :onceRecords.size();
+    }
+
+
+    /**设置item点击事件*/
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
     }
 
 

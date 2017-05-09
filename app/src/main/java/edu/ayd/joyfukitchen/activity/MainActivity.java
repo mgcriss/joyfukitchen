@@ -61,6 +61,7 @@ import edu.ayd.joyfukitchen.Adapter.MyRecordsRecyclerViewAdapter;
 import edu.ayd.joyfukitchen.bean.FoodNutrition;
 import edu.ayd.joyfukitchen.bean.FoodNutritrion_sub;
 import edu.ayd.joyfukitchen.bean.OnceRecord;
+import edu.ayd.joyfukitchen.bean.User;
 import edu.ayd.joyfukitchen.bean.WeightRecord;
 import edu.ayd.joyfukitchen.dao.FoodNutritionDao;
 import edu.ayd.joyfukitchen.dao.OnceRecordDao;
@@ -261,10 +262,17 @@ public class MainActivity extends BaseActivity {
         });
 
 
-        //设置图标x轴的默认数据
-        element.add("Energy");
-        element.add("Fat");
-        element.add("Protein");
+        //查询保存的User信息
+        User user = ((MyApplication) this.getApplication()).getUser();
+        //如果有数据则用用户关注的数据,没有则用默认的
+        if(EmptyUtils.isNotEmpty(user)){
+
+        }else {
+            //设置图标x轴的默认数据
+            element.add("Df");
+            element.add("Fat");
+            element.add("Protein");
+        }
 
 
         //设置RecycleView
@@ -276,6 +284,16 @@ public class MainActivity extends BaseActivity {
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rv_food.setLayoutManager(linearLayoutManager1);
         myRecordsRecyclerViewAdapter = new MyRecordsRecyclerViewAdapter(this, onceRecords);
+        myRecordsRecyclerViewAdapter.setOnItemClickListener(new MyRecordsRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                //TODO
+                Intent intent = new Intent(MainActivity.this, RecordDetailsActivity.class);
+                ToastUtil.show(MainActivity.this,"点击了记录" + position);
+                intent.putExtra("data", (onceRecords == null ? null : onceRecords.get(position)));
+                startActivity(intent);
+            }
+        });
         rv_food.setAdapter(myRecordsRecyclerViewAdapter);
 
 

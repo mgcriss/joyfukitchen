@@ -35,17 +35,27 @@ public class User {
     public Integer getAge() {                  //当前时间减去生日得到年龄
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String date=df.format(new Date());
-        String birth=df.format(getBirth());
-        return DateUtil.yearDateDiff(birth,date);
+        String date = df.format(new Date());
+        String birth = df.format(getBirth());
+        return DateUtil.yearDateDiff(birth, date);
     }
 
 
-    private Target target;                  /**目标*/
+    private Target target;
+    /**
+     * 目标
+     */
 
-    private WorkStrength workStrength;      /**工作强度*/
+    private WorkStrength workStrength;
+    /**
+     * 工作强度
+     */
 
-    private long workTimes;                  /**工作时间*/
+    private long workTimes;
+
+    /**
+     * 工作时间
+     */
 
     public long getWorkTimes() {
         return workTimes;
@@ -84,7 +94,6 @@ public class User {
     }
 
 
-
     public ForeignCollection<OnceRecord> getOnceRecords() {
         return onceRecords;
     }
@@ -102,7 +111,7 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username=username;
+        this.username = username;
     }
 
     public void setNickname(String nickname) {
