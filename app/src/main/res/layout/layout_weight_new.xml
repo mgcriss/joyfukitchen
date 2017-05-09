@@ -209,8 +209,15 @@
                 <!-- 分割线1 -->
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    android:textColor="@color/point_title_text_color"
                     android:layout_marginTop="8dp"
+                    android:text="元素含量"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
                     android:background="@color/dividing_line" />
 
                 <!-- 元素含量 -->
@@ -219,11 +226,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <!-- 分割线1 -->
+                <!-- 分割线2 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/point_title_text_color"
+                    android:text="今日称量"
+                    />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
                     android:background="@color/dividing_line" />
 
 
@@ -232,7 +246,7 @@
                     android:id="@+id/rv_food_material_history"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="40dp" />
+                    android:layout_marginBottom="10dp" />
 
             </LinearLayout>
         </ScrollView>
