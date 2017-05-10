@@ -1,8 +1,10 @@
 package edu.ayd.joyfukitchen.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +43,49 @@ public class MenuClassificationActivity extends BaseActivity {
     private List<RecipeType> munutype;
     List<RecipeType.ListBean> list = null;
     private String TAG = "Menu";
+
+    private final int DEFAIL = 1;
+
+    //handler
+    private final Handler mHandler = new MyHandler(this);
+
+
+    private class MyHandler extends Handler {
+
+        private final WeakReference<MenuClassificationActivity> mActivity;
+
+        public MyHandler(MenuClassificationActivity activity) {
+            mActivity = new WeakReference<MenuClassificationActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            switch (msg.what) {
+                case DEFAIL: {
+                    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(MenuClassificationActivity.this);
+                    builder.setTitle(getResources().getString(R.string.title_faild));
+                    builder.setMessage(getResources().getString(R.string.serverfaild));
+                    builder.setNegativeButton(getResources().getString(R.string.know), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MenuClassificationActivity.this.finish();
+                        }
+                    });
+                    builder.show();
+
+                }
+                ;
+                break;
+                default:
+                    ;
+                    break;
+            }
+        }
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +144,12 @@ public class MenuClassificationActivity extends BaseActivity {
                     if (toolsList != null) {
                         handler.post(runnable1);
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
+                    //发送错误消息,弹框提示
+                    Message message = mHandler.obtainMessage(DEFAIL);
+                    mHandler.sendMessage(message);
+
                 }
             }
         }).start();
@@ -202,7 +251,7 @@ public class MenuClassificationActivity extends BaseActivity {
                         if (iconName != null) {
                             handler.post(runnablegridview);
                         }
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

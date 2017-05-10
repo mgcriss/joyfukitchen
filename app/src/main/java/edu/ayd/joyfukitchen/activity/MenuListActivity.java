@@ -10,12 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.List;
 
 import edu.ayd.joyfukitchen.Adapter.MenuLlistViewAdapter;
 import edu.ayd.joyfukitchen.bean.MenuResult;
 import edu.ayd.joyfukitchen.dao.JsonDataDao;
+import edu.ayd.joyfukitchen.util.EmptyUtils;
 
 public class MenuListActivity extends BaseActivity {
     private ListView listView;
@@ -50,10 +50,13 @@ public class MenuListActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-       Intent intent = getIntent();
+        //设置适配器
+        adapter = new MenuLlistViewAdapter(MenuListActivity.this,datalist);
+        listView.setAdapter(adapter);
+        Intent intent = getIntent();
         id = intent.getStringExtra("id");
 
-        Toast.makeText(getApplicationContext(),id+"传过来的ID",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),id+"传过来的ID",Toast.LENGTH_SHORT).show();
         new Fooasyc().execute();
 
     }
@@ -66,10 +69,12 @@ public class MenuListActivity extends BaseActivity {
         @Override
         protected Object doInBackground(Object[] objects) {
             try {
-                datalist = jsonDataDao.getMenuTypeIDALL(id,0);
-                adapter = new MenuLlistViewAdapter(MenuListActivity.this,datalist);
+                if(EmptyUtils.isNotEmpty(datalist)) {
+                    datalist.clear();
+                }
+                datalist.addAll(jsonDataDao.getMenuTypeIDALL(id,0));
                 Log.i("data", "doInBackground: +++"+datalist);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
@@ -77,7 +82,6 @@ public class MenuListActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Object result) {
 
-            listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
     }

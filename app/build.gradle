@@ -3,14 +3,9 @@ apply plugin: 'com.android.application'
 
 android {
 
-    //签名配置
+  /*  //签名配置
     signingConfigs {
-        debugConfig {
-            keyAlias "key0"
-            keyPassword "dengou123"
-            storeFile file("D:\\Dengou\\appKey\\key1.jks")
-            storePassword "dengou123"
-        }
+
         releaseConfig {
             keyAlias "key0"
             keyPassword "dengou123"
@@ -22,13 +17,11 @@ android {
 
     //打包配置
     buildTypes {
-        debug {
-            signingConfig signingConfigs.debugConfig
-        }
+
         release {
             signingConfig signingConfigs.releaseConfig
         }
-    }
+    }*/
 
     compileSdkVersion 25
     //编译工具版本
