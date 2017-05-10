@@ -3,7 +3,6 @@ package edu.ayd.joyfukitchen.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +23,7 @@ import java.util.Map;
 import edu.ayd.joyfukitchen.bean.RecipeType;
 import edu.ayd.joyfukitchen.dao.JsonDataDao;
 
-public class MenuClassificationActivity extends AppCompatActivity {
+public class MenuClassificationActivity extends BaseActivity {
     private String toolsList[] = null;
     private int toolsImages[];
     private TextView toolsTextViews[];
@@ -45,6 +44,10 @@ public class MenuClassificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //隐藏标题栏
+        getSupportActionBar().hide();
+        setStatusBarTrans();
         setContentView(R.layout.activity_menu_classification);
         munutype = new ArrayList<RecipeType>();
         jsonDataDao= new JsonDataDao();

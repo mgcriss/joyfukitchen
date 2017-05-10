@@ -1,9 +1,5 @@
 package edu.ayd.joyfukitchen.activity;
 
-import android.os.PowerManager;
-
-import edu.ayd.joyfukitchen.activity.BaseActivity;
-
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -222,14 +218,13 @@ public class MainActivity extends BaseActivity {
         init();
 
         //菜单页面跳转
-        //TODO
-//        menu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, );
-//                startActivity(intent);
-//            }
-//        });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MenuClassificationActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //食材页面跳转
         ingredients.setOnClickListener(new View.OnClickListener() {

@@ -38,7 +38,6 @@
         android:theme="@style/myTheme">
 
         <activity android:name=".LoginActivity"></activity>
-
         <activity android:name=".BaseActivity" />
         <activity android:name=".FoodClassIficationActivity" />
         <activity android:name=".CheckCodeActivity" />
@@ -69,6 +68,11 @@
                 android:resource="@xml/searchable" />
         </activity>
 
+        <!-- <activity android:name=".MenuClassificationActivity"></activity> -->
+        <activity android:name=".MenuListActivity"></activity>
+        <activity android:name=".MenuClassificationActivity"/>
+        <activity android:name=".FoodMakingProcessActivity"></activity>
+
 
         <!-- provider -->
         <provider
@@ -78,9 +82,6 @@
         <!-- 蓝牙所需Service -->
         <service android:name="edu.ayd.joyfukitchen.service.BluetoothService" />
 
-        <!-- <activity android:name=".MenuClassificationActivity"></activity> -->
-         <activity android:name=".MenuListActivity"></activity>
-        <activity android:name=".FoodMakingProcessActivity"></activity>
     </application>
 
 </manifest>

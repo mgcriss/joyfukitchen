@@ -1,6 +1,5 @@
 package edu.ayd.joyfukitchen.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,7 +17,7 @@ import edu.ayd.joyfukitchen.Adapter.MenuLlistViewAdapter;
 import edu.ayd.joyfukitchen.bean.MenuResult;
 import edu.ayd.joyfukitchen.dao.JsonDataDao;
 
-public class MenuListActivity extends Activity {
+public class MenuListActivity extends BaseActivity {
     private ListView listView;
     private MenuLlistViewAdapter adapter;
     private List<MenuResult.ResultBean.DataBean> datalist ;
@@ -29,6 +28,10 @@ public class MenuListActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //隐藏标题栏
+        getSupportActionBar().hide();
+        setStatusBarTrans();
         setContentView(R.layout.activity_menu_list);
         init();
     }
