@@ -44,10 +44,10 @@
         android:id="@+id/menu"
         >
         <ImageView
-            android:layout_width="@dimen/left_photo_volume"
-            android:layout_height="@dimen/left_photo_volume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="5dp"
-            android:src="@mipmap/left_menu"
+            android:src="@mipmap/left_menu_32"
             />
         <TextView
             android:layout_width="0dp"
@@ -70,10 +70,10 @@
         android:id="@+id/ingredients"
         >
         <ImageView
-            android:layout_width="@dimen/left_photo_volume"
-            android:layout_height="@dimen/left_photo_volume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="5dp"
-            android:src="@mipmap/left_ingredients"
+            android:src="@mipmap/left_ingredients_32"
             />
         <TextView
             android:layout_width="0dp"
@@ -96,10 +96,10 @@
         android:id="@+id/personalData"
         >
         <ImageView
-            android:layout_width="@dimen/left_photo_volume"
-            android:layout_height="@dimen/left_photo_volume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="5dp"
-            android:src="@mipmap/left_personal_data"
+            android:src="@mipmap/left_personal_data_32"
             />
         <TextView
             android:layout_width="0dp"
