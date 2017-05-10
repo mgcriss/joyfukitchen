@@ -50,11 +50,14 @@ public class PersonCenterActivity extends BaseActivity {
         user = (User) getIntent().getSerializableExtra("user");
 
         DecimalFormat fnum = new DecimalFormat("#.##");
+
         weight_text.setText(String.valueOf(fnum.format(user.getWeight())));
-        height_text.setText(String.valueOf(fnum.format(user.getHeight())));
+
+        height_text.setText(String.valueOf(user.getHeight()));
         target_text.setText(String.valueOf(user.getTarget()));
         strength_text.setText(String.valueOf(user.getWorkStrength()));
         login_nickName.setText(String.valueOf(user.getNickname()));
+
 
 
 
@@ -65,7 +68,7 @@ public class PersonCenterActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
             Intent intent =new  Intent(PersonCenterActivity.this,EditInformationActivity.class);
-            intent.putExtra("id",user.getId());
+            intent.putExtra("user",user);
             startActivity(intent);
         }
     }

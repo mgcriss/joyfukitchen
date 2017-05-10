@@ -445,7 +445,7 @@ public class CountUtil {
 
 
     private Double a; //*的
-    private Float weight;  //体重
+    private Double weight;  //体重
     private Double c;  // +的
     private Integer d; //工作强度消耗,单位千卡
     private Integer wt; //工作时间
