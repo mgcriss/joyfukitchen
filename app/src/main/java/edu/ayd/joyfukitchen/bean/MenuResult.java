@@ -44,7 +44,7 @@ public class MenuResult {
         this.result = result;
     }
 
-    public int getError_code() {
+   public int getError_code() {
         return error_code;
     }
 

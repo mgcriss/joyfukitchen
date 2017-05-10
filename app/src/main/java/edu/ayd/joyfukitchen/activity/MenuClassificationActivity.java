@@ -40,6 +40,7 @@ public class MenuClassificationActivity extends BaseActivity {
     private JsonDataDao jsonDataDao;
     private List<RecipeType> munutype;
     List<RecipeType.ListBean> list = null;
+    private String TAG = "Menu";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -234,11 +235,16 @@ public class MenuClassificationActivity extends BaseActivity {
      * @param arr
      */
     private void gridviewSetData(String[] arr){
-        getData(arr);
-        String [] from ={"image","text"};
-        int [] to = {R.id.nev_img,R.id.nev_text};
-        simpleAdapter = new SimpleAdapter(this,data_list,R.layout.item_nev_layout,from,to);
-        gridView.setAdapter(simpleAdapter);
+        try {
+            getData(arr);
+            String[] from = {"image", "text"};
+            int[] to = {R.id.nev_img, R.id.nev_text};
+            simpleAdapter = new SimpleAdapter(this, data_list, R.layout.item_nev_layout, from, to);
+            gridView.setAdapter(simpleAdapter);
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e(TAG, "gridviewSetData: ", e );
+        }
     }
 
     public List<Map<String, Object>> getData(String [] arr){
