@@ -18,11 +18,11 @@ import edu.ayd.joyfukitchen.bean.MenuResult;
  */
 public class FoodMakingProcessListViewAdapter extends BaseAdapter{
 
-    private MenuResult data;
+    private MenuResult.ResultBean.DataBean data;
     private Context context;
     private LayoutInflater inflater;
 
-    public FoodMakingProcessListViewAdapter(Context context,MenuResult data) {
+    public FoodMakingProcessListViewAdapter(Context context,MenuResult.ResultBean.DataBean data) {
         this.context = context;
         this.data = data;
         this.inflater = LayoutInflater.from(context);
@@ -31,12 +31,12 @@ public class FoodMakingProcessListViewAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return data.getResult().getData().size();
+        return data.getSteps().size();
     }
 
     @Override
     public Object getItem(int i) {
-        return data.getResult().getData().get(i);
+        return data.getSteps().get(i);
     }
 
     @Override
@@ -57,11 +57,11 @@ public class FoodMakingProcessListViewAdapter extends BaseAdapter{
 
             view.setTag(item);
         }else {
-            view = (View) view.getTag();
+            item = (ViewHolder) view.getTag();
         }
 
-        item.textView.setText(data.getResult().getData().get(i).getSteps().get(i).getStep());
-        Picasso.with(context).load(data.getResult().getData().get(i).getSteps().get(i).getImg()).into(item.imageView);
+        item.textView.setText(data.getSteps().get(i).getStep());
+        Picasso.with(context).load(data.getSteps().get(i).getImg()).into(item.imageView);
         return view;
     }
 

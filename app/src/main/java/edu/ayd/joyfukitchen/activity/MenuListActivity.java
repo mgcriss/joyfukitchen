@@ -31,6 +31,8 @@ public class MenuListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_list);
         init();
+
+
     }
 
     private void init() {
@@ -45,11 +47,17 @@ public class MenuListActivity extends Activity {
                 startActivity(intent);
             }
         });
-        Intent intent = getIntent();
+       Intent intent = getIntent();
         id = intent.getStringExtra("id");
+
         Toast.makeText(getApplicationContext(),id+"传过来的ID",Toast.LENGTH_LONG).show();
         new Fooasyc().execute();
+
     }
+
+
+
+
 
     class Fooasyc extends AsyncTask {
         @Override
@@ -65,10 +73,13 @@ public class MenuListActivity extends Activity {
         }
         @Override
         protected void onPostExecute(Object result) {
+
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
     }
+
+
 
 }
 

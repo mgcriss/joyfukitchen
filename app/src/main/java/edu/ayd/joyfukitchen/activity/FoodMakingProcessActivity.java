@@ -21,13 +21,14 @@ import edu.ayd.joyfukitchen.dao.JsonDataDao;
 * */
 public class FoodMakingProcessActivity extends AppCompatActivity {
 
-    private MenuResult data;
+    private  MenuResult.ResultBean.DataBean data;
     private JsonDataDao jsonDataDao;
     private String id;
     private FoodMakingProcessListViewAdapter adapter;
-    private TextView fmp_title,fmp_ingredients;
+     private TextView fmp_title,fmp_ingredients;
     private ImageView fmp_titleimg;
     private ListView listView;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,34 +42,43 @@ public class FoodMakingProcessActivity extends AppCompatActivity {
         fmp_ingredients = (TextView) findViewById(R.id.fmp_ingredients);
         fmp_titleimg = (ImageView) findViewById(R.id.fmp_titleimg);
         listView = (ListView) findViewById(R.id.fmp_listView);
-        data = new MenuResult();
+        data = new  MenuResult.ResultBean.DataBean();
         jsonDataDao = new JsonDataDao();
         Intent intent = getIntent();
         id = intent.getStringExtra("scid");
-        new foodAsyncTask().execute();
+       new foodAsyncTask().execute();
     }
 
     class foodAsyncTask extends AsyncTask{
 
+       private AppCompatActivity FoodMakingProcessActivity;
         @Override
         protected Object doInBackground(Object[] objects) {
             try {
                 data = jsonDataDao.getMenuIDALL(id);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
+            return data;
         }
 
         @Override
         protected void onPostExecute(Object result) {
+            MenuResult.ResultBean.DataBean datas = ( MenuResult.ResultBean.DataBean) result;
             //设置界面，我还没有完成，帮我写一下
-            if (data != null) {
-                fmp_title.setText(data.getResult().getData().get(0).getTitle());
-                fmp_ingredients.setText(data.getResult().getData().get(0).getIngredients());
-                Picasso.with(getApplicationContext()).load(data.getResult().getData().get(0).getAlbums().get(0)).into(fmp_titleimg);
-                adapter = new FoodMakingProcessListViewAdapter(getApplicationContext(),data);
+
+            if (datas != null) {
+                fmp_title.setText(datas.getTitle().toString());
+
+               fmp_ingredients.setText(datas.getIngredients().toString());
+                Picasso.with(getApplicationContext()).load(datas.getAlbums().get(0)).into(fmp_titleimg);
+             adapter = new FoodMakingProcessListViewAdapter(getApplicationContext(),datas);
+
+
+
                 listView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
         }

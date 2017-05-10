@@ -102,7 +102,7 @@ public class JsonDataDao {
      * @return
      * @throws IOException
      */
-    public MenuResult getMenuIDALL(String recipeId) throws IOException {
+    public MenuResult.ResultBean.DataBean getMenuIDALL(String recipeId) throws IOException {
         String url_json="http://www.chedles.xyz/joyfulkitchen/recipe/searchRecipeFromRecipeId.do?recipeId="+recipeId;
         OkHttpClient client=new OkHttpClient();
         Request request= new Request.Builder().url(url_json).build();
@@ -113,10 +113,8 @@ public class JsonDataDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        String result=response.body().string();
         Gson gson =new Gson();
-        MenuResult menuResult=gson.fromJson(result,MenuResult.class);
+        MenuResult.ResultBean.DataBean menuResult=gson.fromJson(response.body().string(), MenuResult.ResultBean.DataBean.class);
         return menuResult;
     }
 
