@@ -17,7 +17,7 @@ import java.util.Date;
 @DatabaseTable(tableName = "day_record")
 public class OnceRecord implements Serializable{
 
-    @DatabaseField(id = true)
+    @DatabaseField(generatedId = true)
     private Integer id;
 
     @ForeignCollectionField(eager = true)
@@ -28,6 +28,13 @@ public class OnceRecord implements Serializable{
 
     @DatabaseField
     private Date recordTime;
+
+    @DatabaseField
+    private String des;
+
+
+
+
 
     public Date getRecordTime() {
         return recordTime;
@@ -61,6 +68,14 @@ public class OnceRecord implements Serializable{
         this.user = user;
     }
 
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
+    }
+
     @Override
     public String toString() {
         return "OnceRecord{" +
@@ -68,6 +83,8 @@ public class OnceRecord implements Serializable{
                 ", weightRecords=" + weightRecords +
                 ", user=" + user +
                 ", recordTime=" + recordTime +
+                ", des='" + des + '\'' +
                 '}';
     }
+
 }

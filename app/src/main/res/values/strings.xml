@@ -7,8 +7,20 @@
     <string name="unit_ml">ml</string>
     <string name="unit_lb">lb</string>
     <string name="unit_l">两</string>
-
     <string name="index_ftv_initlization">0</string>
+
+
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">登录</string>
+    <string name="regist">新用户注册</string>
+
+    <string name="regist_regist">注册</string>
+    <string name="next_btn">下一步</string>
+    <string name="agree">注册视为同意</string>
+    <string name="user_agree">用户协议</string>
+
     <string name="test">测试</string>
 
 
@@ -23,4 +35,63 @@
 
     <string name="point_text">健康提示</string>
 
+    <!-- 搜索框提示字 -->
+    <string name="searchView_hint">输入搜索的驶入,如:大米、西红柿等</string>
+
+    <string name="search_food_label">查找食材</string>
+
+
+    <string name="add">添加</string>
+    <string name="yingyangcf">营养成分</string>
+    <string name="curhanliang">含量</string>
+    <string name="hanliang">参考值/100g</string>
+
+
+    <dimen name="left_photo_volume">60dp</dimen>
+    <dimen name="left_text_size">20sp</dimen>
+    <dimen name="left_margin_left">10dp</dimen>
+
+
+
+
+    <!-- 元素 -->
+    <string name="Ca">钙</string>
+    <string name="Carbohydrate">糖分</string>
+    <string name="Carotene">糖</string>
+    <string name="Cholesterol">胆固醇</string>
+    <string name="Cu">铜</string>
+    <string name="Df">糖</string>
+    <string name="Energy">能量</string>
+    <string name="Fat">脂肪</string>
+    <string name="Fe">铁</string>
+    <string name="K">钾</string>
+    <string name="Mg">镁</string>
+    <string name="Mn">锰</string>
+    <string name="Na">钠</string>
+    <string name="Niacin">维生素B3</string>
+    <string name="P">磷</string>
+    <string name="Protein">蛋白质</string>
+    <string name="Retinol">维生素a</string>
+    <string name="Se">硒</string>
+    <string name="Vitamina">维生素 A</string>
+    <string name="Vitaminb1">维生素 B1</string>
+    <string name="Vitaminb2">维生素 B2</string>
+    <string name="Vitaminc">维生素 C</string>
+    <string name="Vitamine">维生素 E</string>
+    <string name="Water">水</string>
+    <string name="Zn">锌</string>
+
+
+    <string name="current_weight">当前重量:</string>
+
+    <string name="dialog_title">添加称量记录</string>
+    <string name="dialog_content">本次称量记录尚未保存,是否继续返回?</string>
+    <string name="save_success">记录保存成功</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="will_return">我要返回</string>
+    <string name="will_save">我要保存</string>
+
+    <string name="username_null">登录/注册</string>
+    <string name="no_username">空</string>
 </resources>

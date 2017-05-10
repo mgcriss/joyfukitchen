@@ -6,6 +6,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
 
 
 
@@ -75,6 +76,15 @@
 
     <!-- 元素含量字体 -->
     <color name="rv_element_content_color">#5E5E5E</color>
+
+    <!-- 食材搜索框背景颜色 -->
+    <color name="search_bgcolor">#EBEBEB</color>
+
+    <!-- 食材分类背景色 -->
+    <color name="food_class_bg">#F7F7F7</color>
+
+
+
 
     <!--泳哥字体-->
     <color name="Textwhite">#fff</color>

@@ -5,13 +5,11 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import edu.ayd.joyfukitchen.constants.Sex;
-import edu.ayd.joyfukitchen.constants.Target;
-import edu.ayd.joyfukitchen.constants.WorkStrength;
 import edu.ayd.joyfukitchen.util.DateUtil;
 
 /**
@@ -19,14 +17,14 @@ import edu.ayd.joyfukitchen.util.DateUtil;
  */
 
 @DatabaseTable(tableName = "users")
-public class User {
+public class User implements Serializable {
 
     @DatabaseField(id = true)
     private Integer id;
-    private String email;                 //账户2017-4-10 新增email字段
+    private String username;                 //账户2017-4-10 新增email字段
     private String nickname;
-    private Date birth;
-    private Sex sex;
+    private String birth;
+    private String sex;
     private float height;
     private float weight;
 
@@ -35,25 +33,33 @@ public class User {
     public Integer getAge() {                  //当前时间减去生日得到年龄
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String date=df.format(new Date());
-        String birth=df.format(getBirth());
-        return DateUtil.yearDateDiff(birth,date);
+        String date = df.format(new Date());
+        String birth = df.format(getBirth());
+        return DateUtil.yearDateDiff(birth, date);
     }
 
 
-    private Target target;                  /**目标*/
 
-    private WorkStrength workStrength;      /**工作强度*/
+    private String target;                  /**目标*/
 
-    private long workTimes;                  /**工作时间*/
+    private String workStrength;      /**工作强度*/
 
-    public long getWorkTimes() {
+    private Integer workTimes;
+
+    public Integer getWorkTimes() {
         return workTimes;
     }
 
-    public void setWorkTimes(long workTimes) {
+    public void setWorkTimes(Integer workTimes) {
         this.workTimes = workTimes;
     }
+
+    /**工作时间*/
+
+
+
+
+
     //// TODO: 2017/3/30 属性待完成
 
     @ForeignCollectionField(eager = true)
@@ -67,23 +73,13 @@ public class User {
         this.id = id;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
-
-    public Sex getSex() {
-        return sex;
-    }
-
-    public void setSex(Sex sex) {
-        this.sex = sex;
-    }
-
-
 
     public ForeignCollection<OnceRecord> getOnceRecords() {
         return onceRecords;
@@ -97,12 +93,12 @@ public class User {
         return nickname;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setNickname(String nickname) {
@@ -125,20 +121,54 @@ public class User {
         this.weight = weight;
     }
 
-    public Target getTarget() {
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getTarget() {
         return target;
     }
 
-    public void setTarget(Target target) {
+    public void setTarget(String target) {
         this.target = target;
     }
 
-    public WorkStrength getWorkStrength() {
+    public String getWorkStrength() {
         return workStrength;
     }
 
-    public void setWorkStrength(WorkStrength workStrength) {
+    public void setWorkStrength(String workStrength) {
         this.workStrength = workStrength;
     }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", birth=" + birth +
+                ", sex='" + sex + '\'' +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", age=" + age +
+                ", target='" + target + '\'' +
+                ", workStrength='" + workStrength + '\'' +
+                ", workTimes=" + workTimes +
+                ", onceRecords=" + onceRecords +
+                '}';
+    }
+
+
 }
 

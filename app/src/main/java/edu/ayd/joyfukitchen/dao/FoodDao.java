@@ -20,14 +20,15 @@ public class FoodDao {
 
     public FoodDao(Context mctx) {
         try
-    {
-        DHelper = DatabaseHelper.getHelper(mctx);
-        daos = DHelper.getDao(Food.class);
-    } catch (SQLException e)
-    {
-        e.printStackTrace();
+        {
+            DHelper = DatabaseHelper.getInstance(mctx);
+            daos = DHelper.getDao(Food.class);
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
-}
+
 
     /**
      * 查询所有类型

@@ -17,6 +17,8 @@ import edu.ayd.joyfukitchen.bean.OnceRecord;
 import edu.ayd.joyfukitchen.bean.User;
 import edu.ayd.joyfukitchen.bean.WeightRecord;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by Administrator on 2017/3/30.
  */
@@ -32,11 +34,13 @@ public class JoyFuDBHelper extends OrmLiteSqliteOpenHelper{
     //构造器.单例
     private JoyFuDBHelper(Context context) {
         super(context, databaseName, null, databaseVersion);
+
     }
     public static JoyFuDBHelper getInstance(Context context){
         if(joyFuDBHelper == null){
             joyFuDBHelper = new JoyFuDBHelper(context);
         }
+
         return joyFuDBHelper;
     }
 
@@ -73,9 +77,16 @@ public class JoyFuDBHelper extends OrmLiteSqliteOpenHelper{
     public synchronized Dao getDao(Class clazz) throws SQLException {
         Dao dao = null;
         String className = clazz.getSimpleName();
-        if (daos.containsKey(className)) {
-            dao = super.getDao(clazz);
-            daos.put(className, dao);
+        if (!daos.containsKey(className)) {
+            try {
+                dao = super.getDao(clazz);
+                daos.put(className, dao);
+            }catch(Exception e){
+                e.printStackTrace();
+                Log.e(TAG, "getDao: e ", e);
+            }
+        } else {
+            dao = daos.get(className);
         }
         return dao;
     }

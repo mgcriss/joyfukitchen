@@ -15,7 +15,7 @@ import java.util.Date;
 @DatabaseTable(tableName = "weight_record")
 public class WeightRecord implements Serializable{
 
-    @DatabaseField(id = true)
+    @DatabaseField(generatedId = true)
     private Integer id;
     @DatabaseField
     private Integer foodId;
@@ -67,5 +67,17 @@ public class WeightRecord implements Serializable{
     public void setWeightingTime(Date weightingTime) {
         this.weightingTime = weightingTime;
     }
+
+    public OnceRecord getOnceRecord() {
+        return onceRecord;
+    }
+
+    public void setOnceRecord(OnceRecord onceRecord) {
+        this.onceRecord = onceRecord;
+    }
+
+
+
+
 }
 

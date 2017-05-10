@@ -22,11 +22,4 @@
 
     </android.support.v4.widget.DrawerLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="进入菜单"
-        android:textSize="30sp"
-        android:onClick="gomenu"
-        />
 </RelativeLayout>

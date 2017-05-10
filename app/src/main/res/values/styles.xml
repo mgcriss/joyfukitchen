@@ -8,11 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="myTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+    <style name="myTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowTranslucentStatus">false</item>
-        <!--<item name="android:windowTranslucentNavigation">true</item>-->
-        <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
-        <!--<item name="android:clipToPadding">false</item>-->
+        <item name="colorPrimary">@color/header_bg_color</item>
+        <item name="colorPrimaryDark">@color/header_bg_color</item>
+        <item name="colorAccent">@color/header_bg_color</item>
     </style>
 
 
