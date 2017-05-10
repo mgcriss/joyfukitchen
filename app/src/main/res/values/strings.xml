@@ -94,4 +94,7 @@
 
     <string name="username_null">登录/注册</string>
     <string name="no_username">空</string>
+    <string name="title_faild">错误信息</string>
+    <string name="know">知道了</string>
+    <string name="serverfaild">服务器崩溃啦</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,22 +14,21 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-
 import edu.ayd.joyfukitchen.Adapter.FoodMakingProcessListViewAdapter;
 import edu.ayd.joyfukitchen.bean.MenuResult;
 import edu.ayd.joyfukitchen.dao.JsonDataDao;
+import edu.ayd.joyfukitchen.util.EmptyUtils;
 
 /*
 *点击那个菜，跳到制作过程
 * */
 public class FoodMakingProcessActivity extends AppCompatActivity {
 
-    private  MenuResult.ResultBean.DataBean data;
+    private MenuResult.ResultBean.DataBean data;
     private JsonDataDao jsonDataDao;
     private String id;
     private FoodMakingProcessListViewAdapter adapter;
-    private TextView fmp_title,fmp_ingredients,ingreTitle;
+    private TextView fmp_title, fmp_ingredients, ingreTitle;
     private ImageView fmp_titleimg;
     private ListView listView;
     private String title;
@@ -46,22 +46,23 @@ public class FoodMakingProcessActivity extends AppCompatActivity {
         fmp_titleimg = (ImageView) findViewById(R.id.fmp_titleimg);
         listView = (ListView) findViewById(R.id.fmp_listView);
         ingreTitle = (TextView) findViewById(R.id.ingreTitle);
-        data = new  MenuResult.ResultBean.DataBean();
+        data = new MenuResult.ResultBean.DataBean();
         jsonDataDao = new JsonDataDao();
         Intent intent = getIntent();
         id = intent.getStringExtra("scid");
-       new foodAsyncTask().execute();
+        new foodAsyncTask().execute();
     }
 
-    class foodAsyncTask extends AsyncTask{
+    class foodAsyncTask extends AsyncTask {
 
-       private AppCompatActivity FoodMakingProcessActivity;
+        private AppCompatActivity FoodMakingProcessActivity;
+
         @Override
         protected Object doInBackground(Object[] objects) {
             try {
                 data = jsonDataDao.getMenuIDALL(id);
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return data;
@@ -69,20 +70,23 @@ public class FoodMakingProcessActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Object result) {
-            MenuResult.ResultBean.DataBean datas = ( MenuResult.ResultBean.DataBean) result;
-            //设置界面，我还没有完成，帮我写一下
+            MenuResult.ResultBean.DataBean datas = null;
+            try {
+                datas = (MenuResult.ResultBean.DataBean) result;
+            } catch (Exception e) {
+                Log.e("Food.....", "onPostExecute: ", e);
+            }
 
-            if (datas != null) {
+            if (EmptyUtils.isNotEmpty(datas)) {
                 fmp_title.setText(datas.getTitle().toString());
                 ingreTitle.setText("所需食材");
-               fmp_ingredients.setText(datas.getIngredients().toString());
+                fmp_ingredients.setText(datas.getIngredients().toString());
                 Picasso.with(getApplicationContext()).load(datas.getAlbums().get(0)).into(fmp_titleimg);
-             adapter = new FoodMakingProcessListViewAdapter(getApplicationContext(),datas);
-
+                adapter = new FoodMakingProcessListViewAdapter(getApplicationContext(), datas);
 
 
                 listView.setAdapter(adapter);
-               setListViewHeightBasedOnChildren(listView);
+                setListViewHeightBasedOnChildren(listView);
                 listView.setEnabled(false);
                 adapter.notifyDataSetChanged();
             }

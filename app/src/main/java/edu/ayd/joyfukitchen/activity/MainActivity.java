@@ -966,13 +966,13 @@ public class MainActivity extends BaseActivity {
         Log.i("onresume", "什么事都没做");
 
         if (!mBluetoothAdapter.isEnabled()) {
-            Toast.makeText(MainActivity.this, "打开蓝牙成功", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "打开蓝牙成功", Toast.LENGTH_SHORT).show();
             Log.i("打开蓝牙成功", "BluetoothConnection");
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
 
-        Toast.makeText(MainActivity.this, "打开蓝牙后", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "打开蓝牙后", Toast.LENGTH_SHORT).show();
 
         if (lazyCallback == null) {
             Log.i("lazyCallback", "lazyCallback  new前");
