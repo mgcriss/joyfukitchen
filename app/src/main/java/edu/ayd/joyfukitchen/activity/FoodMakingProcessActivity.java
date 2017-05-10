@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +28,7 @@ public class FoodMakingProcessActivity extends AppCompatActivity {
     private JsonDataDao jsonDataDao;
     private String id;
     private FoodMakingProcessListViewAdapter adapter;
-     private TextView fmp_title,fmp_ingredients;
+    private TextView fmp_title,fmp_ingredients,ingreTitle;
     private ImageView fmp_titleimg;
     private ListView listView;
     private String title;
@@ -42,6 +45,7 @@ public class FoodMakingProcessActivity extends AppCompatActivity {
         fmp_ingredients = (TextView) findViewById(R.id.fmp_ingredients);
         fmp_titleimg = (ImageView) findViewById(R.id.fmp_titleimg);
         listView = (ListView) findViewById(R.id.fmp_listView);
+        ingreTitle = (TextView) findViewById(R.id.ingreTitle);
         data = new  MenuResult.ResultBean.DataBean();
         jsonDataDao = new JsonDataDao();
         Intent intent = getIntent();
@@ -70,7 +74,7 @@ public class FoodMakingProcessActivity extends AppCompatActivity {
 
             if (datas != null) {
                 fmp_title.setText(datas.getTitle().toString());
-
+                ingreTitle.setText("所需食材");
                fmp_ingredients.setText(datas.getIngredients().toString());
                 Picasso.with(getApplicationContext()).load(datas.getAlbums().get(0)).into(fmp_titleimg);
              adapter = new FoodMakingProcessListViewAdapter(getApplicationContext(),datas);
@@ -78,9 +82,49 @@ public class FoodMakingProcessActivity extends AppCompatActivity {
 
 
                 listView.setAdapter(adapter);
+               setListViewHeightBasedOnChildren(listView);
+                listView.setEnabled(false);
                 adapter.notifyDataSetChanged();
             }
 
         }
+
+
+        /*计算listview每个Item   用于自适应高度*/
+        public void setListViewHeightBasedOnChildren(ListView listView) {
+
+            // 获取ListView对应的Adapter
+
+            ListAdapter listAdapter = listView.getAdapter();
+
+            if (listAdapter == null) {
+                return;
+            }
+
+            int totalHeight = 0;
+
+            for (int i = 0; i < listAdapter.getCount(); i++) { // listAdapter.getCount()返回数据项的数目
+
+                View listItem = listAdapter.getView(i, null, listView);
+
+                listItem.measure(0, 0); // 计算子项View 的宽高
+
+                totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
+
+            }
+
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+
+            params.height = totalHeight
+                    + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+
+            // listView.getDividerHeight()获取子项间分隔符占用的高度
+
+            // params.height最后得到整个ListView完整显示需要的高度
+
+            listView.setLayoutParams(params);
+
+        }
+
     }
 }
