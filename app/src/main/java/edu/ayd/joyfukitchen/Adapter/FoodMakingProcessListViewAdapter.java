@@ -36,7 +36,7 @@ public class FoodMakingProcessListViewAdapter extends BaseAdapter{
 
     @Override
     public Object getItem(int i) {
-        return data.getSteps().get(i);
+        return data.getSteps();
     }
 
     @Override
@@ -59,9 +59,9 @@ public class FoodMakingProcessListViewAdapter extends BaseAdapter{
         }else {
             item = (ViewHolder) view.getTag();
         }
-
-        item.textView.setText(data.getSteps().get(i).getStep());
-        Picasso.with(context).load(data.getSteps().get(i).getImg()).into(item.imageView);
+        MenuResult.ResultBean.DataBean.StepsBean mm = data.getSteps().get(i);
+        item.textView.setText(mm.getStep());
+        Picasso.with(context).load(mm.getImg()).into(item.imageView);
         return view;
     }
 
