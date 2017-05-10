@@ -953,7 +953,7 @@ public class MainActivity extends BaseActivity {
             username.setText(getResources().getString(R.string.username_null));
         } else {
             //如果不为空
-            String name = user.getUsername();
+            String name = user.getNickname();
             if (EmptyUtils.isEmpty(name)) {
                 username.setText(getResources().getString(R.string.no_username));
             } else {

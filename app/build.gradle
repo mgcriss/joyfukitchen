@@ -6,6 +6,36 @@ android {
     compileSdkVersion 25
     //编译工具版本
     buildToolsVersion "25.0.2"
+
+    //签名配置
+    signingConfigs {
+        debugConfig {
+            keyAlias "key0"
+            keyPassword "dengou123"
+            storeFile file("D:\\Dengou\\appKey\\key1.jks")
+            storePassword "dengou123"
+        }
+        releaseConfig {
+            keyAlias "key0"
+            keyPassword "dengou123"
+            storeFile file("D:\\Dengou\\appKey\\key1.jks")
+            storePassword "dengou123"
+        }
+    }
+
+
+    //打包配置
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debugConfig
+        }
+        release {
+            signingConfig signingConfigs.releaseConfig
+        }
+    }
+
+
+
     defaultConfig {
         //主程序包，相当于eclipse的manifast下面的package
         applicationId "edu.ayd.joyfukitchen"
@@ -17,6 +47,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -41,7 +73,15 @@ repositories {
         url  'http://dl.bintray.com/gigamole/maven/'
     }
 
+
+
+
+
+
+
 }
+
+
 
 
 
@@ -83,4 +123,8 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
 
 }
+
+
+
+
 
