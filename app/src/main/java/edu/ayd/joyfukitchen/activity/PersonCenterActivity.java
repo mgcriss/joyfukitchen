@@ -21,8 +21,8 @@ public class PersonCenterActivity extends BaseActivity {
     private int i;
     User user;
     //目标
-    private TextView target_text,weight_text,height_text,strength_text,edi_text,login_nickName;
-    private LinearLayout target_LLay,weight_LLay,height_LLay,strength_LLay;
+    private TextView target_text, weight_text, height_text, strength_text, edi_text, login_nickName;
+    private LinearLayout target_LLay, weight_LLay, height_LLay, strength_LLay;
     private String TAG = "PersonCenterActivity";
 
     @Override
@@ -41,7 +41,7 @@ public class PersonCenterActivity extends BaseActivity {
         weight_LLay = (LinearLayout) findViewById(R.id.weight_LLay);
         height_LLay = (LinearLayout) findViewById(R.id.height_LLay);
         strength_LLay = (LinearLayout) findViewById(R.id.strength_LLay);
-        target_text =(TextView) findViewById(R.id.target_txt);
+        target_text = (TextView) findViewById(R.id.target_txt);
         weight_text = (TextView) findViewById(R.id.weight_text);
         height_text = (TextView) findViewById(R.id.height_text);
         strength_text = (TextView) findViewById(R.id.strength_text);
@@ -50,11 +50,11 @@ public class PersonCenterActivity extends BaseActivity {
 
         edi_text.setOnClickListener(new NextClickListener());
 
-        user = ((MyApplication)getApplication()).getUser();
+        user = ((MyApplication) getApplication()).getUser();
         Log.i(TAG, "init: 获取到的user = " + user);
 
         DecimalFormat fnum = new DecimalFormat("#.##");
-        if(EmptyUtils.isEmpty(user)) {
+        if (EmptyUtils.isEmpty(user)) {
             Log.i(TAG, "init: 获取的user为空,因为没有登录");
         } else {
             weight_text.setText(String.valueOf(fnum.format(user.getWeight())));
@@ -65,16 +65,15 @@ public class PersonCenterActivity extends BaseActivity {
         }
 
 
-
     }
 
     /*点击编辑按钮，进入编辑页面*/
     private class NextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent intent =new  Intent(PersonCenterActivity.this,EditInformationActivity.class);
-            if(EmptyUtils.isNotEmpty(user)) {
-                intent.putExtra("id", user.getId());
+            Intent intent = new Intent(PersonCenterActivity.this, EditInformationActivity.class);
+            if (EmptyUtils.isNotEmpty(user)) {
+                intent.putExtra("user", user);
             }
             startActivity(intent);
         }

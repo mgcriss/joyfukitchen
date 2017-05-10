@@ -137,7 +137,6 @@ public class LoginActivity extends BaseActivity{
                             @Override
                             public void onResponse(Call call, Response response) throws IOException {
                                 try {
-                              /*      Log.i("body   dd ",response.body().string());*/
                                     user = gson.fromJson(response.body().string(), User.class);
 
                                 } catch (Exception e) {

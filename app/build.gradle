@@ -138,6 +138,7 @@ dependencies {
     /*TabLayout ViewPager支持包*/
     compile 'com.android.support:design:22.2.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }
 
 

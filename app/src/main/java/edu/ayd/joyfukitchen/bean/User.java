@@ -20,13 +20,13 @@ import edu.ayd.joyfukitchen.util.DateUtil;
 public class User implements Serializable {
 
     @DatabaseField(id = true)
-    private Integer id;
+    private Integer uId;
     private String username;                 //账户2017-4-10 新增email字段
     private String nickname;
     private String birth;
     private String sex;
-    private float height;
-    private float weight;
+    private Integer height;
+    private Double weight;
 
     private Integer age;
 
@@ -65,12 +65,13 @@ public class User implements Serializable {
     @ForeignCollectionField(eager = true)
     private ForeignCollection<OnceRecord> onceRecords;
 
-    public Integer getId() {
-        return id;
+
+    public Integer getuId() {
+        return uId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setuId(Integer uId) {
+        this.uId = uId;
     }
 
     public String getBirth() {
@@ -105,22 +106,22 @@ public class User implements Serializable {
         this.nickname = nickname;
     }
 
-    public float getHeight() {
+
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(float height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
-    public float getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
-
 
     public String getSex() {
         return sex;
@@ -154,10 +155,10 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "uId=" + uId +
                 ", username='" + username + '\'' +
                 ", nickname='" + nickname + '\'' +
-                ", birth=" + birth +
+                ", birth='" + birth + '\'' +
                 ", sex='" + sex + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
