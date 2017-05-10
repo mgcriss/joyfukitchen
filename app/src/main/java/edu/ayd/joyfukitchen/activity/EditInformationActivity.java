@@ -44,6 +44,7 @@ public class EditInformationActivity extends BaseActivity {
     private  User user;
     private Gson gson;
     private int userId;
+    private String TAG = "EditInformationActivity";
 
 
 
@@ -99,7 +100,12 @@ public class EditInformationActivity extends BaseActivity {
         strength_info_llay.setOnClickListener(new StrengthClickListener());
         gson = new Gson();
 
-        userId = (int) getIntent().getSerializableExtra("id");
+        try {
+            userId = (int) getIntent().getSerializableExtra("id");
+        }catch(Exception e){
+            Log.e(TAG, "init: e", e);
+        }
+
 
     }
 

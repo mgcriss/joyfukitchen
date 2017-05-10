@@ -73,7 +73,9 @@ public class PersonCenterActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
             Intent intent =new  Intent(PersonCenterActivity.this,EditInformationActivity.class);
-            intent.putExtra("id",user.getId());
+            if(EmptyUtils.isNotEmpty(user)) {
+                intent.putExtra("id", user.getId());
+            }
             startActivity(intent);
         }
     }
