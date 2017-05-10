@@ -26,9 +26,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
-    <!-- Android6.0 蓝牙扫描才需要-->
+    <!-- Android6.0 蓝牙扫描才需要 -->
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
 
     <application
         android:name=".MyApplication"
@@ -76,10 +75,12 @@
             android:name="edu.ayd.joyfukitchen.provider.MySearchRecentSuggestionsProvider"
             android:authorities="edu.ayd.joyfukitchen.provider.MySearchRecentSuggestionsProvider" />
 
+        <!-- 蓝牙所需Service -->
+        <service android:name="edu.ayd.joyfukitchen.service.BluetoothService" />
 
-        <!--蓝牙所需Service-->
-        <service android:name="edu.ayd.joyfukitchen.service.BluetoothService"></service>
-
+        <!-- <activity android:name=".MenuClassificationActivity"></activity> -->
+         <activity android:name=".MenuListActivity"></activity>
+        <activity android:name=".FoodMakingProcessActivity"></activity>
     </application>
 
 </manifest>

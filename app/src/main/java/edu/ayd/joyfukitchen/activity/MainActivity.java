@@ -1,5 +1,9 @@
 package edu.ayd.joyfukitchen.activity;
 
+import android.os.PowerManager;
+
+import edu.ayd.joyfukitchen.activity.BaseActivity;
+
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -97,8 +101,6 @@ public class MainActivity extends BaseActivity {
     private LinearLayout personalData;
     private LinearLayout show_user_name;
     private TextView username;
-
-
 
 
     //圆圈中间的textView
@@ -243,11 +245,11 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
 
                 User user = ((MyApplication) getApplication()).getUser();
-                if(EmptyUtils.isEmpty(user)) {
+                if (EmptyUtils.isEmpty(user)) {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
-                }else {
+                } else {
                     Intent intent = new Intent(MainActivity.this, PersonCenterActivity.class);
                     startActivity(intent);
                 }
@@ -319,18 +321,17 @@ public class MainActivity extends BaseActivity {
         //查询保存的User信息
         User user = ((MyApplication) this.getApplication()).getUser();
         //如果有数据则用用户关注的数据,没有则用默认的
-        if(EmptyUtils.isNotEmpty(user)){
+        if (EmptyUtils.isNotEmpty(user)) {
 
         }
 
         //再次判断如果为空则添加默认数据
-        if(EmptyUtils.isEmpty(element)) {
+        if (EmptyUtils.isEmpty(element)) {
             //设置图标x轴的默认数据
             element.add("Df");
             element.add("Fat");
             element.add("Protein");
         }
-
 
 
         //设置RecycleView
@@ -347,7 +348,7 @@ public class MainActivity extends BaseActivity {
             public void onItemClick(View view, int position) {
                 //TODO
                 Intent intent = new Intent(MainActivity.this, RecordDetailsActivity.class);
-                ToastUtil.show(MainActivity.this,"点击了记录" + position);
+                ToastUtil.show(MainActivity.this, "点击了记录" + position);
                 intent.putExtra("data", (onceRecords == null ? null : onceRecords.get(position)));
                 startActivity(intent);
             }
@@ -564,7 +565,7 @@ public class MainActivity extends BaseActivity {
                     if (EmptyUtils.isNotEmpty(onceRecs)) {
                         try {
                             MainActivity.this.onceRecords.addAll(onceRecs);
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             Log.e(TAG, "run: 将查询出来的记录集合添加到onceRecords ", e);
                         }
                     }
@@ -953,14 +954,14 @@ public class MainActivity extends BaseActivity {
         //检查有没有登录,更新username   TextView显示的值
         User user = ((MyApplication) getApplication()).getUser();
         //如果为空
-        if(EmptyUtils.isEmpty(user)){
+        if (EmptyUtils.isEmpty(user)) {
             username.setText(getResources().getString(R.string.username_null));
         } else {
             //如果不为空
             String name = user.getUsername();
-            if(EmptyUtils.isEmpty(name)){
+            if (EmptyUtils.isEmpty(name)) {
                 username.setText(getResources().getString(R.string.no_username));
-            }else {
+            } else {
                 username.setText(name);
             }
         }

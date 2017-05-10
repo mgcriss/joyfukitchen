@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+       <ImageView
+           android:id="@+id/ml_imgage"
+           android:layout_width="90dp"
+           android:layout_height="90dp"
+           android:layout_marginRight="5dp"
+           android:src="@mipmap/test"
+           />
+        <LinearLayout
+            android:layout_toRightOf="@id/ml_imgage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ml_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="生滚牛肉粥"/>
+
+            <TextView
+                android:id="@+id/ml_detailed"
+                android:layout_marginTop="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:maxLines="2"
+                android:ellipsize ="end"
+                android:text="生东北大米，牛肉，鲜姜，鲜葱打工的地方郭德纲法规东方故事是大法官大法官单方事故个 生滚是个是是个帅哥的大哥的观点个"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_toRightOf="@id/ml_imgage"
+            android:layout_alignBottom ="@id/ml_imgage"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/xing"/>
+            <TextView
+                android:id="@+id/ml_praises"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="30"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/kan"/>
+            <TextView
+                android:id="@+id/ml_pageviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3000"
+                android:padding="2dp"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

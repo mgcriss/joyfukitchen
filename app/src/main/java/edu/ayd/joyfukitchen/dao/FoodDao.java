@@ -29,6 +29,7 @@ public class FoodDao {
         }
     }
 
+
     /**
      * 查询所有类型
      * @return  List<Food>
