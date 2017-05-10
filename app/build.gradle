@@ -2,7 +2,34 @@ apply plugin: 'com.android.application'
 
 
 android {
-    //编译版本
+
+    //签名配置
+    signingConfigs {
+        debugConfig {
+            keyAlias "key0"
+            keyPassword "dengou123"
+            storeFile file("D:\\Dengou\\appKey\\key1.jks")
+            storePassword "dengou123"
+        }
+        releaseConfig {
+            keyAlias "key0"
+            keyPassword "dengou123"
+            storeFile file("D:\\Dengou\\appKey\\key1.jks")
+            storePassword "dengou123"
+        }
+    }
+
+
+    //打包配置
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debugConfig
+        }
+        release {
+            signingConfig signingConfigs.releaseConfig
+        }
+    }
+
     compileSdkVersion 25
     //编译工具版本
     buildToolsVersion "25.0.2"
@@ -23,7 +50,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -50,7 +76,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.+'
-
     // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core
     compile 'com.j256.ormlite:ormlite-core:5.0'
     compile 'com.j256.ormlite:ormlite-android:5.0'
@@ -60,27 +85,18 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
-
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     //gson
     compile 'com.google.code.gson:gson:2.8.0'
-
     //calendar
     compile 'com.github.loonggg:WeekCalendar:v1.3'
-
     compile 'com.mikhaellopez:circularprogressbar:1.0.1'
-
     //searchView
     compile 'com.github.mancj:MaterialSearchBar:0.1.0'
-
-
     testCompile 'junit:junit:4.12'
-
     compile 'com.android.support:design:25.1.0'
     /*TabLayout ViewPager支持包*/
     compile 'com.android.support:design:22.2.0'
-
     compile 'com.squareup.picasso:picasso:2.5.2'
-
 }
 

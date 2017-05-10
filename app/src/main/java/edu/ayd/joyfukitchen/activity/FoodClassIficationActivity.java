@@ -103,6 +103,7 @@ public class FoodClassIficationActivity extends BaseActivity {
                 if(hasFocus){
                     Log.i(TAG, "onFocusChange: click et_search");
                     Intent intent = new Intent(FoodClassIficationActivity.this, CheckIngredientsActivity.class);
+                    intent.putExtra("weight", weight);
                     startActivity(intent);
                     finish();
                 }
