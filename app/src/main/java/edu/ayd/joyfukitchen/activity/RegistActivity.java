@@ -140,8 +140,17 @@ public class RegistActivity extends BaseActivity {
 
                 user.setNickname(nickName);
                 user.setUsername(email);
-                String str_user=gson.toJson(user);
-                regist(str_user, password);
+                String str_user = null;
+                try {
+                    str_user = gson.toJson(user);
+                }catch (Exception e){
+                    Log.e("RegistActivity", "onClick: ", e);
+                }
+                try {
+                    regist(str_user, password);
+                }catch (Exception e){
+                    Log.e("RegistActivity", "onClick: ", e);
+                }
 
             }
 
@@ -158,7 +167,7 @@ public class RegistActivity extends BaseActivity {
                     .build();
 
 
-            //创建一个请求对象
+            //创建一   个请求对象
             final Request request=new Request.Builder()
                     .url(login_url)
                     .post(body)
